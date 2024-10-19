@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEditor;
+// using UnityEditor;
 
 // Alert system. A number increases the longer the target stays in the fov zone.
 // (and decreases when outside of): maxed/being alerted means enemy becomes hostile
@@ -93,7 +93,7 @@ public enum AlertStage
 //    }
 //}
 
-public class FieldofView : MonoBehaviour
+public class FieldOfView : MonoBehaviour
 { 
     public AlertStage alertStage;
     [Range(0, 100)] public float alertLevel; // 0=peaceful, 100=alerted
@@ -104,7 +104,7 @@ public class FieldofView : MonoBehaviour
         alertLevel = 0;
     }
     
-    public float radius;
+    [Range(0, 100)] public float radius;
     [Range(0, 360)] public float angle;
 
     public GameObject playerRef;
