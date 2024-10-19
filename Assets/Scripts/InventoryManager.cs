@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class InventoryManager : MonoBehaviour
 {
@@ -19,20 +21,23 @@ public class InventoryManager : MonoBehaviour
                 ChangeSelectedSlot(number - 1);
             }
         }
-        //change selected slot with scroll (currently way too fast)
-        if (Input.mouseScrollDelta.y >= 1) {
-            Debug.Log("scroll up");
-            if (selectedSlot == 7) {
-                ChangeSelectedSlot(0);
-            } else {
-                ChangeSelectedSlot(selectedSlot+1);
-            }
-        } else if (Input.mouseScrollDelta.y <= -1) {
-            Debug.Log("scroll down");
-            if (selectedSlot == 0) {
-                ChangeSelectedSlot(7);
-            } else {
-                ChangeSelectedSlot(selectedSlot-1);
+        //change selected slot with scroll
+        float scrollDelta = Input.mouseScrollDelta.y;
+        if (scrollDelta != 0) {
+            Debug.Log(scrollDelta > 0 ? "scroll up" : "scroll down");
+
+            if (scrollDelta > 0) { // scroll up
+                if (selectedSlot == 7) {
+                    ChangeSelectedSlot(0);
+                } else {
+                    ChangeSelectedSlot(selectedSlot + 1);
+                }
+            } else if (scrollDelta < 0) { // scroll down
+                if (selectedSlot == 0) {
+                    ChangeSelectedSlot(7);
+                } else {
+                    ChangeSelectedSlot(selectedSlot - 1);
+                }
             }
         }
     }
