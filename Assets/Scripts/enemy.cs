@@ -103,7 +103,8 @@ public class FieldOfView : MonoBehaviour
         alertStage = AlertStage.Peaceful;
         alertLevel = 0;
     }
-    
+
+    [Range(1, 20)] public float aggroSpeed = 1; // how fast alertness increments
     [Range(0, 100)] public float radius;
     [Range(0, 360)] public float angle;
 
@@ -157,11 +158,9 @@ public class FieldOfView : MonoBehaviour
             else
                 canSeePlayer = false; // player is not within radius
         }
-        //else (canSeePlayer)
-        //    canSeePlayer = false;
+        else // check failed
+            canSeePlayer = false;
         // if check failed and you were previously viewing, you are no longer able to view player
-        // it had a strange namespace error here which isn't true bc you can access canSeePlayer in the next line
-        // anyway if you get permanently aggro'd at least it means you got aggro'd.
 
 
         _UpdateAlertState(canSeePlayer);
@@ -180,12 +179,14 @@ public class FieldOfView : MonoBehaviour
             case AlertStage.Aware: // increment if in fov, decrement if not
                 if (playerInFOV)
                 {
-                    alertLevel++;
+                    //alertLevel++;
+                    alertLevel = alertLevel + aggroSpeed;
                     if (alertLevel >= 100)
                         alertStage = AlertStage.Alerted;
                 }
                 else
-                    alertLevel--;
+                    //alertLevel--;
+                    alertLevel = alertLevel - aggroSpeed;
                     if (alertLevel <= 0)
                         alertStage = AlertStage.Peaceful;
                 break;
