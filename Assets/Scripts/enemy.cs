@@ -134,8 +134,6 @@ public class FieldOfView : MonoBehaviour
 
     private void FieldOfViewCheck()
     {
-        Debug.Log(canSeePlayer);
-
         Collider[] rangeChecks = Physics.OverlapSphere(transform.position, radius, targetMask);
         // array of things that collide with your fov cone
         
@@ -181,13 +179,15 @@ public class FieldOfView : MonoBehaviour
 
             case AlertStage.Aware: // increment if in fov, decrement if not
                 if (playerInFOV)
+                {
                     alertLevel++;
-                if (alertLevel >= 100)
-                    alertStage = AlertStage.Alerted;
+                    if (alertLevel >= 100)
+                        alertStage = AlertStage.Alerted;
+                }
                 else
                     alertLevel--;
-                if (alertLevel <= 0)
-                    alertStage = AlertStage.Peaceful;
+                    if (alertLevel <= 0)
+                        alertStage = AlertStage.Peaceful;
                 break;
 
             case AlertStage.Alerted: // decrement if not in fov
