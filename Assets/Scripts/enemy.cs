@@ -116,9 +116,11 @@ public class FieldOfView : MonoBehaviour
     private void Start()
     {
         playerRef = GameObject.FindGameObjectWithTag("Player");
+        StartCoroutine(FOVRoutine());
     }
 
     private IEnumerator FOVRoutine() // core routine to reduce number of calls per frame (for performance)
+        // basically: every x s, do this
     {
         float delay = 0.2f;
         WaitForSeconds wait = new WaitForSeconds(delay);
@@ -132,6 +134,8 @@ public class FieldOfView : MonoBehaviour
 
     private void FieldOfViewCheck()
     {
+        Debug.Log(canSeePlayer);
+
         Collider[] rangeChecks = Physics.OverlapSphere(transform.position, radius, targetMask);
         // array of things that collide with your fov cone
         
@@ -167,6 +171,7 @@ public class FieldOfView : MonoBehaviour
 
     private void _UpdateAlertState(bool playerInFOV)
     {
+        //Debug.Log(alertLevel);
         switch (alertStage)
         {
             case AlertStage.Peaceful:
@@ -191,7 +196,6 @@ public class FieldOfView : MonoBehaviour
                 break;
         }
     }
-
 
 
 }
