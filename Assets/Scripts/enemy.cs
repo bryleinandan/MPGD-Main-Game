@@ -67,24 +67,24 @@ public class FieldOfView : MonoBehaviour
         // array of things that collide with your fov cone
         // henceforth we can refer to the rangeChecks array for a list 
         
-        // do not ask why Length must be capitalised here. blame 2023.1
-        if (rangeChecks.Length != 0)
+        if (rangeChecks.Length != 0) // if there are colliders in the area
         {
             // Transform target = rangeChecks[0].transform; // this only gets the first in rangecheck
             // Identify player in the array
 
-            foreach (Collider c in rangeChecks) // if there exists an object with player tag in the list of colliders
+            foreach (Collider c in rangeChecks) // check list of colliders for player tag
             {
                 if (c.CompareTag("Player"))
                     target = c.transform;
                 //break; // exit
             }
 
-            if (target == null) // target is null, so set nav agent velocity to zero as player isn't in range
+            if (target == null) // no target to walk towards
             {
                 gameObject.GetComponent<NavMeshAgent>().velocity = Vector3.zero;
+                canSeePlayer = false;
             }
-            else
+            else // target = collider with player tag
             {
                 //Vector3 directionToTarget = (target.postion - transform.position).normalized;
                 Vector3 directionToTarget = (target.position - transform.position).normalized;
@@ -97,7 +97,7 @@ public class FieldOfView : MonoBehaviour
                     // limit raycast distance to whenever it hits something (vision is blocked by walls)
                     if (!(Physics.Raycast(transform.position, directionToTarget, distanceToTarget, obstructionMask)))
                     {
-                        canSeePlayer = true;;
+                        canSeePlayer = true;
                     }
                     else
                         canSeePlayer = false;
@@ -106,11 +106,15 @@ public class FieldOfView : MonoBehaviour
                     canSeePlayer = false; // player is not within radius
             }
             //else // check failed - for example there are no colliders in the list
-            canSeePlayer = false;
+            //canSeePlayer = false;
             // if check failed and you were previously viewing, you are no longer able to view player
 
             _UpdateAlertState(canSeePlayer);
-            moveTowardsPlayer(target);
+
+            if (canSeePlayer)
+            {
+                moveTowardsPlayer(target);
+            }
         }
 
     }
@@ -155,7 +159,7 @@ public class FieldOfView : MonoBehaviour
 
         agent.SetDestination(player.transform.position);
 
-        // if distance between player and self is 0
+        // if distance between player and self is small
         if (Vector3.Distance(transform.position, player.position) < enemyDistance)
         {
             gameObject.GetComponent<NavMeshAgent>().velocity = Vector3.zero;
