@@ -27,6 +27,11 @@ public class FieldOfView : MonoBehaviour
         alertLevel = 0;
     }
 
+    public float movementSpeed = 3;
+    public float attackSpeed = 1;
+    public float damage = 0;
+    public float health = 1;
+
     [Range(1, 20)] public float aggroSpeed = 1; // how fast alertness increments
     [Range(0, 100)] public float radius;
     [Range(0, 360)] public float angle;
@@ -45,6 +50,7 @@ public class FieldOfView : MonoBehaviour
         playerRef = GameObject.FindGameObjectWithTag("Player");
         StartCoroutine(FOVRoutine());
         agent = GetComponent<NavMeshAgent>();
+        agent.speed = movementSpeed;
     }
 
     private IEnumerator FOVRoutine() // core routine to reduce number of calls per frame (for performance)
@@ -166,6 +172,7 @@ public class FieldOfView : MonoBehaviour
         {
             gameObject.GetComponent<NavMeshAgent>().velocity = Vector3.zero;
             // and attack
+            // gameObject.GetComponent<Animator>().Play("attack");
         }
     }
     // private void idle()
