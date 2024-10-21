@@ -105,10 +105,6 @@ public class FieldOfView : MonoBehaviour
                 else
                     canSeePlayer = false; // player is not within radius
             }
-            //else // check failed - for example there are no colliders in the list
-            //canSeePlayer = false;
-            // if check failed and you were previously viewing, you are no longer able to view player
-
             _UpdateAlertState(canSeePlayer);
 
             if (canSeePlayer)
@@ -116,6 +112,8 @@ public class FieldOfView : MonoBehaviour
                 moveTowardsPlayer(target);
             }
         }
+        // getting to this point means coliders[] length is zero: auto-fail, so
+        canSeePlayer = false;
 
     }
 
