@@ -811,8 +811,8 @@ MonoBehaviour:
   alertStage: 1
   alertLevel: 0
   aggroSpeed: 1
-  radius: 5.90956
-  angle: 70
+  radius: 8.9
+  angle: 116
   playerRef: {fileID: 199301088}
   enemyDistance: 0.2
   targetMask:

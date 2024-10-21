@@ -66,7 +66,7 @@ public class FieldOfView : MonoBehaviour
         Collider[] rangeChecks = Physics.OverlapSphere(transform.position, radius, targetMask);
         // array of things that collide with your fov cone
         // henceforth we can refer to the rangeChecks array for a list 
-        
+
         if (rangeChecks.Length != 0) // if there are colliders in the area
         {
             // Transform target = rangeChecks[0].transform; // this only gets the first in rangecheck
@@ -105,15 +105,19 @@ public class FieldOfView : MonoBehaviour
                 else
                     canSeePlayer = false; // player is not within radius
             }
-            _UpdateAlertState(canSeePlayer);
-
-            if (canSeePlayer)
-            {
-                moveTowardsPlayer(target);
-            }
         }
         // getting to this point means coliders[] length is zero: auto-fail, so
-        canSeePlayer = false;
+        else
+        {
+            canSeePlayer = false;
+        }
+
+        _UpdateAlertState(canSeePlayer);
+
+        if (canSeePlayer)
+        {
+            moveTowardsPlayer(target);
+        }
 
     }
 
