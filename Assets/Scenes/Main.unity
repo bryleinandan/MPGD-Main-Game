@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.18028292, g: 0.22571306, b: 0.30692118, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028331, g: 0.2257133, b: 0.3069217, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -667,6 +667,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy
       objectReference: {fileID: 0}
+    - target: {fileID: 4571238477727134883, guid: 71259656a79da9c47904c87fc676a4cf, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
     - target: {fileID: 6085622505290389798, guid: 71259656a79da9c47904c87fc676a4cf, type: 3}
       propertyPath: m_LocalPosition.x
       value: 172.17
@@ -677,7 +681,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6085622505290389798, guid: 71259656a79da9c47904c87fc676a4cf, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 41.11
+      value: 27.41
       objectReference: {fileID: 0}
     - target: {fileID: 6085622505290389798, guid: 71259656a79da9c47904c87fc676a4cf, type: 3}
       propertyPath: m_LocalRotation.w
@@ -839,6 +843,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2746e7affcf374f909802de72a4e2651, type: 3}
+--- !u!20 &1645146270 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 4044425540431231855, guid: 2746e7affcf374f909802de72a4e2651, type: 3}
+  m_PrefabInstance: {fileID: 1645146269}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1656859790
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -954,6 +963,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 493752862098040534, guid: c65fe9718210b40acab8aa0a7f82bc79, type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 1645146270}
     - target: {fileID: 1537225073679748965, guid: c65fe9718210b40acab8aa0a7f82bc79, type: 3}
       propertyPath: speed
       value: 100
@@ -1004,6 +1017,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6761776627532231796, guid: c65fe9718210b40acab8aa0a7f82bc79, type: 3}
       propertyPath: m_Name
+      value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 6761776627532231796, guid: c65fe9718210b40acab8aa0a7f82bc79, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 6761776627532231796, guid: c65fe9718210b40acab8aa0a7f82bc79, type: 3}
+      propertyPath: m_TagString
       value: Player
       objectReference: {fileID: 0}
     m_RemovedComponents: []

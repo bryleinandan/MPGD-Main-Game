@@ -1,0 +1,6 @@
+Documentation
+
+# When you instantiate enemy from prefab
+- make sure player is on target layer
+- make sure any walls, objects, etc. on obstacle layer
+- make sure dependencies for player (on the enemy) are set
