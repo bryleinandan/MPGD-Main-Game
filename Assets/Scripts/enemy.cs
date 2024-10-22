@@ -73,8 +73,8 @@ public class FieldOfView : MonoBehaviour
         // array of things that collide with your fov cone
         // henceforth we can refer to the rangeChecks array for a list 
 
-        if (rangeChecks.Length != 0) // if there are colliders in the area
-        {
+        // if there are any colliders in the area
+        if (rangeChecks.Length != 0) {
             // Transform target = rangeChecks[0].transform; // this only gets the first in rangecheck
             // Identify player in the array
 
@@ -96,13 +96,11 @@ public class FieldOfView : MonoBehaviour
                 Vector3 directionToTarget = (target.position - transform.position).normalized;
 
                 // check for angle
-                if ((Vector3.Angle(transform.forward, directionToTarget)) < angle / 2)
-                {
+                if ((Vector3.Angle(transform.forward, directionToTarget)) < angle / 2) {
                     float distanceToTarget = Vector3.Distance(transform.position, target.position);
 
                     // limit raycast distance to whenever it hits something (vision is blocked by walls)
-                    if (!(Physics.Raycast(transform.position, directionToTarget, distanceToTarget, obstructionMask)))
-                    {
+                    if (!(Physics.Raycast(transform.position, directionToTarget, distanceToTarget, obstructionMask))) {
                         canSeePlayer = true;
                     }
                     else
@@ -113,33 +111,28 @@ public class FieldOfView : MonoBehaviour
             }
         }
         // getting to this point means coliders[] length is zero: auto-fail, so
-        else
-        {
+        else {
             canSeePlayer = false;
         }
 
         _UpdateAlertState(canSeePlayer);
 
-        if (canSeePlayer)
-        {
+        if (canSeePlayer) {
             moveTowardsPlayer(target);
         }
 
     }
 
-    private void _UpdateAlertState(bool playerInFOV)
-    {
+    private void _UpdateAlertState(bool playerInFOV) {
         //Debug.Log(alertLevel);
-        switch (alertStage)
-        {
+        switch (alertStage) {
             case AlertStage.Peaceful:
                 if (playerInFOV)
                     alertStage = AlertStage.Aware;
                 break;
 
             case AlertStage.Aware: // increment if in fov, decrement if not
-                if (playerInFOV)
-                {
+                if (playerInFOV) {
                     //alertLevel++;
                     alertLevel = alertLevel + aggroSpeed;
                     if (alertLevel >= 100)
@@ -165,12 +158,21 @@ public class FieldOfView : MonoBehaviour
 
         transform.LookAt(player);
 
-        agent.SetDestination(player.transform.position);
+        // only chase when alerted
+        if (alertStage == AlertStage.Alerted) {
+            agent.SetDestination(player.transform.position);
+        }
 
-        // if distance between player and self is small
-        if (Vector3.Distance(transform.position, player.position) < enemyDistance)
-        {
+        // if distance between player and self is small: stop moving
+        if (Vector3.Distance(transform.position, player.position) <= enemyDistance) {
+
+            // this supposedly sets the speed of the navmeshagent to zero but it doesn/t
             gameObject.GetComponent<NavMeshAgent>().velocity = Vector3.zero;
+
+            // let's set destination to self and see if this actually stops it moving
+            //agent.SetDestination(transform.position);
+            // for some reason this locks itself into not chasing the player ever.
+
             // and attack
             // gameObject.GetComponent<Animator>().Play("attack");
         }
