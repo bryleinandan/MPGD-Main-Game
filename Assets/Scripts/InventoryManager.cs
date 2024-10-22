@@ -14,6 +14,7 @@ public class InventoryManager : MonoBehaviour
     void Start() {
         ChangeSelectedSlot(0);
     }
+
     private void Update() {
         if (Input.inputString != null) {
             bool isNumber = int.TryParse(Input.inputString, out int number);
@@ -46,6 +47,7 @@ public class InventoryManager : MonoBehaviour
             inventorySlots[selectedSlot].Deselect();
         }
         inventorySlots[newValue].Select();
+        Debug.Log(inventorySlots[newValue]);
         selectedSlot = newValue;
     }
     public bool AddItem(Item item) {
