@@ -212,6 +212,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 177122155135672169, guid: 630079d7fcbd94085b0f389389a48306, type: 3}
+      propertyPath: m_TagString
+      value: InventorySlot
+      objectReference: {fileID: 0}
     - target: {fileID: 203572080775518587, guid: 630079d7fcbd94085b0f389389a48306, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -264,6 +268,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 610375955499015051, guid: 630079d7fcbd94085b0f389389a48306, type: 3}
+      propertyPath: m_TagString
+      value: InventorySlot
+      objectReference: {fileID: 0}
     - target: {fileID: 612199494241208670, guid: 630079d7fcbd94085b0f389389a48306, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -495,6 +503,14 @@ PrefabInstance:
     - target: {fileID: 1783099587049174776, guid: 630079d7fcbd94085b0f389389a48306, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1902959009961328086, guid: 630079d7fcbd94085b0f389389a48306, type: 3}
+      propertyPath: mainInventoryGroup
+      value: 
+      objectReference: {fileID: 1752068505}
+    - target: {fileID: 2177489257430122978, guid: 630079d7fcbd94085b0f389389a48306, type: 3}
+      propertyPath: m_TagString
+      value: InventorySlot
       objectReference: {fileID: 0}
     - target: {fileID: 2437689539735985576, guid: 630079d7fcbd94085b0f389389a48306, type: 3}
       propertyPath: m_AnchorMax.y
@@ -722,7 +738,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4755483996010133305, guid: 630079d7fcbd94085b0f389389a48306, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4755483996010133305, guid: 630079d7fcbd94085b0f389389a48306, type: 3}
+      propertyPath: m_TagString
+      value: MainInventoryGroup
       objectReference: {fileID: 0}
     - target: {fileID: 5188272276226750749, guid: 630079d7fcbd94085b0f389389a48306, type: 3}
       propertyPath: m_AnchorMax.y
@@ -1131,7 +1151,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 4755483996010133305, guid: 630079d7fcbd94085b0f389389a48306, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1752068507}
   m_SourcePrefab: {fileID: 100100000, guid: 630079d7fcbd94085b0f389389a48306, type: 3}
 --- !u!1 &705507993
 GameObject:
@@ -1328,9 +1351,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb26fb21705eb704c930133604f90899, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mainInventoryGroup: {fileID: 0}
   maxStackedItems: 61
-  inventorySlots: []
   inventoryItemPrefab: {fileID: 1231131192}
+  slotsByTag: []
 --- !u!114 &1231131197
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1539,6 +1563,19 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 1231131197}
   m_SourcePrefab: {fileID: 100100000, guid: 600f816dd2771472c8706a046a868c2a, type: 3}
+--- !u!1 &1752068505 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4755483996010133305, guid: 630079d7fcbd94085b0f389389a48306, type: 3}
+  m_PrefabInstance: {fileID: 442456697}
+  m_PrefabAsset: {fileID: 0}
+--- !u!222 &1752068507
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1752068505}
+  m_CullTransparentMesh: 1
 --- !u!1001 &1882735099
 PrefabInstance:
   m_ObjectHideFlags: 0

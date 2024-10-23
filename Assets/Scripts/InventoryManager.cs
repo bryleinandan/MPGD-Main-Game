@@ -6,18 +6,38 @@ using UnityEngine.UI;
 
 public class InventoryManager : MonoBehaviour
 {
+    public GameObject mainInventoryGroup;
     public int maxStackedItems = 61;
     private InventorySlot[] inventorySlots = new InventorySlot[32];
     public GameObject inventoryItemPrefab;
-    // int selectedSlot = -1;
-    // //select first hotbar slot as soon as game starts
-    // void Start() {
-    //     ChangeSelectedSlot(0);
-    // }
-
-    // can you not just
+    //int selectedSlot = -1;
+    //select first hotbar slot as soon as game starts
     int selectedSlot = 0;
-    // scrolling up/down yields a selected slot of -1 which...???? yeah
+
+    public GameObject[] slotsByTag; // temp for getting the slots
+    private Renderer inventoryGroupRenderer;
+    void Start() {
+        //ChangeSelectedSlot(0);
+
+        // Make main inventory active but invisible
+        // so we always have inventory but it's not always visible
+        // don't forget to set the object reference for it.
+        // nvm i'm setting it via tags because the unity editor has forsaken me -J
+        if (mainInventoryGroup == null) {
+            GameObject[] mainInvGroupTagged = GameObject.FindGameObjectsWithTag("MainInventoryGroup");
+            // there should only be one
+            mainInventoryGroup = mainInvGroupTagged[0];
+        }
+        mainInventoryGroup.SetActive(true);
+        // disable renderer (invisible)
+        inventoryGroupRenderer = mainInventoryGroup.GetComponent<Renderer>();
+        Debug.Log(inventoryGroupRenderer);
+        inventoryGroupRenderer.enabled = false;
+
+        //if (inventorySlots == null) { }
+        slotsByTag = GameObject.FindGameObjectsWithTag("InventorySlot");
+        Debug.Log(slotsByTag.Length);
+    }
 
     private void Update() {
         if (Input.inputString != null) {
@@ -113,6 +133,15 @@ public class InventoryManager : MonoBehaviour
             return item;
         }
         return null;
+    }
+
+    public void showMainInventory(bool tf) {
+        if (tf) {
+            inventoryGroupRenderer.enabled = true;
+        }
+        else {
+            inventoryGroupRenderer.enabled = false;
+        }
     }
 
 }
