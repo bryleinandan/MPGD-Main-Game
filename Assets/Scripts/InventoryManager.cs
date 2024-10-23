@@ -77,12 +77,12 @@ public class InventoryManager : MonoBehaviour
         }
     }
     void ChangeSelectedSlot(int newValue) {
-        Debug.Log("length of array is");
-        Debug.Log(inventorySlots.Length);
-        Debug.Log("new value is");
-        Debug.Log(newValue);
-        Debug.Log ("the object in the new slot is");
-        Debug.Log(inventorySlots[selectedSlot]);
+        // Debug.Log("length of array is");
+        // Debug.Log(inventorySlots.Length);
+        // Debug.Log("new value is");
+        // Debug.Log(newValue);
+        // Debug.Log ("the object in the new slot is");
+        // Debug.Log(inventorySlots[selectedSlot]);
 
         // Select / deselect colours
         if (selectedSlot >= 0) {
