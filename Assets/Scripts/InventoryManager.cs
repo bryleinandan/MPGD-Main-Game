@@ -33,8 +33,20 @@ public class InventoryManager : MonoBehaviour
         // set scale to 0 to make it disappear.
         mainInventoryGroup.transform.localScale = Vector3.zero;
 
+        // get all the slot objects that exist in the game: should be 32
         slotsByTag = GameObject.FindGameObjectsWithTag("InventorySlot");
-        Debug.Log(slotsByTag.Length);
+        // add to inventorySlots[]. inventoryslot (24) - (31) should be the first 8
+        // Debug.Log(slotsByTag[0]); // [0] gets (31)
+        // Debug.Log(slotsByTag[1]); // gets (30)... perfect, we just use [0]:[7]
+
+        // cast to InventorySlot
+        // (InventorySlot)collison.gameObject (bad)
+        // slot = objToChange.GetComponent<NewType>() is ok if custom class inherits from monobehaviour
+        for (int i = 0; i < 8; i++) {
+            // 7-i because using the number keys reverses order idk
+			inventorySlots[7-i] = slotsByTag[i].GetComponent<InventorySlot>();
+		}
+
     }
 
     private void Update() {
@@ -65,7 +77,6 @@ public class InventoryManager : MonoBehaviour
         }
     }
     void ChangeSelectedSlot(int newValue) {
-        //Debug.Log(inventorySlots[newValue]);
         Debug.Log("length of array is");
         Debug.Log(inventorySlots.Length);
         Debug.Log("new value is");
@@ -78,8 +89,6 @@ public class InventoryManager : MonoBehaviour
             inventorySlots[selectedSlot].Deselect();
         }
         inventorySlots[newValue].Select();
-
-        //Debug.Log(inventorySlots[newValue]);
         selectedSlot = newValue;
     }
     public bool AddItem(Item item) {
