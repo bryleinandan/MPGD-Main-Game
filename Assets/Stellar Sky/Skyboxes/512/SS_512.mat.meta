@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 9c0e1084808ff1e4c9d5b4404052b341
+timeCreated: 1504521131
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 99558
+  packageName: Stellar Sky
+  packageVersion: 1.0
+  assetPath: Assets/Stellar Sky/Skyboxes/512/SS_512.mat
+  uploadId: 199633
