@@ -7,13 +7,17 @@ using UnityEngine.UI;
 public class InventoryManager : MonoBehaviour
 {
     public int maxStackedItems = 61;
-    public InventorySlot[] inventorySlots;
+    private InventorySlot[] inventorySlots = new InventorySlot[32];
     public GameObject inventoryItemPrefab;
-    int selectedSlot = -1;
-    //select first hotbar slot as soon as game starts
-    void Start() {
-        ChangeSelectedSlot(0);
-    }
+    // int selectedSlot = -1;
+    // //select first hotbar slot as soon as game starts
+    // void Start() {
+    //     ChangeSelectedSlot(0);
+    // }
+
+    // can you not just
+    int selectedSlot = 0;
+    // scrolling up/down yields a selected slot of -1 which...???? yeah
 
     private void Update() {
         if (Input.inputString != null) {
@@ -25,16 +29,16 @@ public class InventoryManager : MonoBehaviour
         //change selected slot with scroll
         float scrollDelta = Input.mouseScrollDelta.y;
         if (scrollDelta != 0) {
-            Debug.Log(scrollDelta > 0 ? "scroll up" : "scroll down");
+            //Debug.Log(scrollDelta > 0 ? "scroll up" : "scroll down");
 
             if (scrollDelta > 0) { // scroll up
-                if (selectedSlot == 7) {
+                if (selectedSlot >= 7) {
                     ChangeSelectedSlot(0);
                 } else {
                     ChangeSelectedSlot(selectedSlot + 1);
                 }
             } else if (scrollDelta < 0) { // scroll down
-                if (selectedSlot == 0) {
+                if (selectedSlot <= 0) {
                     ChangeSelectedSlot(7);
                 } else {
                     ChangeSelectedSlot(selectedSlot - 1);
@@ -43,12 +47,21 @@ public class InventoryManager : MonoBehaviour
         }
     }
     void ChangeSelectedSlot(int newValue) {
+        //Debug.Log(inventorySlots[newValue]);
+        Debug.Log("length of array is");
+        Debug.Log(inventorySlots.Length);
+        Debug.Log("new value is");
         Debug.Log(newValue);
+        Debug.Log ("the object in the new slot is");
+        Debug.Log(inventorySlots[selectedSlot]);
+
+        // Select / deselect colours
         if (selectedSlot >= 0) {
             inventorySlots[selectedSlot].Deselect();
         }
         inventorySlots[newValue].Select();
-        Debug.Log(inventorySlots[newValue]);
+
+        //Debug.Log(inventorySlots[newValue]);
         selectedSlot = newValue;
     }
     public bool AddItem(Item item) {
@@ -101,4 +114,5 @@ public class InventoryManager : MonoBehaviour
         }
         return null;
     }
+
 }

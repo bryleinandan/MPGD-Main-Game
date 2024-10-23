@@ -31,4 +31,5 @@ public class DemoScript : MonoBehaviour
             Debug.Log ("No item removed!");
         }
     }
+
 }
