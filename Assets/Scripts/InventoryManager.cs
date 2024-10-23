@@ -39,12 +39,25 @@ public class InventoryManager : MonoBehaviour
         // Debug.Log(slotsByTag[0]); // [0] gets (31)
         // Debug.Log(slotsByTag[1]); // gets (30)... perfect, we just use [0]:[7]
 
-        // cast to InventorySlot
+        // cast to InventorySlot (first 7 only)
         // (InventorySlot)collison.gameObject (bad)
         // slot = objToChange.GetComponent<NewType>() is ok if custom class inherits from monobehaviour
-        for (int i = 0; i < 8; i++) {
-            // 7-i because using the number keys reverses order idk
-			inventorySlots[7-i] = slotsByTag[i].GetComponent<InventorySlot>();
+        // for (int i = 0; i < 8; i++) {
+        //     // 7-i because using the number keys reverses order idk
+		// 	inventorySlots[7-i] = slotsByTag[i].GetComponent<InventorySlot>();
+		// }
+
+        int index = 0;
+        foreach (GameObject thing in slotsByTag) {
+            if (index <= 7) {
+                inventorySlots[7-index] = slotsByTag[index].GetComponent<InventorySlot>();
+            }
+            else {
+                inventorySlots[index] = slotsByTag[index].GetComponent<InventorySlot>();
+            }
+            Debug.Log(index);
+            Debug.Log(inventorySlots[index]);
+            index++;
 		}
 
     }
