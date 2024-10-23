@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: c146daf0163687f47b4c34424b41c4be
+timeCreated: 1504519675
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 99558
+  packageName: Stellar Sky
+  packageVersion: 1.0
+  assetPath: Assets/Stellar Sky/Skyboxes/2048/SS_2048.mat
+  uploadId: 199633
