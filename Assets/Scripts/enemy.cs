@@ -33,7 +33,7 @@ public class FieldOfView : MonoBehaviour
     public float health = 1;
 
     [Range(1, 100)] public float aggroSpeed = 1; // how fast alertness increments
-    private float maxNumberEnemies = 3; // max number of enemies to be attacking player at once
+    //private float maxNumberEnemies = 3; // max number of enemies to be attacking player at once
     // probably need to set this in a game settings later
     [Range(0, 100)] public float radius;
     [Range(0, 360)] public float angle;
