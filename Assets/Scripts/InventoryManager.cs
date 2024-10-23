@@ -15,7 +15,8 @@ public class InventoryManager : MonoBehaviour
     int selectedSlot = 0;
 
     public GameObject[] slotsByTag; // temp for getting the slots
-    private Renderer inventoryGroupRenderer;
+    private CanvasRenderer inventoryGroupRenderer;
+
     void Start() {
         //ChangeSelectedSlot(0);
 
@@ -29,10 +30,12 @@ public class InventoryManager : MonoBehaviour
             mainInventoryGroup = mainInvGroupTagged[0];
         }
         mainInventoryGroup.SetActive(true);
-        // disable renderer (invisible)
-        inventoryGroupRenderer = mainInventoryGroup.GetComponent<Renderer>();
-        Debug.Log(inventoryGroupRenderer);
-        inventoryGroupRenderer.enabled = false;
+        // // disable renderer (invisible)
+        inventoryGroupRenderer = mainInventoryGroup.GetComponent<CanvasRenderer>();
+        inventoryGroupRenderer.cull = false;
+
+        // set scale to 0 to make it disappear.
+        // mainInventoryGroup.LocalScale = 0;
 
         //if (inventorySlots == null) { }
         slotsByTag = GameObject.FindGameObjectsWithTag("InventorySlot");
@@ -137,10 +140,10 @@ public class InventoryManager : MonoBehaviour
 
     public void showMainInventory(bool tf) {
         if (tf) {
-            inventoryGroupRenderer.enabled = true;
+            inventoryGroupRenderer.cull = true;
         }
         else {
-            inventoryGroupRenderer.enabled = false;
+            inventoryGroupRenderer.cull = false;
         }
     }
 
