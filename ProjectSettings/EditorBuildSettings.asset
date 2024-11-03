@@ -8,6 +8,12 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Main.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
+  - enabled: 1
+    path: Assets/Scenes/MainMenu.unity
+    guid: c29a1346c0fe4d54baa098e373a923ce
+  - enabled: 1
+    path: Assets/Scenes/Sahra2.unity
+    guid: 49d05f8948c48ca4da6297be311fb2e7
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: 7052d107620cb4df4aca70e441feaac9, type: 2}
   m_UseUCBPForAssetBundles: 0
