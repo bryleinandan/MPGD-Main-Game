@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using JetBrains.Annotations;
 using UnityEngine;
 // using UnityEditor;
 using UnityEngine.AI;
@@ -29,10 +30,10 @@ public class FieldOfView : MonoBehaviour
 
     public float movementSpeed = 3;
     public float attackSpeed = 1;
-    public float damage = 0;
+    public float damage = 1;
     public float health = 1;
 
-    [Range(1, 100)] public float aggroSpeed = 1; // how fast alertness increments
+    [Range(1, 100)] public float aggroSpeed = 20; // how fast alertness increments
     //private float maxNumberEnemies = 3; // max number of enemies to be attacking player at once
     // probably need to set this in a game settings later
     [Range(0, 100)] public float radius;
@@ -41,7 +42,8 @@ public class FieldOfView : MonoBehaviour
     public GameObject playerRef;
 
     private NavMeshAgent agent;
-    public float enemyDistance = 0.7f;
+    [Range(1, 50)] public float enemyDistance = 1.5f;
+    //tutorial set this to 0.7f but that seems too small
 
     public LayerMask targetMask;
     public LayerMask obstructionMask;
@@ -49,7 +51,11 @@ public class FieldOfView : MonoBehaviour
 
     private void Start()
     {
-        playerRef = GameObject.FindGameObjectWithTag("Player");
+        if (playerRef == null) {
+            // playerRef = GameObject.FindGameObjectWithTag("Player");
+            // nvm let's just
+            playerRef = GameObject.Find("Player");
+        }
         StartCoroutine(FOVRoutine());
         agent = GetComponent<NavMeshAgent>();
         agent.speed = movementSpeed;
@@ -157,27 +163,75 @@ public class FieldOfView : MonoBehaviour
     private void moveTowardsPlayer(Transform player)
     {
         // move towards player
-
-        transform.LookAt(player);
+        //transform.LookAt(player);
+        ManualLookAt(player.transform.position);
 
         // only chase when alerted
         if (alertStage == AlertStage.Alerted) {
+            //transform.LookAt(player);
+            //agent.speed = movementSpeed;
+            agent.isStopped = false;
             agent.SetDestination(player.transform.position);
+        } else {
+            //agent.speed = 0;
+            agent.SetDestination(agent.transform.position);
+            agent.isStopped = true;
         }
 
         // if distance between player and self is small: stop moving
-        if (Vector3.Distance(transform.position, player.position) <= enemyDistance) {
+        //if (Vector3.Distance(transform.position, player.position) <= enemyDistance) {
+        Debug.Log(Vector3.Distance(transform.position, player.transform.position));
+        if (Vector3.Distance(transform.position, player.transform.position) <= enemyDistance) {
 
+            Debug.Log("stoppp");
             // this supposedly sets the speed of the navmeshagent to zero but it doesn/t
             gameObject.GetComponent<NavMeshAgent>().velocity = Vector3.zero;
 
-            // let's set destination to self and see if this actually stops it moving
-            //agent.SetDestination(transform.position);
-            // for some reason this locks itself into not chasing the player ever.
-
             // and attack
             // gameObject.GetComponent<Animator>().Play("attack");
+            if (alertStage == AlertStage.Alerted) {
+                Debug.Log("deal damage:");
+                Debug.Log(damage);
+            }
         }
     }
     // private void idle()
+
+    // private void attack(Transform target)
+    //If your GameObject starts to collide with another GameObject with a Collider
+    // void OnCollisionEnter(Collision collision)
+    // {
+    //     //Output the Collider's GameObject's name
+    //     Debug.Log(collision.collider.name);
+    // }
+
+    // //If your GameObject keeps colliding with another GameObject with a Collider, do something
+    // void OnCollisionStay(Collision collision)
+    // {
+    //     //Check to see if the Collider's name is "Chest"
+    //     if (collision.collider.name == "Chest")
+    //     {
+    //         //Output the message
+    //         Debug.Log("Chest is here!");
+    //     }
+    // {
+
+    private void ManualLookAt(Vector3 player_pos) {
+        // //var qTo = Quaternion.LookRotation(player.transform.position - transform.position);
+        // var qTo = Quaternion.LookRotation(player_pos - transform.position);
+        // //qTo = Quaternion.Slerp(transform.rotation, qTo, 10 * Time.deltaTime);
+        // qTo = Quaternion.Slerp(transform.rotation, qTo, 15 * Time.deltaTime);
+        // GetComponent<Rigidbody>().MoveRotation(qTo);
+        // //Debug.Log(qTo);
+
+        // just lookat buggin again
+        //transform.rotation = Quaternion.LookRotation(player_pos - transform.position, transform.up);
+    
+        //transform.rotation = Quaternion.FromToRotation(transform.forward, player_pos - transform.position);
+        
+        // Source: ChatGPT
+        Vector3 lookDirection = player_pos - transform.position;
+        lookDirection.y = 0; // Optionally, ignore the Y axis to keep the enemy level
+        transform.rotation = Quaternion.LookRotation(lookDirection);
+    }
 }
