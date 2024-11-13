@@ -9,6 +9,8 @@ using UnityEngine.InputSystem;
 
 public class Interactor : MonoBehaviour 
 {
+
+public KeyCode interactKey;
 [SerializeField] private Transform _interactionPoint; 
 [SerializeField] private float _interactionPointRadius = 1.2f;
 [SerializeField] private LayerMask _interactableMask;
@@ -30,8 +32,12 @@ public class Interactor : MonoBehaviour
         // if array not empty, get the first item in colliders & call Interact function from it
         if (_numFound > 0) {
             var interactable = _colliders[0].GetComponent<IInteractable>();
-            if (interactable != null && Keyboard.current.eKey.wasPressedThisFrame) {
-                interactable.Interact(this); // pass self in as a parameter
+            //if (interactable != null && Keyboard.current.eKey.wasPressedThisFrame) {
+            if (Input.GetKeyDown(interactKey)) { // if false and true
+                Debug.Log("i have been interacted with.");
+                if (interactable != null) {
+                    interactable.Interact(this); // pass self in as a parameter
+                }
             }
         } else {
             _colliders[0] = null;

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 // using System.ComponentModel;
@@ -5,8 +6,16 @@ using UnityEngine;
 using UnityEngine.Tilemaps;
 
 [CreateAssetMenu(menuName = "Scriptable object/Item")]
-public class Item : ScriptableObject
+public class Item : ScriptableObject, IInteractable
+
 {
+    [SerializeField] private string _prompt = "Tap it";
+    public string InteractionPrompt => _prompt;
+
+    public bool Interact(Interactor interactor) {
+        Debug.Log("I have been interacted with.");
+        return true;
+    }
 
     [Header("Only gameplay")]
         //public TileBase tile; //how the item will look like ingame (possibly not needed/different for 3d game?)

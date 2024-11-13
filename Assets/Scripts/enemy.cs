@@ -180,10 +180,10 @@ public class FieldOfView : MonoBehaviour
 
         // if distance between player and self is small: stop moving
         //if (Vector3.Distance(transform.position, player.position) <= enemyDistance) {
-        Debug.Log(Vector3.Distance(transform.position, player.transform.position));
+        //Debug.Log(Vector3.Distance(transform.position, player.transform.position));
         if (Vector3.Distance(transform.position, player.transform.position) <= enemyDistance) {
 
-            Debug.Log("stoppp");
+            //Debug.Log("stoppp");
             // this supposedly sets the speed of the navmeshagent to zero but it doesn/t
             gameObject.GetComponent<NavMeshAgent>().velocity = Vector3.zero;
 

@@ -55,8 +55,8 @@ public class InventoryManager : MonoBehaviour
             else {
                 inventorySlots[index] = slotsByTag[index].GetComponent<InventorySlot>();
             }
-            Debug.Log(index);
-            Debug.Log(inventorySlots[index]);
+            //Debug.Log(index);
+            //Debug.Log(inventorySlots[index]);
             index++;
 		}
 
