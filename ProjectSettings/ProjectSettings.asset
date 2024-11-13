@@ -730,7 +730,13 @@ PlayerSettings:
   XboxOneOverrideIdentityPublisher: 
   vrEditorSettings: {}
   cloudServicesEnabled:
+    Build: 0
+    Game Performance: 0
+    Legacy Analytics: 0
+    Purchasing: 0
+    UDP: 0
     UNet: 1
+    Unity Ads: 0
   luminIcon:
     m_Name: 
     m_ModelFolderPath: 
@@ -750,11 +756,11 @@ PlayerSettings:
   apiCompatibilityLevel: 3
   activeInputHandler: 2
   windowsGamepadBackendHint: 0
-  cloudProjectId: 674535be-ca4b-4d8c-b5b8-3fa68b5d8a86
+  cloudProjectId: 0fe743c5-1057-4b74-9025-7ba329553f00
   framebufferDepthMemorylessMode: 0
   qualitySettingsNames: []
   projectName: AstroNuts
-  organizationId: bryrito
+  organizationId: endeirus
   cloudEnabled: 0
   legacyClampBlendShapeWeights: 0
   hmiLoadingImage: {fileID: 0}

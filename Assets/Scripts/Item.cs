@@ -9,10 +9,12 @@ public class Item : ScriptableObject
 {
 
     [Header("Only gameplay")]
-        public TileBase tile; //how the item will look like ingame (possibly not needed/different for 3d game?)
+        //public TileBase tile; //how the item will look like ingame (possibly not needed/different for 3d game?)
+        // making a corresponding overworldItem class to show ingame - also to enable other things to happen
+        public GameObject overworldObject; // assign if the item in inventory is placeable I guess
         public ItemType type;
     public ActionType actionType;
-    public Vector2Int range = new Vector2Int(5, 4); //Range of which this tool can be used
+    public Vector2Int range = new Vector2Int(5, 4); // Range of which this tool can be used
 
     [Header("Only UI")]
     public bool stackable = true;
