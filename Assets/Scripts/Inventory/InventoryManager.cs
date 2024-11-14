@@ -89,6 +89,7 @@ public class InventoryManager : MonoBehaviour
             }
         }
     }
+    
     void ChangeSelectedSlot(int newValue) {
         // Debug.Log("length of array is");
         // Debug.Log(inventorySlots.Length);
@@ -104,6 +105,7 @@ public class InventoryManager : MonoBehaviour
         inventorySlots[newValue].Select();
         selectedSlot = newValue;
     }
+    
     public bool AddItem(Item item) {
         //Check if any slot has same item with count lower than max
         for (int i = 0; i<inventorySlots.Length; i++) {
