@@ -6,8 +6,17 @@ using UnityEngine;
 public class overworldItem : MonoBehaviour, IInteractable
 {
     // public Mesh model;
-    public InventoryManager inventoryManager;
+
+    [Header("Mandatory")]
     public Item inventoryItem; // the Item class equivalent (will be added to inventory)
+
+    [Header("Set second one if you can")]
+    public InventoryManager inventoryManager;
+    //public GameObject inventoryManager;
+    public GameObject inventoryManagerObj;
+        // for assigning in inspector because it says InventoryManager is just a GameObject
+        // but we need it to be of InventoryManager class to use .addItem
+
     //// ^ this object is designed to be used in conjunction with item.cs, so getters are:
     // inventoryItem.ActionType
     // inventoryItem.ItemType
@@ -24,6 +33,18 @@ public class overworldItem : MonoBehaviour, IInteractable
             // get MeshFilter component. Then get the mesh property associated with it.
         //MeshFilter selfMeshFilter = (MeshFilter)GameObject.GetComponent("MeshFilter");
         //model = selfMeshFilter.sharedMesh; //.mesh; / .sharedMesh
+
+        if (inventoryManagerObj == null) {
+            // Find inventory manager!
+            //inventoryManager= GameObject.FindFirstObjectByType<InventoryManager>();
+            inventoryManagerObj = GameObject.Find("InventoryManager");
+        }
+        inventoryManager = inventoryManagerObj.GetComponent<InventoryManager>();
+
+        // if inventoryManager is STILL null
+        // if (inventoryManager == null) {
+        //     inventoryManager= GameObject.FindFirstObjectByType<InventoryManager>();
+        // }
     }
 
     void Update() {
@@ -31,6 +52,7 @@ public class overworldItem : MonoBehaviour, IInteractable
             selfDestruct();
         }
     }
+
     // Handle interaction with its corresponding overworld object
     public bool Interact(Interactor interactor) {
         Debug.Log("I have been interacted with.");

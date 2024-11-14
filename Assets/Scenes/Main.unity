@@ -1239,6 +1239,7 @@ GameObject:
   - component: {fileID: 523195299}
   - component: {fileID: 523195298}
   - component: {fileID: 523195300}
+  - component: {fileID: 523195301}
   m_Layer: 7
   m_Name: ItemCylinder
   m_TagString: Untagged
@@ -1334,6 +1335,23 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
+--- !u!114 &523195301
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 523195295}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1612f85ef925b4c4d81de184b60cf1d7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inventoryItem: {fileID: 11400000, guid: 35ebf988cef1ad440b4074110423360a, type: 2}
+  inventoryManager: {fileID: 0}
+  inventoryManagerObj: {fileID: 0}
+  _prompt: Pick up!
+  setToDestroy: 0
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0

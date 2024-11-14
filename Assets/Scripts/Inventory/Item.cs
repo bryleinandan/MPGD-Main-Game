@@ -9,11 +9,11 @@ using UnityEngine.Tilemaps;
 public class Item : ScriptableObject
 
 {
+    // Uncomment later to allow for overworldItem to be reconstructed
     // [SerializeField] private string _prompt = "Pick up!";
     // public string InteractionPrompt => _prompt;
 
-    // Set this in the prefab!
-    public InventoryManager inventoryManager;
+    //public InventoryManager inventoryManager;
 
     [Header("Only gameplay")]
         //public TileBase tile; //how the item will look like ingame (possibly not needed/different for 3d game?)
