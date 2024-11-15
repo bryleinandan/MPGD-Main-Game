@@ -2,15 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
+using TMPro;
 
 public class overworldItem : MonoBehaviour, IInteractable
 {
     // public Mesh model;
 
-    [Header("Mandatory")]
+    [Header("# Make sure these are set!")]
     public Item inventoryItem; // the Item class equivalent (will be added to inventory)
+    public GameObject cameraHolder;
+    public TextMeshProUGUI promptText => this.GetComponent<TextMeshProUGUI>();
+    [SerializeField] private string prompt = "Pick up!";
 
-    [Header("Set second one if you can")]
+    [Header("Make sure there is a textmeshprogui component.")]
+
+    [Header("code does this for you / debugging")]
     public InventoryManager inventoryManager;
     //public GameObject inventoryManager;
     public GameObject inventoryManagerObj;
@@ -21,11 +27,14 @@ public class overworldItem : MonoBehaviour, IInteractable
     // inventoryItem.ActionType
     // inventoryItem.ItemType
 
+    // Interface things
     //[Range(3,10)] public int interactionRange = 5; // range 
-    [SerializeField] private string _prompt = "Pick up!";
-    public string InteractionPrompt => _prompt;
+    public string InteractionPrompt => prompt;
+    public Camera mainCam => cameraHolder.GetComponent<Camera>();
+    // textmeshpro initialisation, prompt txt
 
     public bool setToDestroy = false;
+    public bool promptIsVisible = false;
 
     void Start()
     {
@@ -45,11 +54,16 @@ public class overworldItem : MonoBehaviour, IInteractable
         // if (inventoryManager == null) {
         //     inventoryManager= GameObject.FindFirstObjectByType<InventoryManager>();
         // }
+
+        if (mainCam == null) {
+            var camholder = GameObject.Find("CameraHolder");
+            // ok and now I can't overwrite mainCam because it's read only
+        }
     }
 
     void Update() {
         if (setToDestroy) {
-            selfDestruct();
+            SelfDestruct();
         }
     }
 
@@ -73,7 +87,17 @@ public class overworldItem : MonoBehaviour, IInteractable
         return true;
     }
 
-    public virtual void selfDestruct() { // you'll never guess what this does
+    public void ShowPrompt(string promptText) {
+        promptText = prompt;
+        promptIsVisible = true;
+    }
+
+    public void HidePrompt() {
+        promptIsVisible = false;
+    }
+
+
+    public virtual void SelfDestruct() { // you'll never guess what this does
         // this can overwritten in any child class by
         // public override void selfDestruct() ...
 

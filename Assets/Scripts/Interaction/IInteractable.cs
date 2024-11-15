@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public interface IInteractable {
 
@@ -13,6 +14,10 @@ public interface IInteractable {
     public String InteractionPrompt { get; }
 
     // function that plays when you press the interaction key.
-    public bool Interact(Interactor interactor);
+    public bool Interact(Interactor interactor); // takes as input the thing that initiated
+
+    //private Camera mainCam = GameObject.Find("InventoryManager").GetComponent<Camera>();
+    abstract Camera mainCam { get; }
+    abstract TextMeshProUGUI promptText { get; }
 
 }

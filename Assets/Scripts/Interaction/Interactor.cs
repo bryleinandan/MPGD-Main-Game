@@ -12,14 +12,15 @@ public class Interactor : MonoBehaviour
 
 public KeyCode interactKey;
 [SerializeField] private Transform interactionPoint; 
-[SerializeField] private float interactionPointRadius = 1.2f;
+[SerializeField] private float interactionPointRadius = 4.2f;
 [SerializeField] private LayerMask interactableMask; // layer to check for collisions
-[SerializeField] private InteractionPromptUI interactionPromptUI;
 
+[Header("For debugging")]
+[SerializeField] private InteractionPromptUI interactionPromptUI;
 //private readonly Collider[] _colliders = new Collider[3];
 [SerializeField] private Collider[] colliders = new Collider[3];
 [SerializeField] private int _numFound;
-private IInteractable interactable;
+private IInteractable interactable; // global "target" for interacting with
     
     void Start()
     {
@@ -37,9 +38,9 @@ private IInteractable interactable;
             if (interactable != null) {
 
                 // found but not interacted with, show gui prompt
-                if (!interactionPromptUI.isVisible) {
-                    interactionPromptUI.SetUp(interactable.InteractionPrompt);
-                }
+                // if (!interactionPromptUI.isVisible) {
+                //     interactionPromptUI.SetUp(interactable.InteractionPrompt);
+                // }
 
                 //if (interactable != null && Keyboard.current.eKey.wasPressedThisFrame) {
                 // found + keyboard pressed
@@ -51,7 +52,7 @@ private IInteractable interactable;
         } else { // number of things found is 0: nothing in vicinity detected
             colliders[0] = null;
             interactable = null;
-            interactionPromptUI.Close();
+            //interactionPromptUI.Close();
         }
     }
 
