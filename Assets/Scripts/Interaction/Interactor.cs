@@ -16,7 +16,7 @@ public KeyCode interactKey;
 [SerializeField] private LayerMask interactableMask; // layer to check for collisions
 
 [Header("For debugging")]
-[SerializeField] private InteractionPromptUI interactionPromptUI;
+//[SerializeField] private InteractionPromptUI interactionPromptUI;
 //private readonly Collider[] _colliders = new Collider[3];
 [SerializeField] private Collider[] colliders = new Collider[3];
 [SerializeField] private int _numFound;
@@ -41,6 +41,7 @@ private IInteractable interactable; // global "target" for interacting with
                 // if (!interactionPromptUI.isVisible) {
                 //     interactionPromptUI.SetUp(interactable.InteractionPrompt);
                 // }
+                interactable.ShowPrompt();
 
                 //if (interactable != null && Keyboard.current.eKey.wasPressedThisFrame) {
                 // found + keyboard pressed
@@ -50,9 +51,12 @@ private IInteractable interactable; // global "target" for interacting with
                 }
             }
         } else { // number of things found is 0: nothing in vicinity detected
-            colliders[0] = null;
-            interactable = null;
-            //interactionPromptUI.Close();
+            if (interactable != null) {
+                interactable.HidePrompt();
+                colliders[0] = null;
+                interactable = null;
+                //interactionPromptUI.Close();
+            }
         }
     }
 

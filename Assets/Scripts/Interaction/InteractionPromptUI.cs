@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
+// delete when text prompt is working.
+
+
 public class InteractionPromptUI : MonoBehaviour
 {
     // UI look at camera - parent some text to the camera
