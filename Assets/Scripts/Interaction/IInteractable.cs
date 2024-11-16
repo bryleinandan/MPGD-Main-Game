@@ -23,14 +23,23 @@ public interface IInteractable {
     public bool promptIsVisible { get; set; }
     public Vector3 textOriginalScale { get; set; }
     //  promptTextMesh.GetComponent<RectTransform>().localScale
+    public float smoothSpeed { get; } // i use 2.5f // considering a setter. probably not.
+    
 
     void UpdateVisibility() { // put this in update()
-        Debug.Log("Prompt is visible:" +promptIsVisible);
+        // no point in making these public
+        var vec0 = new Vector3(0.0f, 0.0f, 0.0f);
+        float smooth = 1.0f - Mathf.Pow(0.5f, Time.deltaTime * smoothSpeed);
+
+        //Debug.Log("Prompt is visible:" +promptIsVisible);
         RectTransform txtScale = promptTextMesh.GetComponent<RectTransform>();
         if (promptIsVisible) {
-            txtScale.localScale = textOriginalScale;
+            //txtScale.localScale = textOriginalScale;
+            txtScale.localScale = Vector3.Lerp(txtScale.localScale, textOriginalScale, smooth);
         } else {
-            txtScale.localScale = new Vector3(0.0f, 0.0f, 0.0f);
+            //txtScale.localScale = new Vector3(0.0f, 0.0f, 0.0f);
+            // ease:
+            txtScale.localScale = Vector3.Lerp(txtScale.localScale, vec0, smooth);
         }
     }
 

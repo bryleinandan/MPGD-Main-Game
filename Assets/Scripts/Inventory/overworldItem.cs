@@ -12,9 +12,10 @@ public class overworldItem : MonoBehaviour, IInteractable
 
     [Header("# Make sure these are set!")]
     public Item inventoryItem; // the Item class equivalent (will be added to inventory)
-    public GameObject cameraHolder;
+    public GameObject playerCam;
     //public TextMeshProUGUI promptText => this.transform.GetChild(0).gameObject.GetComponent<TextMeshProUGUI>();
     [SerializeField] private string prompt = "Pick up!";
+    public float visibilitySmoothingSpeed = 2.5f;
 
     [Header("Make sure there is a textmeshprogui child component.")]
 
@@ -24,13 +25,15 @@ public class overworldItem : MonoBehaviour, IInteractable
         // for assigning in inspector because it says InventoryManager is just a GameObject
         // but we need it to be of InventoryManager class to use .addItem
     public InventoryManager inventoryManager;
+    public float smoothSpeed => visibilitySmoothingSpeed;
+    // add a setter in interactable.cs and define that here if you want to change this during runtime
 
     // inventoryItem.ActionType
     // inventoryItem.ItemType
 
     // more interface things
     //[Range(3,10)] public int interactionRange = 5; // range 
-    public Camera mainCam => cameraHolder.GetComponent<Camera>();
+    public Camera mainCam => playerCam.GetComponent<Camera>();
 
     // public string interactionPromptStr {
     //     get { return interactionPromptStr; }
@@ -73,8 +76,8 @@ public class overworldItem : MonoBehaviour, IInteractable
         // maincam is readonly without the setter :)
         // if (mainCam == null) {
         //     var camholder = GameObject.Find("CameraHolder");
-        //     //mainCam = camholder.GetComponent<Camera>());
-        // }
+        //     mainCam = camholder.GetComponent<Camera>());
+        //}
     }
 
     void Update() {
@@ -82,6 +85,10 @@ public class overworldItem : MonoBehaviour, IInteractable
         if (setToDestroy) {
             SelfDestruct();
         }
+    }
+
+    void LateUpdate() {
+        transform.rotation = mainCam.transform.rotation;
     }
 
     // Handle interaction with its corresponding overworld object
@@ -111,24 +118,8 @@ public class overworldItem : MonoBehaviour, IInteractable
         Debug.Log("self destructing.");
         Destroy(gameObject);
     }
-
-    // use default implementation in interactable
-    // delete later
-    // public void ShowPrompt(string setTo = "DEFAULT_") {
-    //     // Default implementation as in IInteractable.cs
-    //     Debug.Log("Show prompt" + setTo);
-    // }
-
-    // public void HidePrompt() {
-    //     // Default implementation as in IInteractable.cs
-    //     Debug.Log("Hide prompt");
-    // }
-
-    // public void UpdateVisibility() {
-    //     // Default implementation as in IInteractable.cs
-    // }
-
-    // I learned that interfaces only provide default implementation but if you generate a new methoc, it will overwrite it.
+    
+       // I learned that interfaces only provide default implementation but if you generate a new methoc, it will overwrite it.
     // it's kinda difficult to access. so you can't call ShowPrompt() and expect this class to knoe
     // either new Interactable = interactable then innteractable.ShowPrompt() with all sorts of static problems
     // or (IInteractable)this.ShowPrompt()

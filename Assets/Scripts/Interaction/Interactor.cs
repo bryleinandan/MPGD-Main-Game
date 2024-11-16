@@ -46,7 +46,7 @@ private IInteractable interactable; // global "target" for interacting with
                 //if (interactable != null && Keyboard.current.eKey.wasPressedThisFrame) {
                 // found + keyboard pressed
                 if (Input.GetKeyDown(interactKey)) {
-                    Debug.Log("i have been interacted with.");
+                    //Debug.Log("i have been interacted with.");
                     interactable.Interact(this); // pass self in as a parameter to interact with the thing
                 }
             }

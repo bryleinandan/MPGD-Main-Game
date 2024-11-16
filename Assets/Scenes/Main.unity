@@ -213,11 +213,6 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 2086710030}
   m_SourcePrefab: {fileID: 100100000, guid: ef37d2126cfed49ada5b417716446b2f, type: 3}
---- !u!1 &424816134 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8408844984917963375, guid: 005f24dd5f851442c80008026e8884f2, type: 3}
-  m_PrefabInstance: {fileID: 903556499}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &438554375 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4755483996010133305, guid: 630079d7fcbd94085b0f389389a48306, type: 3}
@@ -1363,8 +1358,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inventoryItem: {fileID: 11400000, guid: 35ebf988cef1ad440b4074110423360a, type: 2}
-  cameraHolder: {fileID: 424816134}
+  playerCam: {fileID: 1305775484}
   prompt: Pick up!
+  visibilitySmoothingSpeed: 2.5
   setToDestroy: 0
   inventoryManagerObj: {fileID: 0}
   inventoryManager: {fileID: 0}
@@ -1852,6 +1848,11 @@ MonoBehaviour:
   maxStackedItems: 61
   inventoryItemPrefab: {fileID: 1231131192}
   slotsByTag: []
+--- !u!1 &1305775484 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6759627085187705636, guid: 005f24dd5f851442c80008026e8884f2, type: 3}
+  m_PrefabInstance: {fileID: 903556499}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1426268052 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2319736956675224901, guid: c65fe9718210b40acab8aa0a7f82bc79, type: 3}
