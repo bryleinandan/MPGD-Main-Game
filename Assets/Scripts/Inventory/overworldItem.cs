@@ -5,6 +5,7 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 using System;
+using UnityEngine.UIElements;
 
 public class overworldItem : MonoBehaviour, IInteractable
 {
@@ -16,6 +17,10 @@ public class overworldItem : MonoBehaviour, IInteractable
     //public TextMeshProUGUI promptText => this.transform.GetChild(0).gameObject.GetComponent<TextMeshProUGUI>();
     [SerializeField] private string prompt = "Pick up!";
     public float visibilitySmoothingSpeed = 2.5f;
+    public float smoothSpeed => visibilitySmoothingSpeed;
+    //float smooth = 1.0f - Mathf.Pow(0.5f, Time.deltaTime * smoothSpeed);
+        // "field initialiser cannot reference non static field smoothspeed" ok
+    public float smooth;
 
     [Header("Make sure there is a textmeshprogui child component.")]
 
@@ -25,7 +30,6 @@ public class overworldItem : MonoBehaviour, IInteractable
         // for assigning in inspector because it says InventoryManager is just a GameObject
         // but we need it to be of InventoryManager class to use .addItem
     public InventoryManager inventoryManager;
-    public float smoothSpeed => visibilitySmoothingSpeed;
     // add a setter in interactable.cs and define that here if you want to change this during runtime
 
     // inventoryItem.ActionType
@@ -83,12 +87,18 @@ public class overworldItem : MonoBehaviour, IInteractable
     void Update() {
         ((IInteractable)this).UpdateVisibility();
         if (setToDestroy) {
-            SelfDestruct();
+            if (transform.localScale == new Vector3(0.0f, 0.0f, 0.0f)) {
+                SelfDestruct();
+            }
         }
     }
 
     void LateUpdate() {
         ((IInteractable)this).LateUpdateLabelRotation();
+        smooth = 1.0f - Mathf.Pow(0.5f, Time.deltaTime * smoothSpeed);
+        if (setToDestroy) {
+            transform.localScale = Vector3.Lerp(transform.localScale, new Vector3(0.0f, 0.0f, 0.0f), smooth*2);
+        }
     }
 
     // Handle interaction with its corresponding overworld object
@@ -99,6 +109,7 @@ public class overworldItem : MonoBehaviour, IInteractable
         bool result = inventoryManager.AddItem(inventoryItem);
         if (result == true) {
             //Debug.Log("Item added");
+            setToDestroy = true;
         } else {
             Debug.Log("ITEM NOT ADDED");
         }
@@ -116,6 +127,10 @@ public class overworldItem : MonoBehaviour, IInteractable
         // public override void selfDestruct() ...
 
         Debug.Log("self destructing.");
+
+        // animation? poof of smoke? scaling for now
+        // (implemented in update())
+
         Destroy(gameObject);
     }
     
