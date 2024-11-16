@@ -24,7 +24,8 @@ public interface IInteractable {
     public Vector3 textOriginalScale { get; set; }
     //  promptTextMesh.GetComponent<RectTransform>().localScale
 
-    public void Update() {
+    void UpdateVisibility() { // put this in update()
+        Debug.Log("Prompt is visible:" +promptIsVisible);
         RectTransform txtScale = promptTextMesh.GetComponent<RectTransform>();
         if (promptIsVisible) {
             txtScale.localScale = textOriginalScale;
@@ -33,7 +34,7 @@ public interface IInteractable {
         }
     }
 
-    public void ShowPrompt(string setTo = "DEFAULT_") {
+    void ShowPrompt(string setTo = "DEFAULT_") {
         if (promptTextMesh == null) {
             Debug.Log("there is no text mesh to display in:");
             Debug.Log(this);
@@ -46,7 +47,7 @@ public interface IInteractable {
         }
     }
 
-    public void HidePrompt() {
+    void HidePrompt() {
         promptIsVisible = false;
     }
 

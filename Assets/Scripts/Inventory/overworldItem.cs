@@ -55,7 +55,7 @@ public class overworldItem : MonoBehaviour, IInteractable
         //promptTextMesh = this.transform.GetChild(0).gameObject.GetComponent<TextMeshProUGUI>();
         promptTextMesh = this.transform.GetChild(0).gameObject.GetComponent<TextMeshPro>();
         interactionPromptStr = prompt;
-        HidePrompt();
+        ((IInteractable)this).HidePrompt();
         textOriginalScale = promptTextMesh.GetComponent<RectTransform>().localScale;
 
         if (inventoryManagerObj == null) {
@@ -78,6 +78,7 @@ public class overworldItem : MonoBehaviour, IInteractable
     }
 
     void Update() {
+        ((IInteractable)this).UpdateVisibility();
         if (setToDestroy) {
             SelfDestruct();
         }
@@ -111,14 +112,24 @@ public class overworldItem : MonoBehaviour, IInteractable
         Destroy(gameObject);
     }
 
-    public void ShowPrompt(string setTo = "DEFAULT_") {
-        // Default implementation as in IInteractable.cs
-        Debug.Log("Show prompt" + setTo);
-    }
+    // use default implementation in interactable
+    // delete later
+    // public void ShowPrompt(string setTo = "DEFAULT_") {
+    //     // Default implementation as in IInteractable.cs
+    //     Debug.Log("Show prompt" + setTo);
+    // }
 
-    public void HidePrompt() {
-        // Default implementation as in IInteractable.cs
-        Debug.Log("Hide prompt");
-    }
+    // public void HidePrompt() {
+    //     // Default implementation as in IInteractable.cs
+    //     Debug.Log("Hide prompt");
+    // }
 
+    // public void UpdateVisibility() {
+    //     // Default implementation as in IInteractable.cs
+    // }
+
+    // I learned that interfaces only provide default implementation but if you generate a new methoc, it will overwrite it.
+    // it's kinda difficult to access. so you can't call ShowPrompt() and expect this class to knoe
+    // either new Interactable = interactable then innteractable.ShowPrompt() with all sorts of static problems
+    // or (IInteractable)this.ShowPrompt()
 }
