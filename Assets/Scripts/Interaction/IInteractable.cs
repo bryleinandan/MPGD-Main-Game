@@ -43,6 +43,10 @@ public interface IInteractable {
         }
     }
 
+    void LateUpdateLabelRotation() {
+        promptTextMesh.transform.rotation = mainCam.transform.rotation;
+    }
+
     void ShowPrompt(string setTo = "DEFAULT_") {
         if (promptTextMesh == null) {
             Debug.Log("there is no text mesh to display in:");

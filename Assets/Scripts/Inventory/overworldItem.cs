@@ -88,7 +88,7 @@ public class overworldItem : MonoBehaviour, IInteractable
     }
 
     void LateUpdate() {
-        transform.rotation = mainCam.transform.rotation;
+        ((IInteractable)this).LateUpdateLabelRotation();
     }
 
     // Handle interaction with its corresponding overworld object
