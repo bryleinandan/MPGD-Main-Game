@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(Rigidbody))]
 public class PlayerControl : MonoBehaviour
@@ -24,20 +25,9 @@ public class PlayerControl : MonoBehaviour
     public float jumpHeight;
     public float airMultiplier;
 
-
-    // jump button key bind
-    public KeyCode jumpKey = KeyCode.Space;
-
-
     // movement variables
     public float moveSpeed;
-
-    public Transform orientation; // orientation that's synced with camera
-
-    float horizontalInput;
-    float verticalInput;
-
-    Vector3 moveDirection;
+    public Vector2 moveValue;
 
     private void Start() {
 
@@ -47,15 +37,17 @@ public class PlayerControl : MonoBehaviour
         _readyToJump = true;
     }
 
+    // updates dependent on machine frame rate as supposed to project
+    // not as regular as fixedupdate
     private void Update() {
 
         // player on ground check
         _grounded = Physics.Raycast(transform.position, Vector3.down, _playerHeight * 0.5f + 0.3f, ground);
 
-        _PlayerInput();
+        // speed limiter function
         _SpeedControl();
 
-        // drag handling - no drag in air to avoid weird feeling movement
+        // drag handling
         if(_grounded) {
             _player.drag = groundDrag;
         } else {
@@ -63,42 +55,48 @@ public class PlayerControl : MonoBehaviour
         }
     }
 
+    // updates at regular intervals - better for physics
     private void FixedUpdate() {
         _MovePlayer();
     }
 
-    // input function - gets input from movement keys
-    private void _PlayerInput() {
+    public void OnMove(InputValue value) {
+        moveValue = value.Get<Vector2>();
+    }
 
-        // direction keys - wasd
-        horizontalInput = Input.GetAxisRaw("Horizontal");
-        verticalInput = Input.GetAxisRaw("Vertical");
+    public void OnJump() {
+        
+        // check conditions for jump
+        if(_readyToJump && _grounded) {
 
-        // jump - space
-        if(Input.GetKey(jumpKey) && _readyToJump && _grounded) {
-
-            // jump activated - no longer ready to jump
+            // jump started - no longer ready to jump
             _readyToJump = false;
 
             // call jump function
             _Jump();
 
-            // continous jumping whilst holding space down - invoke reset jump function
-            Invoke("_ResetJump", jumpCooldown);
+            // code for continuous jumping here
+            // player will bunny hop when they hold space down
+
+            // reset jump function called
+            _ResetJump();
         }
+
     }
 
     // move player function
     private void _MovePlayer() {
 
-        // movement direction calculation
-        moveDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
+        // cast move values from vector2 to vector3
+        // determines direction
+        Vector3 movement = new Vector3(moveValue.x, 0.0f, moveValue.y);
 
-        // change move speed based on grounded state
+        // add force
+        // adjust move speed based on grounded state
         if(_grounded) {
-            _player.AddForce(moveDirection.normalized * moveSpeed * Time.fixedDeltaTime * 10f, ForceMode.Force);
+            _player.AddForce(movement * moveSpeed * Time.fixedDeltaTime * 10f, ForceMode.Force);
         } else {
-            _player.AddForce(moveDirection.normalized * moveSpeed * Time.fixedDeltaTime * 10f * airMultiplier, ForceMode.Force);
+            _player.AddForce(movement * moveSpeed * Time.fixedDeltaTime * 10f * airMultiplier, ForceMode.Force);
         }
     }
 
@@ -106,14 +104,14 @@ public class PlayerControl : MonoBehaviour
     private void _SpeedControl() {
 
         // get current speed of player
-        Vector3 currentVelocity = new Vector3(_player.velocity.x, 0, _player.velocity.z);
+        Vector3 currentVelocity = new Vector3(_player.velocity.x, 0f, _player.velocity.z);
 
         // limit speed as needed by checking magnitude of current velocity against intended move speed
         if(currentVelocity.magnitude > moveSpeed) { 
 
             // calculate intended max velocity and apply to player
             Vector3 limitedVelocity = currentVelocity.normalized * moveSpeed;
-            _player.velocity = new Vector3(limitedVelocity.x, 0, limitedVelocity.z);
+            _player.velocity = new Vector3(limitedVelocity.x, 0f, limitedVelocity.z);
         }
     }
 
