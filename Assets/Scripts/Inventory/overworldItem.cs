@@ -6,6 +6,7 @@ using TMPro;
 using UnityEngine.UI;
 using System;
 using UnityEngine.UIElements;
+using Unity.VisualScripting;
 
 public class overworldItem : MonoBehaviour, IInteractable
 {
@@ -21,8 +22,13 @@ public class overworldItem : MonoBehaviour, IInteractable
     //float smooth = 1.0f - Mathf.Pow(0.5f, Time.deltaTime * smoothSpeed);
         // "field initialiser cannot reference non static field smoothspeed" ok
     public float smooth;
+    public bool autoSetLabelPosition = true;
 
-    [Header("Make sure there is a textmeshprogui child component.")]
+    //[Header("Make sure there is a textmeshprogui child component.")]
+    // [Header("Label position overrides:")]
+    // public float labelPosX;
+    // public float labelPosY;
+    // public float labelPosZ;
 
     [Header("code does this for you / debugging")]
     public bool setToDestroy = false;
@@ -45,7 +51,6 @@ public class overworldItem : MonoBehaviour, IInteractable
     // }
 
     public string interactionPromptStr { get; set; }
-    //public TextMeshProUGUI promptTextMesh { get; set; }
     public TextMeshPro promptTextMesh { get; set; }
 
     public bool promptIsVisible { get; set; }
@@ -86,6 +91,10 @@ public class overworldItem : MonoBehaviour, IInteractable
 
     void Update() {
         ((IInteractable)this).UpdateVisibility();
+        if(autoSetLabelPosition) {
+            AutoSetLabelPosition();
+        }
+
         if (setToDestroy) {
             if (transform.localScale == new Vector3(0.0f, 0.0f, 0.0f)) {
                 SelfDestruct();
@@ -94,7 +103,7 @@ public class overworldItem : MonoBehaviour, IInteractable
     }
 
     void LateUpdate() {
-        ((IInteractable)this).LateUpdateLabelRotation();
+        //((IInteractable)this).LateUpdateLabelRotation();
         smooth = 1.0f - Mathf.Pow(0.5f, Time.deltaTime * smoothSpeed);
         if (setToDestroy) {
             transform.localScale = Vector3.Lerp(transform.localScale, new Vector3(0.0f, 0.0f, 0.0f), smooth*2);
@@ -138,4 +147,30 @@ public class overworldItem : MonoBehaviour, IInteractable
     // it's kinda difficult to access. so you can't call ShowPrompt() and expect this class to knoe
     // either new Interactable = interactable then innteractable.ShowPrompt() with all sorts of static problems
     // or (IInteractable)this.ShowPrompt()
+
+    void AutoSetLabelPosition() {
+        //var rect = promptTextMesh.GetComponent<RectTransform>();
+
+        // Renderer meshRenderer = promptTextMesh.GetComponent<Renderer>();
+        // if (meshRenderer != null) {
+        //     // Calculate the top position of the mesh
+        //     Vector3 topPosition = meshRenderer.bounds.max;
+        //     // Set the text position above the mesh
+        //     promptTextMesh.transform.position = new Vector3(topPosition.x, topPosition.y, topPosition.z);
+        //     // Optionally add an offset if needed
+        //     //promptTextMesh.transform.position += Vector3.up * 0.2f; // Adjust height offset as needed
+        // }
+
+        // Get Mesh filter
+        MeshFilter selfMeshFilter = GetComponent<MeshFilter>();
+        var model = selfMeshFilter.sharedMesh; //.mesh; / .sharedMesh
+        // mesh.bounds.size * transform.localScale = actual size of mesh, but they are both vector3 so it's *scalex, *scaley... etc
+        Vector3 meshSize = new Vector3((model.bounds.size.x * transform.localScale.x),
+        (model.bounds.size.y * transform.localScale.y), (model.bounds.size.z * transform.localScale.z));
+        
+        // Use size (X, Y) to determine label margin size. see IInteractable.cs
+        ((IInteractable)this).SetLabelPosition(meshSize.x, meshSize.y, meshSize.z);
+        
+    }
+
 }

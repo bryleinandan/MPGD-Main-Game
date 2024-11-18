@@ -34,3 +34,5 @@ The scriptable object is the container for each item.
 	overworldItem inherits from IInteractable interface:
 	anything that can be interacted with must be on the correct layer! (Interactable)
 	there must be an iinteractable.cs script on that object!
+
+manually overriding the label position must be done in the global inspector and not the prefab one

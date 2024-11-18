@@ -18,7 +18,6 @@ public interface IInteractable {
 
     //private Camera mainCam = GameObject.Find("InventoryManager").GetComponent<Camera>();
     abstract Camera mainCam { get; }
-    //abstract TextMeshProUGUI promptTextMesh { get; set;}
     abstract TextMeshPro promptTextMesh { get; set;}
     public bool promptIsVisible { get; set; }
     public Vector3 textOriginalScale { get; set; }
@@ -64,4 +63,12 @@ public interface IInteractable {
         promptIsVisible = false;
     }
 
+    void SetLabelPosition(float posX, float posY, float posZ) {
+        // var rect = promptTextMesh.GetComponent<RectTransform>();
+        // rect.anchoredPosition3D = new Vector3(posX, posY, posZ);
+        // so this really only scales the y value to mesh height
+        var offset = 0.3f;
+        promptTextMesh.margin = new Vector4(8, 0, 8, posY - offset);
+        
+    }
 }
