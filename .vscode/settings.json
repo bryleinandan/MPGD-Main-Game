@@ -56,5 +56,6 @@
         "temp/": true,
         "Temp/": true
     },
-    "dotnet.defaultSolution": "MPGD-Main-Game.sln"
+    "dotnet.defaultSolution": "MPGD-Main-Game.sln",
+    "editor.codeLens": false
 }

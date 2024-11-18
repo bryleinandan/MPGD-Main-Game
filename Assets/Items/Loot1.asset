@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab0687e676ca967489a234c37e4a259f, type: 3}
   m_Name: Loot1
   m_EditorClassIdentifier: 
-  tile: {fileID: 0}
+  _prompt: Tap it
+  overworldObject: {fileID: 4571238477727134883, guid: 71259656a79da9c47904c87fc676a4cf, type: 3}
   type: 0
   actionType: 0
   range: {x: 5, y: 4}
