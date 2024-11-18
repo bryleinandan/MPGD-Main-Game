@@ -24,12 +24,6 @@ public class overworldItem : MonoBehaviour, IInteractable
     public float smooth;
     public bool autoSetLabelPosition = true;
 
-    //[Header("Make sure there is a textmeshprogui child component.")]
-    // [Header("Label position overrides:")]
-    // public float labelPosX;
-    // public float labelPosY;
-    // public float labelPosZ;
-
     [Header("code does this for you / debugging")]
     public bool setToDestroy = false;
     public GameObject inventoryManagerObj;
@@ -45,11 +39,6 @@ public class overworldItem : MonoBehaviour, IInteractable
     //[Range(3,10)] public int interactionRange = 5; // range 
     public Camera mainCam => playerCam.GetComponent<Camera>();
 
-    // public string interactionPromptStr {
-    //     get { return interactionPromptStr; }
-    //     set { interactionPromptStr = value; }
-    // }
-
     public string interactionPromptStr { get; set; }
     public TextMeshPro promptTextMesh { get; set; }
 
@@ -58,13 +47,8 @@ public class overworldItem : MonoBehaviour, IInteractable
 
     void Start()
     {
-        // Get own model.
-            // get MeshFilter component. Then get the mesh property associated with it.
-        //MeshFilter selfMeshFilter = (MeshFilter)GameObject.GetComponent("MeshFilter");
-        //model = selfMeshFilter.sharedMesh; //.mesh; / .sharedMesh
 
         // get own first child and get the text mesh
-        //promptTextMesh = this.transform.GetChild(0).gameObject.GetComponent<TextMeshProUGUI>();
         promptTextMesh = this.transform.GetChild(0).gameObject.GetComponent<TextMeshPro>();
         interactionPromptStr = prompt;
         ((IInteractable)this).HidePrompt();
@@ -76,17 +60,6 @@ public class overworldItem : MonoBehaviour, IInteractable
             inventoryManagerObj = GameObject.Find("InventoryManager");
         }
         inventoryManager = inventoryManagerObj.GetComponent<InventoryManager>();
-
-        // if inventoryManager is STILL null
-        // if (inventoryManager == null) {
-        //     inventoryManager= GameObject.FindFirstObjectByType<InventoryManager>();
-        // }
-
-        // maincam is readonly without the setter :)
-        // if (mainCam == null) {
-        //     var camholder = GameObject.Find("CameraHolder");
-        //     mainCam = camholder.GetComponent<Camera>());
-        //}
     }
 
     void Update() {
@@ -124,7 +97,7 @@ public class overworldItem : MonoBehaviour, IInteractable
         }
 
         // Remove the instanced object from overworld
-        //selfDestruct();
+        // selfDestruct();
         // this makes "return true" unreachable!
         // if we set a boolean, it'll defer executing selfDestruct() until the next frame when Update() is called.
 
@@ -132,8 +105,7 @@ public class overworldItem : MonoBehaviour, IInteractable
     }
 
     public virtual void SelfDestruct() { // you'll never guess what this does
-        // this can overwritten in any child class by
-        // public override void selfDestruct() ...
+        // this can overwritten in any child class by public override void selfDestruct() ...
 
         Debug.Log("self destructing.");
 
@@ -142,25 +114,8 @@ public class overworldItem : MonoBehaviour, IInteractable
 
         Destroy(gameObject);
     }
-    
-       // I learned that interfaces only provide default implementation but if you generate a new methoc, it will overwrite it.
-    // it's kinda difficult to access. so you can't call ShowPrompt() and expect this class to knoe
-    // either new Interactable = interactable then innteractable.ShowPrompt() with all sorts of static problems
-    // or (IInteractable)this.ShowPrompt()
 
     void AutoSetLabelPosition() {
-        //var rect = promptTextMesh.GetComponent<RectTransform>();
-
-        // Renderer meshRenderer = promptTextMesh.GetComponent<Renderer>();
-        // if (meshRenderer != null) {
-        //     // Calculate the top position of the mesh
-        //     Vector3 topPosition = meshRenderer.bounds.max;
-        //     // Set the text position above the mesh
-        //     promptTextMesh.transform.position = new Vector3(topPosition.x, topPosition.y, topPosition.z);
-        //     // Optionally add an offset if needed
-        //     //promptTextMesh.transform.position += Vector3.up * 0.2f; // Adjust height offset as needed
-        // }
-
         // Get Mesh filter
         MeshFilter selfMeshFilter = GetComponent<MeshFilter>();
         var model = selfMeshFilter.sharedMesh; //.mesh; / .sharedMesh
