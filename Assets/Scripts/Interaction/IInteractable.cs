@@ -17,7 +17,7 @@ public interface IInteractable {
     public bool Interact(Interactor interactor); // takes as input the thing that initiated
 
     //private Camera mainCam = GameObject.Find("InventoryManager").GetComponent<Camera>();
-    abstract Camera mainCam { get; }
+    abstract Transform playerTransform { get; }
     abstract TextMeshPro promptTextMesh { get; set;}
     public bool promptIsVisible { get; set; }
     public Vector3 textOriginalScale { get; set; }
@@ -43,7 +43,8 @@ public interface IInteractable {
     }
 
     void LateUpdateLabelRotation() {
-        promptTextMesh.transform.rotation = mainCam.transform.rotation;
+        //promptTextMesh.transform.rotation = player.transform.rotation;
+        promptTextMesh.transform.rotation = playerTransform.rotation;
     }
 
     void ShowPrompt(string setTo = "DEFAULT_") {
