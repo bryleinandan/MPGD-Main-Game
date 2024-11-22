@@ -36,3 +36,8 @@ The scriptable object is the container for each item.
 	there must be an iinteractable.cs script on that object!
 
 manually overriding the label position must be done in the global inspector and not the prefab one
+
+## Camera fixes
+make sure playercam is on the movement script on player
+there is one line in fixed update that reroutes the movement through the camera's position.
+it can be commented out to revert to the original _MovePlayer but be aware this movement does not account for camera orientation

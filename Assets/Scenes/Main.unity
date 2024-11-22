@@ -1401,15 +1401,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1148346314633428301, guid: 005f24dd5f851442c80008026e8884f2, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 1148346314633428301, guid: 005f24dd5f851442c80008026e8884f2, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 1148346314633428301, guid: 005f24dd5f851442c80008026e8884f2, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 1148346314633428301, guid: 005f24dd5f851442c80008026e8884f2, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -1431,6 +1431,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: CameraHolder
       objectReference: {fileID: 0}
+    - target: {fileID: 8525798698702928585, guid: 005f24dd5f851442c80008026e8884f2, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 66148236}
     - target: {fileID: 8525798698702928585, guid: 005f24dd5f851442c80008026e8884f2, type: 3}
       propertyPath: orientation
       value: 
@@ -1919,6 +1923,10 @@ PrefabInstance:
       value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 8150530151966571104, guid: c65fe9718210b40acab8aa0a7f82bc79, type: 3}
+      propertyPath: playerCam
+      value: 
+      objectReference: {fileID: 1385940517}
+    - target: {fileID: 8150530151966571104, guid: c65fe9718210b40acab8aa0a7f82bc79, type: 3}
       propertyPath: groundDrag
       value: 6
       objectReference: {fileID: 0}
@@ -2025,7 +2033,7 @@ MonoBehaviour:
   m_Center: {x: 0, y: 2, z: 0}
   m_LayerMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 1024
   m_UseGeometry: 0
   m_DefaultArea: 0
   m_GenerateLinks: 0
@@ -2211,8 +2219,8 @@ PrefabInstance:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
-  - {fileID: 903556499}
   - {fileID: 705507995}
+  - {fileID: 903556499}
   - {fileID: 1725975109}
   - {fileID: 217296172}
   - {fileID: 442456697}

@@ -29,12 +29,19 @@ public class PlayerControl : MonoBehaviour
     public float moveSpeed;
     public Vector2 moveValue;
 
+    public Camera playerCam;
+    private Transform cameraTransform;
+
     private void Start() {
 
         _player = GetComponent<Rigidbody>();
         _player.freezeRotation = true;
 
         _readyToJump = true;
+
+        if (playerCam != null) {
+            cameraTransform = playerCam.transform;
+        }
     }
 
     // updates dependent on machine frame rate as supposed to project
@@ -57,7 +64,8 @@ public class PlayerControl : MonoBehaviour
 
     // updates at regular intervals - better for physics
     private void FixedUpdate() {
-        _MovePlayer();
+        //_MovePlayer();
+        MovePlayerUseCamera();
     }
 
     public void OnMove(InputValue value) {
@@ -81,15 +89,21 @@ public class PlayerControl : MonoBehaviour
             // reset jump function called
             _ResetJump();
         }
-
     }
 
     // move player function
-    private void _MovePlayer() {
+    //private void _MovePlayer() {
+    private void _MovePlayer(Vector3? movement_in = null) { // default value is null
 
         // cast move values from vector2 to vector3
         // determines direction
+        //Vector3 movement = new Vector3(moveValue.x, 0.0f, moveValue.y);
+
         Vector3 movement = new Vector3(moveValue.x, 0.0f, moveValue.y);
+        // if we get nothing in, assign movement as bryle did originally
+        if (movement_in != null) {
+           movement = (Vector3)movement_in;
+        }
 
         // add force
         // adjust move speed based on grounded state
@@ -131,4 +145,25 @@ public class PlayerControl : MonoBehaviour
         _readyToJump = true;
     }
 
+    private void MovePlayerUseCamera()
+    {
+        // If no camera is assigned, do nothing
+        if (cameraTransform == null) return;
+
+        // Get the forward and right directions relative to the camera
+        Vector3 cameraForward = cameraTransform.forward;
+        Vector3 cameraRight = cameraTransform.right;
+
+        // Flatten the camera's forward and right vectors to ignore vertical movement
+        cameraForward.y = 0f;
+        cameraRight.y = 0f;
+        cameraForward.Normalize();
+        cameraRight.Normalize();
+
+        // Calculate the movement direction based on input Vector2
+        Vector3 moveDirection = (cameraForward * moveValue.y + cameraRight * moveValue.x).normalized;
+
+        // Call movement
+        _MovePlayer(moveDirection);
+    }
 }
