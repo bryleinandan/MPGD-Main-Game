@@ -183,6 +183,19 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   _numFound: 0
+--- !u!114 &66148242
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 66148236}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5aa7ddcc9526293499057e693163d05c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerHealthBar: {fileID: 0}
 --- !u!224 &103888626 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 7146686841155015387, guid: cfad939f9ad2d4c858b87f59f54e345c, type: 3}
@@ -1412,7 +1425,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 195649514619761462, guid: 99c683ad5b1db0640b9f80f99b7c99d2, type: 3}
       propertyPath: m_Name
-      value: Player Health bar
+      value: Player Health Bar
       objectReference: {fileID: 0}
     - target: {fileID: 605541391274924872, guid: 99c683ad5b1db0640b9f80f99b7c99d2, type: 3}
       propertyPath: m_AnchorMax.x
@@ -2211,6 +2224,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 9109894608080277335, guid: c65fe9718210b40acab8aa0a7f82bc79, type: 3}
       insertIndex: -1
       addedObject: {fileID: 66148238}
+    - targetCorrespondingSourceObject: {fileID: 9109894608080277335, guid: c65fe9718210b40acab8aa0a7f82bc79, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 66148242}
   m_SourcePrefab: {fileID: 100100000, guid: c65fe9718210b40acab8aa0a7f82bc79, type: 3}
 --- !u!1 &1875800642
 GameObject:

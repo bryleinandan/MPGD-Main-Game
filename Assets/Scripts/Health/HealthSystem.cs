@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class HealthSystem : MonoBehaviour
 {
-    private Health healthComponent;
+    [HideInInspector] public Health healthComponent;
     public HealthBar healthBar;
 
     void Start() {
@@ -16,19 +16,22 @@ public class HealthSystem : MonoBehaviour
     }
 
     void Update() {
-        HealthBarControl();
+        //HealthBarControl();
+        UpdateHealthBar();
     }
-    void HealthBarControl() {
-        if (Input.GetKeyDown(KeyCode.LeftArrow)) {
-            healthComponent.TakeDamage(10);
-            UpdateHealthBar();
-        }
-        else if (Input.GetKeyDown(KeyCode.RightArrow)) {
-            healthComponent.Heal(10);
-            UpdateHealthBar();
-        }
-    }
-    void UpdateHealthBar() {
+
+    // void HealthBarControl() {
+    //     if (Input.GetKeyDown(KeyCode.LeftArrow)) {
+    //         healthComponent.TakeDamage(10);
+    //         UpdateHealthBar();
+    //     }
+    //     else if (Input.GetKeyDown(KeyCode.RightArrow)) {
+    //         healthComponent.Heal(10);
+    //         UpdateHealthBar();
+    //     }
+    // }
+
+    public virtual void UpdateHealthBar() {
         if (healthBar != null) {
             healthBar.SetHealth(healthComponent.currentHealth);
         }
