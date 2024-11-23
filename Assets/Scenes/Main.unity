@@ -1956,11 +1956,6 @@ MonoBehaviour:
   maxStackedItems: 61
   inventoryItemPrefab: {fileID: 1231131192}
   slotsByTag: []
---- !u!4 &1231131199 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 1870576451849733123, guid: 600f816dd2771472c8706a046a868c2a, type: 3}
-  m_PrefabInstance: {fileID: 1656859790}
-  m_PrefabAsset: {fileID: 0}
 --- !u!20 &1385940517 stripped
 Camera:
   m_CorrespondingSourceObject: {fileID: 6581984817270475220, guid: 005f24dd5f851442c80008026e8884f2, type: 3}
@@ -2512,8 +2507,7 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 705507995}
-  - {fileID: 1875800643}
-  - {fileID: 429126317}
+  - {fileID: 903556499}
   - {fileID: 1725975109}
   - {fileID: 217296172}
   - {fileID: 1017218654}

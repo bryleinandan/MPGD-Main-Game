@@ -14,7 +14,10 @@ public class overworldItem : MonoBehaviour, IInteractable
 
     [Header("# Make sure these are set!")]
     public Item inventoryItem; // the Item class equivalent (will be added to inventory)
+
+    [Header("this should just be active camera's position")]
     public GameObject playerCam;
+
     //public TextMeshProUGUI promptText => this.transform.GetChild(0).gameObject.GetComponent<TextMeshProUGUI>();
     [SerializeField] private string prompt = "Pick up!";
     public float visibilitySmoothingSpeed = 2.5f;
@@ -37,7 +40,7 @@ public class overworldItem : MonoBehaviour, IInteractable
 
     // more interface things
     //[Range(3,10)] public int interactionRange = 5; // range 
-    public Camera mainCam => playerCam.GetComponent<Camera>();
+    public Transform playerTransform { get; set; }
 
     public string interactionPromptStr { get; set; }
     public TextMeshPro promptTextMesh { get; set; }
@@ -60,6 +63,19 @@ public class overworldItem : MonoBehaviour, IInteractable
             inventoryManagerObj = GameObject.Find("InventoryManager");
         }
         inventoryManager = inventoryManagerObj.GetComponent<InventoryManager>();
+
+        // get player pos
+        if (playerCam == null) {
+           playerCam = GameObject.Find("PlayerCam");
+           playerTransform = playerCam.transform;
+        } else {
+            playerTransform = playerCam.transform;
+        }
+        // if still can't find - just set to whatever main camera
+        if (playerCam == null) {
+            playerTransform = Camera.main.transform;
+        }
+
     }
 
     void Update() {
@@ -76,7 +92,7 @@ public class overworldItem : MonoBehaviour, IInteractable
     }
 
     void LateUpdate() {
-        //((IInteractable)this).LateUpdateLabelRotation();
+        ((IInteractable)this).LateUpdateLabelRotation();
         smooth = 1.0f - Mathf.Pow(0.5f, Time.deltaTime * smoothSpeed);
         if (setToDestroy) {
             transform.localScale = Vector3.Lerp(transform.localScale, new Vector3(0.0f, 0.0f, 0.0f), smooth*2);

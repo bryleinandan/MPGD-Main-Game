@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerCam : MonoBehaviour
 {
@@ -11,6 +12,9 @@ public class PlayerCam : MonoBehaviour
 
     // player orientation
     public Transform orientation;
+
+    //[Header("Drop player here")]
+    //public PlayerControl player;
 
     // camera rotation
     float xRotation;
@@ -40,6 +44,8 @@ public class PlayerCam : MonoBehaviour
         // rotate camera and player
         transform.rotation = Quaternion.Euler(xRotation, yRotation, 0);
         orientation.rotation = Quaternion.Euler(0, yRotation, 0);
+
+        //player.SetSelfRotation(transform.rotation, orientation.rotation);
     }
 
 }

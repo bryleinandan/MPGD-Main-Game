@@ -298,10 +298,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inventoryItem: {fileID: 11400000, guid: 35ebf988cef1ad440b4074110423360a, type: 2}
-  playerCam: {fileID: 0}
+  playerCam: {fileID: 8408844984917963375, guid: 005f24dd5f851442c80008026e8884f2, type: 3}
   prompt: Pick up!
   visibilitySmoothingSpeed: 2.5
   smooth: 0
+  autoSetLabelPosition: 1
   setToDestroy: 0
   inventoryManagerObj: {fileID: 0}
   inventoryManager: {fileID: 0}
