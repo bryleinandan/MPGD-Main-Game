@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerHealth : MonoBehaviour
+public class HealthSystem : MonoBehaviour
 {
     private Health healthComponent;
     public HealthBar healthBar;

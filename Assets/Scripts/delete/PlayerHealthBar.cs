@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public static class PlayerHealthBar : HealthBar
+public class PlayerHealthBar : HealthBar
 // Inherits eveything in health bar base class.
 {
 
