@@ -41,3 +41,15 @@ manually overriding the label position must be done in the global inspector and 
 make sure playercam is on the movement script on player
 there is one line in fixed update that reroutes the movement through the camera's position.
 it can be commented out to revert to the original _MovePlayer but be aware this movement does not account for camera orientation
+
+## health
+Health System encompasses
+- health class (encompasses the number)
+- health bar class (does the bar stuff)
+
+Player Health System is just the player's health system
+it's a separate prefab with one different script but still uses most of health system
+
+HealthSystemController just links the healthbar to the player
+that means if you get the player object as a target, you can call .TakeDamage() on the player
+(because the health bar is on the ui)

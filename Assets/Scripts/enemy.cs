@@ -29,8 +29,8 @@ public class FieldOfView : MonoBehaviour
     }
 
     public float movementSpeed = 5;
-    public float attackSpeed = 1;
-    public float attackCooldown = 3;
+    [Range(0.01f, 1)] public float attackSpeed = 0.2f;
+    public float attackCooldown = 2;
     public float damage = 1;
     public Vector3 knockbackForce = new Vector3(0, 2, -5); // intend to scale this on damage
     public float health = 1; // take from enemyhealth later
@@ -44,8 +44,8 @@ public class FieldOfView : MonoBehaviour
 
     public GameObject playerRef;
     private NavMeshAgent agent;
-    [Range(1, 50)] public float enemyDistance = 1.6f;
-    //tutorial set this to 0.7f but that seems too small
+    [Range(1, 50)] public float attackRadius = 1.6f;
+    // make sure attack radius is not smaller than the stopping distance on navmeshagent!
 
     public LayerMask targetMask;
     public LayerMask obstructionMask;
@@ -61,6 +61,8 @@ public class FieldOfView : MonoBehaviour
         StartCoroutine(FOVRoutine());
         agent = GetComponent<NavMeshAgent>();
         agent.speed = movementSpeed;
+
+        CalcuateKnockback();
     }
 
     private IEnumerator FOVRoutine() // core routine to reduce number of calls per frame (for performance)
@@ -181,9 +183,9 @@ public class FieldOfView : MonoBehaviour
         }
 
         // if distance between player and self is small: stop moving
-        //if (Vector3.Distance(transform.position, player.position) <= enemyDistance) {
+        //if (Vector3.Distance(transform.position, player.position) <= attackRadius) {
         //Debug.Log(Vector3.Distance(transform.position, player.transform.position));
-        if (Vector3.Distance(transform.position, player.transform.position) <= enemyDistance) {
+        if (Vector3.Distance(transform.position, player.transform.position) <= attackRadius) {
 
             //Debug.Log("stoppp");
             // this supposedly sets the speed of the navmeshagent to zero but it doesn/t
@@ -193,11 +195,12 @@ public class FieldOfView : MonoBehaviour
             // gameObject.GetComponent<Animator>().Play("attack");
             if (alertStage == AlertStage.Alerted) {
 
-                Debug.Log("deal damage:");
-                Debug.Log(damage);
+                //Debug.Log("deal damage:" + damage);
 
                 if (!isAttacking) {
-                    StartCoroutine(AttackSequence(player));
+                    //StartCoroutine(AttackSequence(player));
+                    //nevermind forgot there was a check for making sure the player is the target
+                    StartCoroutine(AttackSequence(playerRef));
                 }
 
             }
@@ -218,15 +221,16 @@ public class FieldOfView : MonoBehaviour
         float x = 0;
         float y = damage;
         float z = -(damage*2);
-        knockbackForce = new Vector3(x, y, z); // so I can't overwrite it?
+        knockbackForce = new Vector3(x, y, z);
     }
 
-    private IEnumerator AttackSequence(Transform target) {
+    private IEnumerator AttackSequence(GameObject target) {
         isAttacking = true;
 
+        Transform targetTransform = target.transform;
         // Initial position of the enemy
         Vector3 startPosition = transform.position;
-        Vector3 targetPosition = target.position;
+        Vector3 targetPosition = targetTransform.position;
         float elapsedTime = 0f;
 
         while (elapsedTime < attackSpeed) // Move toward target with predefined speed
@@ -237,25 +241,68 @@ public class FieldOfView : MonoBehaviour
             yield return null;
         }
 
-        // Ensure final position aligns perfectly
+        // make sure final position aligns with the target's
         transform.position = targetPosition;
+
+        // Check if hit the target!
+        //if (CheckPlayerHit()) { ApplyKnockback(target); }
+        // caused an error where if you were a certain distance, the enemy would just not attack
+        
+        // I fervently believe that if the attack movement is short enough then it is unstoppable
         ApplyKnockback(target);
 
+        // deal damage: get health system component
+        playerRef.GetComponent<PlayerHealthController>().TakeDamage(damage);
+        
+
         // wait for cooldown before attacking again
-        WaitForCooldown();
+        //WaitForCooldown(attackCooldown);
+        Invoke("ReadyToAttack", attackCooldown);
     }
 
-     IEnumerator WaitForCooldown() { // after (cooldown) s, set to attack
-        yield return new WaitForSeconds(attackCooldown);
+    // this never ran
+    IEnumerator WaitForCooldown(float waitTime = 3) { // after (cooldown) s, set to attack
+        yield return new WaitForSecondsRealtime(waitTime);
         isAttacking = false;
+        //Debug.Log("cooldown complete!");
     }
 
-    private void ApplyKnockback(Transform target)
-    {
-        if (target.TryGetComponent<Rigidbody>(out Rigidbody targetRigidbody))
-        {
-            targetRigidbody.AddForce(knockbackForce, ForceMode.Impulse);
+    private void ReadyToAttack() {
+        isAttacking = false;
+        //Debug.Log("ready to attack!");
+    }
+
+    private bool CheckPlayerHit() {
+        bool targetHit = false;
+
+        // intended to be called after movement.
+        // if player is still within attack radius, return true
+        Collider[] rangeChecks = Physics.OverlapSphere(transform.position, attackRadius, targetMask);
+        foreach (Collider c in rangeChecks) {
+            if (c.CompareTag("Player"))
+                targetHit = true;
+            break; // exit
         }
+
+        return targetHit;
+    }
+
+    private void ApplyKnockback(GameObject target) {
+        //Debug.Log("applying knockback");
+        // the code was supposed to only apply this if the target has a rigidbody to apply knockback to,
+        // but the if statement never triggers and I figure if player is the only target we have, it will
+        // always have rigid body so
+        Vector3 knockbackDirection = (target.transform.position - transform.position).normalized + Vector3.up;
+        target.GetComponent<Rigidbody>().AddForce(knockbackDirection * knockbackForce.magnitude, ForceMode.Impulse);
+       
+       // if (target.TryGetComponent<Rigidbody>(out Rigidbody targetRigidbody)) {
+        //     Debug.Log("rigidbody target found");
+        //     Vector3 knockbackDirection = (target.transform.position - transform.position).normalized + Vector3.up;
+        //     targetRigidbody.AddForce(knockbackDirection * knockbackForce.magnitude, ForceMode.Impulse);
+        // }
+        // else {
+        //     target.position += knockbackForce;
+        // }
     }
 
 
