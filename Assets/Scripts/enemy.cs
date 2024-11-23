@@ -29,7 +29,7 @@ public class FieldOfView : MonoBehaviour
     }
 
     public float movementSpeed = 5;
-    public float attackSpeed = 1;
+    [Range(0.01f, 1)] public float attackSpeed = 0.2f;
     public float attackCooldown = 2;
     public float damage = 1;
     public Vector3 knockbackForce = new Vector3(0, 2, -5); // intend to scale this on damage
@@ -44,8 +44,8 @@ public class FieldOfView : MonoBehaviour
 
     public GameObject playerRef;
     private NavMeshAgent agent;
-    [Range(1, 50)] public float enemyDistance = 1.6f;
-    //tutorial set this to 0.7f but that seems too small
+    [Range(1, 50)] public float attackRadius = 1.6f;
+    // make sure attack radius is not smaller than the stopping distance on navmeshagent!
 
     public LayerMask targetMask;
     public LayerMask obstructionMask;
@@ -181,9 +181,9 @@ public class FieldOfView : MonoBehaviour
         }
 
         // if distance between player and self is small: stop moving
-        //if (Vector3.Distance(transform.position, player.position) <= enemyDistance) {
-        //Debug.Log(Vector3.Distance(transform.position, player.transform.position));
-        if (Vector3.Distance(transform.position, player.transform.position) <= enemyDistance) {
+        //if (Vector3.Distance(transform.position, player.position) <= attackRadius) {
+        Debug.Log(Vector3.Distance(transform.position, player.transform.position));
+        if (Vector3.Distance(transform.position, player.transform.position) <= attackRadius) {
 
             //Debug.Log("stoppp");
             // this supposedly sets the speed of the navmeshagent to zero but it doesn/t
@@ -193,8 +193,7 @@ public class FieldOfView : MonoBehaviour
             // gameObject.GetComponent<Animator>().Play("attack");
             if (alertStage == AlertStage.Alerted) {
 
-                // Debug.Log("deal damage:");
-                // Debug.Log(damage);
+                Debug.Log("deal damage:" + damage);
 
                 if (!isAttacking) {
                     //StartCoroutine(AttackSequence(player));
@@ -240,8 +239,14 @@ public class FieldOfView : MonoBehaviour
             yield return null;
         }
 
-        // make sure final position aligns perfectly
+        // make sure final position aligns with the target's
         transform.position = targetPosition;
+
+        // Check if hit the target!
+        //if (CheckPlayerHit()) { ApplyKnockback(target); }
+        // caused an error where if you were a certain distance, the enemy would just not attack
+        
+        // I fervently believe that if the attack movement is short enough then it is unstoppable
         ApplyKnockback(target);
 
         // wait for cooldown before attacking again
@@ -250,7 +255,7 @@ public class FieldOfView : MonoBehaviour
     }
 
     // this never ran
-     IEnumerator WaitForCooldown(float waitTime = 3) { // after (cooldown) s, set to attack
+    IEnumerator WaitForCooldown(float waitTime = 3) { // after (cooldown) s, set to attack
         yield return new WaitForSecondsRealtime(waitTime);
         isAttacking = false;
         Debug.Log("cooldown complete!");
@@ -259,6 +264,21 @@ public class FieldOfView : MonoBehaviour
     private void ReadyToAttack() {
         isAttacking = false;
         Debug.Log("ready to attack!");
+    }
+
+    private bool CheckPlayerHit() {
+        bool targetHit = false;
+
+        // intended to be called after movement.
+        // if player is still within attack radius, return true
+        Collider[] rangeChecks = Physics.OverlapSphere(transform.position, attackRadius, targetMask);
+        foreach (Collider c in rangeChecks) {
+            if (c.CompareTag("Player"))
+                targetHit = true;
+            break; // exit
+        }
+
+        return targetHit;
     }
 
     private void ApplyKnockback(GameObject target) {
