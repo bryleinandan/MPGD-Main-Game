@@ -9,6 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1754927131049046791}
+  - component: {fileID: 1865973835122916396}
+  - component: {fileID: 2530251847496463429}
   m_Layer: 0
   m_Name: Player Health bar
   m_TagString: Untagged
@@ -32,6 +34,33 @@ Transform:
   - {fileID: 2225240587590504997}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1865973835122916396
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 195649514619761462}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f42f8a557d5b834087a3e086b2d3245, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthBar: {fileID: 6452971620920341073}
+--- !u!114 &2530251847496463429
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 195649514619761462}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f90c1a7efdba4b428a001d0477c82ae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 100
+  currentHealth: 0
 --- !u!1 &1835114492937765283
 GameObject:
   m_ObjectHideFlags: 0
@@ -44,7 +73,7 @@ GameObject:
   - component: {fileID: 3394639837908338091}
   - component: {fileID: 4635368217079884793}
   m_Layer: 5
-  m_Name: Boarder
+  m_Name: Border
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
