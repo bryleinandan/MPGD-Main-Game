@@ -1956,6 +1956,11 @@ MonoBehaviour:
   maxStackedItems: 61
   inventoryItemPrefab: {fileID: 1231131192}
   slotsByTag: []
+--- !u!4 &1231131197 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1870576451849733123, guid: 600f816dd2771472c8706a046a868c2a, type: 3}
+  m_PrefabInstance: {fileID: 1656859790}
+  m_PrefabAsset: {fileID: 0}
 --- !u!20 &1385940517 stripped
 Camera:
   m_CorrespondingSourceObject: {fileID: 6581984817270475220, guid: 005f24dd5f851442c80008026e8884f2, type: 3}
@@ -2120,6 +2125,10 @@ PrefabInstance:
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+    - target: {fileID: 7619958338856786027, guid: c65fe9718210b40acab8aa0a7f82bc79, type: 3}
+      propertyPath: m_IsKinematic
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7833841273295135420, guid: c65fe9718210b40acab8aa0a7f82bc79, type: 3}
       propertyPath: m_LocalPosition.x
       value: 173.47
@@ -2245,7 +2254,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1671018511}
-  - {fileID: 1231131199}
+  - {fileID: 1231131197}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1897493222 stripped
@@ -2507,8 +2516,9 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 705507995}
-  - {fileID: 903556499}
   - {fileID: 1725975109}
   - {fileID: 217296172}
   - {fileID: 1017218654}
   - {fileID: 2000196166}
+  - {fileID: 429126317}
+  - {fileID: 1875800643}

@@ -30,7 +30,7 @@ public class FieldOfView : MonoBehaviour
 
     public float movementSpeed = 5;
     public float attackSpeed = 1;
-    public float attackCooldown = 3;
+    public float attackCooldown = 2;
     public float damage = 1;
     public Vector3 knockbackForce = new Vector3(0, 2, -5); // intend to scale this on damage
     public float health = 1; // take from enemyhealth later
@@ -193,13 +193,12 @@ public class FieldOfView : MonoBehaviour
             // gameObject.GetComponent<Animator>().Play("attack");
             if (alertStage == AlertStage.Alerted) {
 
-                Debug.Log("deal damage:");
-                Debug.Log(damage);
+                // Debug.Log("deal damage:");
+                // Debug.Log(damage);
 
                 if (!isAttacking) {
                     //StartCoroutine(AttackSequence(player));
-                    // as a side note, some of these methods take target transform (assumed to be player)
-                    // this takes the actual object -- might be worth revising and alaways passing in object then getting its transform
+                    //nevermind forgot there was a check for making sure the player is the target
                     StartCoroutine(AttackSequence(playerRef));
                 }
 
@@ -246,22 +245,35 @@ public class FieldOfView : MonoBehaviour
         ApplyKnockback(target);
 
         // wait for cooldown before attacking again
-        WaitForCooldown();
+        //WaitForCooldown(attackCooldown);
+        Invoke("ReadyToAttack", attackCooldown);
     }
 
-     IEnumerator WaitForCooldown() { // after (cooldown) s, set to attack
-        yield return new WaitForSeconds(attackCooldown);
+    // this never ran
+     IEnumerator WaitForCooldown(float waitTime = 3) { // after (cooldown) s, set to attack
+        yield return new WaitForSecondsRealtime(waitTime);
         isAttacking = false;
+        Debug.Log("cooldown complete!");
     }
 
-    private void ApplyKnockback(GameObject target)
-    {
+    private void ReadyToAttack() {
+        isAttacking = false;
+        Debug.Log("ready to attack!");
+    }
 
-        if (target.TryGetComponent<Rigidbody>(out Rigidbody targetRigidbody)) {
-            Debug.Log("rigidbody target found");
-            Vector3 knockbackDirection = (target.transform.position - transform.position).normalized + Vector3.up;
-            targetRigidbody.AddForce(knockbackDirection * knockbackForce.magnitude, ForceMode.Impulse);
-        }
+    private void ApplyKnockback(GameObject target) {
+        Debug.Log("applying knockback");
+        // the code was supposed to only apply this if the target has a rigidbody to apply knockback to,
+        // but the if statement never triggers and I figure if player is the only target we have, it will
+        // always have rigid body so
+        Vector3 knockbackDirection = (target.transform.position - transform.position).normalized + Vector3.up;
+        target.GetComponent<Rigidbody>().AddForce(knockbackDirection * knockbackForce.magnitude, ForceMode.Impulse);
+       
+       // if (target.TryGetComponent<Rigidbody>(out Rigidbody targetRigidbody)) {
+        //     Debug.Log("rigidbody target found");
+        //     Vector3 knockbackDirection = (target.transform.position - transform.position).normalized + Vector3.up;
+        //     targetRigidbody.AddForce(knockbackDirection * knockbackForce.magnitude, ForceMode.Impulse);
+        // }
         // else {
         //     target.position += knockbackForce;
         // }
