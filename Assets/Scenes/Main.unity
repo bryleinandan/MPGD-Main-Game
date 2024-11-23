@@ -375,6 +375,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1897493222}
     - target: {fileID: 148073383343846507, guid: 630079d7fcbd94085b0f389389a48306, type: 3}
+      propertyPath: toggleInventory
+      value: 105
+      objectReference: {fileID: 0}
+    - target: {fileID: 148073383343846507, guid: 630079d7fcbd94085b0f389389a48306, type: 3}
       propertyPath: mainInventoryGroup
       value: 
       objectReference: {fileID: 438554375}

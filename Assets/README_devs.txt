@@ -53,3 +53,7 @@ it's a separate prefab with one different script but still uses most of health s
 HealthSystemController just links the healthbar to the player
 that means if you get the player object as a target, you can call .TakeDamage() on the player
 (because the health bar is on the ui)
+
+
+## Implementing IAttack
+define WaitForCooldown with an invoke and cooldown

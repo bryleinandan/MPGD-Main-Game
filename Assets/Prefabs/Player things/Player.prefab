@@ -300,7 +300,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa6f3d19744a8e842bf2271d49e26079, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  interactKey: 113
+  interactKey: 101
   interactionPoint: {fileID: 2319736956675224901}
   interactionPointRadius: 2
   interactableMask:
