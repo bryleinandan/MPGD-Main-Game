@@ -184,7 +184,7 @@ public class FieldOfView : MonoBehaviour
 
         // if distance between player and self is small: stop moving
         //if (Vector3.Distance(transform.position, player.position) <= attackRadius) {
-        Debug.Log(Vector3.Distance(transform.position, player.transform.position));
+        //Debug.Log(Vector3.Distance(transform.position, player.transform.position));
         if (Vector3.Distance(transform.position, player.transform.position) <= attackRadius) {
 
             //Debug.Log("stoppp");
@@ -195,7 +195,7 @@ public class FieldOfView : MonoBehaviour
             // gameObject.GetComponent<Animator>().Play("attack");
             if (alertStage == AlertStage.Alerted) {
 
-                Debug.Log("deal damage:" + damage);
+                //Debug.Log("deal damage:" + damage);
 
                 if (!isAttacking) {
                     //StartCoroutine(AttackSequence(player));
@@ -250,6 +250,9 @@ public class FieldOfView : MonoBehaviour
         
         // I fervently believe that if the attack movement is short enough then it is unstoppable
         ApplyKnockback(target);
+
+        // deal damage: get health system component
+        playerRef.GetComponent<PlayerHealthController>().TakeDamage(damage);
         
 
         // wait for cooldown before attacking again
@@ -261,12 +264,12 @@ public class FieldOfView : MonoBehaviour
     IEnumerator WaitForCooldown(float waitTime = 3) { // after (cooldown) s, set to attack
         yield return new WaitForSecondsRealtime(waitTime);
         isAttacking = false;
-        Debug.Log("cooldown complete!");
+        //Debug.Log("cooldown complete!");
     }
 
     private void ReadyToAttack() {
         isAttacking = false;
-        Debug.Log("ready to attack!");
+        //Debug.Log("ready to attack!");
     }
 
     private bool CheckPlayerHit() {
@@ -285,7 +288,7 @@ public class FieldOfView : MonoBehaviour
     }
 
     private void ApplyKnockback(GameObject target) {
-        Debug.Log("applying knockback");
+        //Debug.Log("applying knockback");
         // the code was supposed to only apply this if the target has a rigidbody to apply knockback to,
         // but the if statement never triggers and I figure if player is the only target we have, it will
         // always have rigid body so

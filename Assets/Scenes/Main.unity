@@ -1832,7 +1832,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3360919407585783280, guid: 71259656a79da9c47904c87fc676a4cf, type: 3}
       propertyPath: damage
-      value: 1
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 3360919407585783280, guid: 71259656a79da9c47904c87fc676a4cf, type: 3}
       propertyPath: radius
