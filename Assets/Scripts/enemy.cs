@@ -28,21 +28,23 @@ public class FieldOfView : MonoBehaviour
         alertLevel = 0;
     }
 
-    public float movementSpeed = 3;
+    public float movementSpeed = 5;
     public float attackSpeed = 1;
+    public float attackCooldown = 3;
     public float damage = 1;
-    public float health = 1;
+    public Vector3 knockbackForce = new Vector3(0, 2, -5); // intend to scale this on damage
+    public float health = 1; // take from enemyhealth later
 
     [Range(1, 100)] public float aggroSpeed = 20; // how fast alertness increments
+    [SerializeField] private bool isAttacking = false;
     //private float maxNumberEnemies = 3; // max number of enemies to be attacking player at once
     // probably need to set this in a game settings later
     [Range(0, 100)] public float radius;
     [Range(0, 360)] public float angle;
 
     public GameObject playerRef;
-
     private NavMeshAgent agent;
-    [Range(1, 50)] public float enemyDistance = 1.5f;
+    [Range(1, 50)] public float enemyDistance = 1.6f;
     //tutorial set this to 0.7f but that seems too small
 
     public LayerMask targetMask;
@@ -190,14 +192,73 @@ public class FieldOfView : MonoBehaviour
             // and attack
             // gameObject.GetComponent<Animator>().Play("attack");
             if (alertStage == AlertStage.Alerted) {
+
                 Debug.Log("deal damage:");
                 Debug.Log(damage);
+
+                if (!isAttacking) {
+                    StartCoroutine(AttackSequence(player));
+                }
+
             }
         }
     }
+    
+    private void ManualLookAt(Vector3 player_pos) {
+        // Source: ChatGPT
+        Vector3 lookDirection = player_pos - transform.position;
+        lookDirection.y = 0; // Optionally, ignore the Y axis to keep the enemy level
+        transform.rotation = Quaternion.LookRotation(lookDirection);
+    }
+    
     // private void idle()
 
-    // private void attack(Transform target)
+    // calculate knockback based off of damage
+    private void CalcuateKnockback() {
+        float x = 0;
+        float y = damage;
+        float z = -(damage*2);
+        knockbackForce = new Vector3(x, y, z); // so I can't overwrite it?
+    }
+
+    private IEnumerator AttackSequence(Transform target) {
+        isAttacking = true;
+
+        // Initial position of the enemy
+        Vector3 startPosition = transform.position;
+        Vector3 targetPosition = target.position;
+        float elapsedTime = 0f;
+
+        while (elapsedTime < attackSpeed) // Move toward target with predefined speed
+        {
+            elapsedTime += Time.deltaTime;
+            float t = elapsedTime / attackSpeed;
+            transform.position = Vector3.Lerp(startPosition, targetPosition, t);
+            yield return null;
+        }
+
+        // Ensure final position aligns perfectly
+        transform.position = targetPosition;
+        ApplyKnockback(target);
+
+        // wait for cooldown before attacking again
+        WaitForCooldown();
+    }
+
+     IEnumerator WaitForCooldown() { // after (cooldown) s, set to attack
+        yield return new WaitForSeconds(attackCooldown);
+        isAttacking = false;
+    }
+
+    private void ApplyKnockback(Transform target)
+    {
+        if (target.TryGetComponent<Rigidbody>(out Rigidbody targetRigidbody))
+        {
+            targetRigidbody.AddForce(knockbackForce, ForceMode.Impulse);
+        }
+    }
+
+
     //If your GameObject starts to collide with another GameObject with a Collider
     // void OnCollisionEnter(Collision collision)
     // {
@@ -216,22 +277,5 @@ public class FieldOfView : MonoBehaviour
     //     }
     // {
 
-    private void ManualLookAt(Vector3 player_pos) {
-        // //var qTo = Quaternion.LookRotation(player.transform.position - transform.position);
-        // var qTo = Quaternion.LookRotation(player_pos - transform.position);
-        // //qTo = Quaternion.Slerp(transform.rotation, qTo, 10 * Time.deltaTime);
-        // qTo = Quaternion.Slerp(transform.rotation, qTo, 15 * Time.deltaTime);
-        // GetComponent<Rigidbody>().MoveRotation(qTo);
-        // //Debug.Log(qTo);
 
-        // just lookat buggin again
-        //transform.rotation = Quaternion.LookRotation(player_pos - transform.position, transform.up);
-    
-        //transform.rotation = Quaternion.FromToRotation(transform.forward, player_pos - transform.position);
-        
-        // Source: ChatGPT
-        Vector3 lookDirection = player_pos - transform.position;
-        lookDirection.y = 0; // Optionally, ignore the Y axis to keep the enemy level
-        transform.rotation = Quaternion.LookRotation(lookDirection);
-    }
-}
+} // end of class

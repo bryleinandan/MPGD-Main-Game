@@ -53,13 +53,16 @@ MonoBehaviour:
   alertLevel: 0
   movementSpeed: 1
   attackSpeed: 1
+  attackCooldown: 3
   damage: 0
+  knockbackForce: {x: 0, y: 2, z: -5}
   health: 1
   aggroSpeed: 1
+  isAttacking: 0
   radius: 6.0174193
   angle: 116
   playerRef: {fileID: 0}
-  enemyDistance: 0.2
+  enemyDistance: 2
   targetMask:
     serializedVersion: 2
     m_Bits: 256
