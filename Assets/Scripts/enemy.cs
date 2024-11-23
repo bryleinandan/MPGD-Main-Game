@@ -61,6 +61,8 @@ public class FieldOfView : MonoBehaviour
         StartCoroutine(FOVRoutine());
         agent = GetComponent<NavMeshAgent>();
         agent.speed = movementSpeed;
+
+        CalcuateKnockback();
     }
 
     private IEnumerator FOVRoutine() // core routine to reduce number of calls per frame (for performance)
@@ -248,6 +250,7 @@ public class FieldOfView : MonoBehaviour
         
         // I fervently believe that if the attack movement is short enough then it is unstoppable
         ApplyKnockback(target);
+        
 
         // wait for cooldown before attacking again
         //WaitForCooldown(attackCooldown);
