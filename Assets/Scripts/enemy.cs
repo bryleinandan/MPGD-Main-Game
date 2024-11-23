@@ -197,7 +197,10 @@ public class FieldOfView : MonoBehaviour
                 Debug.Log(damage);
 
                 if (!isAttacking) {
-                    StartCoroutine(AttackSequence(player));
+                    //StartCoroutine(AttackSequence(player));
+                    // as a side note, some of these methods take target transform (assumed to be player)
+                    // this takes the actual object -- might be worth revising and alaways passing in object then getting its transform
+                    StartCoroutine(AttackSequence(playerRef));
                 }
 
             }
@@ -218,15 +221,16 @@ public class FieldOfView : MonoBehaviour
         float x = 0;
         float y = damage;
         float z = -(damage*2);
-        knockbackForce = new Vector3(x, y, z); // so I can't overwrite it?
+        knockbackForce = new Vector3(x, y, z);
     }
 
-    private IEnumerator AttackSequence(Transform target) {
+    private IEnumerator AttackSequence(GameObject target) {
         isAttacking = true;
 
+        Transform targetTransform = target.transform;
         // Initial position of the enemy
         Vector3 startPosition = transform.position;
-        Vector3 targetPosition = target.position;
+        Vector3 targetPosition = targetTransform.position;
         float elapsedTime = 0f;
 
         while (elapsedTime < attackSpeed) // Move toward target with predefined speed
@@ -237,7 +241,7 @@ public class FieldOfView : MonoBehaviour
             yield return null;
         }
 
-        // Ensure final position aligns perfectly
+        // make sure final position aligns perfectly
         transform.position = targetPosition;
         ApplyKnockback(target);
 
@@ -250,12 +254,17 @@ public class FieldOfView : MonoBehaviour
         isAttacking = false;
     }
 
-    private void ApplyKnockback(Transform target)
+    private void ApplyKnockback(GameObject target)
     {
-        if (target.TryGetComponent<Rigidbody>(out Rigidbody targetRigidbody))
-        {
-            targetRigidbody.AddForce(knockbackForce, ForceMode.Impulse);
+
+        if (target.TryGetComponent<Rigidbody>(out Rigidbody targetRigidbody)) {
+            Debug.Log("rigidbody target found");
+            Vector3 knockbackDirection = (target.transform.position - transform.position).normalized + Vector3.up;
+            targetRigidbody.AddForce(knockbackDirection * knockbackForce.magnitude, ForceMode.Impulse);
         }
+        // else {
+        //     target.position += knockbackForce;
+        // }
     }
 
 
