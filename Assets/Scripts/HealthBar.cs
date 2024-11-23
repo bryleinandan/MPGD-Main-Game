@@ -20,4 +20,9 @@ public class HealthBar : MonoBehaviour
         slider.value = health;
         fill.color = gradient.Evaluate(slider.normalizedValue);
     }
+
+    public void TakeDamage(int damage) {
+        slider.value = slider.value - damage;
+        //slider.value = Mathf.Lerp(minimum, maximum, t), 0, 0);
+    }
 }
