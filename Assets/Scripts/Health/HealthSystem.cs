@@ -9,7 +9,7 @@ public class HealthSystem : MonoBehaviour
 
     void Start() {
         // get the Health component from the player GameObject
-        healthComponent = GetComponent<Health>();
+        healthComponent = GetComponentInChildren<Health>();
         healthBar.SetMaxHealth(healthComponent.maxHealth);
         healthBar.SetHealth(healthComponent.maxHealth);
 

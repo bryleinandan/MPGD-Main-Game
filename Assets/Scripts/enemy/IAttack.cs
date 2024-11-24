@@ -19,12 +19,12 @@ public interface IAttack {
     // calculate knockback based off of damage
     public void CalculateKnockback() {
         float x = 0;
-        float y = damage;
-        float z = -(damage*2);
+        float y = damage*0.25f;
+        float z = -(damage*0.50f);
         knockbackForce = new Vector3(x, y, z);
     }
 
-    public IEnumerator AttackSequence(GameObject target) {
+    public virtual IEnumerator AttackSequence(GameObject target) {
         isAttacking = true;
 
         Transform targetTransform = target.transform;
