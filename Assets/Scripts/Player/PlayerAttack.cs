@@ -7,10 +7,10 @@ public class PlayerAttack : MonoBehaviour, IAttack
     //[Header("Interface stuff")]
     public float attackSpeed { get; set; }
     public float attackCooldown { get; set; }
-    public float damage { get; set; }
+    public float damage { get; set; } = 10;
     public Vector3 knockbackForce { get; set; }
     public bool isAttacking { get; set; }
-    public float attackRadius { get; set; }
+    public float attackRadius { get; set; } = 3;
     public void WaitForCooldown(float waitTime = 0) {
         Invoke("ReadyToAttack", 0);
         // no cooldown for player :)
@@ -19,7 +19,17 @@ public class PlayerAttack : MonoBehaviour, IAttack
         isAttacking = false;
     }
 
+    public void CalculateKnockback() { // basically override
+        float x = 0;
+        float y = damage*0.9f;
+        float z = -(damage*0.8f);
+        knockbackForce = new Vector3(x, y, z);
+    }
+
+    public LayerMask attackableMask;
+
     void Start() {
+        CalculateKnockback(); // call local one, not the interface's one
     }
 
     void Update() {
@@ -27,9 +37,22 @@ public class PlayerAttack : MonoBehaviour, IAttack
     }
 
     void AttackButton() {
-        if (Input.GetKeyDown(KeyCode.Q))
-        {
-            // get range of attack
+        if (Input.GetKeyDown(KeyCode.Q)) {
+            // get colliders in range of attack
+            Collider[] rangeChecks = Physics.OverlapSphere(transform.position, attackRadius, attackableMask);
+            foreach (Collider c in rangeChecks) // check list of colliders for player tag
+            {
+                //Debug.Log("damage dealt!");
+                Debug.Log(knockbackForce);
+
+                // Collider is the component - get game object parent
+                // deal damage + knockback to that collider
+                ((IAttack)this).DealDamage(c.gameObject);
+                //((IAttack)this).ApplyKnockback(c.gameObject);
+                ((IAttack)this).ApplyUppercut(c.gameObject);
+            }
+
+        
         }
     }
 

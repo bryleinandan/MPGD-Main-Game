@@ -24,7 +24,7 @@ public interface IAttack {
         knockbackForce = new Vector3(x, y, z);
     }
 
-    public virtual IEnumerator AttackSequence(GameObject target) {
+    public IEnumerator AttackSequence(GameObject target) {
         isAttacking = true;
 
         Transform targetTransform = target.transform;
@@ -51,15 +51,19 @@ public interface IAttack {
         // I fervently believe that if the attack movement is short enough then it is unstoppable
         ApplyKnockback(target);
 
+        DealDamage(target);
+        
+        WaitForCooldown(attackCooldown);
+    }
+
+    public void DealDamage(GameObject target) {
         // deal damage: get health system component
         // check if player has Player tag, then get component accordingly
         if (target.CompareTag("Player")) {
             target.GetComponent<PlayerHealthController>().TakeDamage(damage);
         } else {
-            //target.GetComponent<PlayerHealthController>().TakeDamage(damage);
+            target.GetComponent<HealthController>().TakeDamage(damage);
         }
-        
-        WaitForCooldown(attackCooldown);
     }
 
     public void WaitForCooldown(float waitTime = 3);
@@ -87,7 +91,7 @@ public interface IAttack {
     //     return targetHit;
     // }
 
-    private void ApplyKnockback(GameObject target) {
+    public void ApplyKnockback(GameObject target) {
         // the code was supposed to only apply this if the target has a rigidbody to apply knockback to,
         // but the if statement never triggers and I figure if player is the only target we have, it will
         // always have rigid body so
@@ -102,6 +106,15 @@ public interface IAttack {
         // else {
         //     target.position += knockbackForce;
         // }
+    }
+
+    // spinoff knockbacl
+    public void ApplyUppercut(GameObject target, float upwardForce = 10f) {
+        // velocitychange ignores mass
+        target.GetComponent<Rigidbody>().AddForce(Vector3.up * upwardForce, ForceMode.VelocityChange);
+        //Vector3 knockbackDirection = (target.transform.position - transform.position).normalized + Vector3.up;
+        //target.GetComponent<Rigidbody>().AddForce(knockbackDirection * knockbackForce.magnitude, ForceMode.Impulse);
+       
     }
 
 
