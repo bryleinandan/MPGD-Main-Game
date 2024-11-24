@@ -38,7 +38,7 @@ public class FieldOfView : MonoBehaviour, IAttack
     [SerializeField] public float attackCooldown { get; set; } = 2;
     [SerializeField] public float damage { get; set; } = 10;
     public float stunTime { get; set; } = 0;
-    public Vector3 knockbackForce { get; set; } = new Vector3(0, 2, -5); // intend to scale this on damage
+    public Vector3 knockbackForce { get; set; } = new Vector3(0, 1, -3); // intend to scale this on damage
     [SerializeField] public bool isAttacking { get; set; } = false;
     [SerializeField] public float attackRadius { get; set; } = 1.6f;
     public void WaitForCooldown(float waitTime = 3) {
@@ -48,8 +48,9 @@ public class FieldOfView : MonoBehaviour, IAttack
     public void ReadyToAttack() {
         isAttacking = false;
     }
+    // not needed as it only attacks player, but:
     public void AgentReenableCoroutine(NavMeshAgent agent) {
-        StartCoroutine(((IAttack)this).ReenableAgentOnGround(agent)); 
+        //StartCoroutine(((IAttack)this).ReenableAgentOnGround(agent)); 
     }
 
     [Range(1, 100)] public float aggroSpeed = 20; // how fast alertness increments
@@ -209,7 +210,9 @@ public class FieldOfView : MonoBehaviour, IAttack
             // and attack
             // gameObject.GetComponent<Animator>().Play("attack");
             if (alertStage == AlertStage.Alerted) {
-                if (!isAttacking) {
+                //if (!isAttacking) {
+                // if agent is disabled, the enemy has been hit or in the stun sequence
+                if (!isAttacking && agent.enabled) {
                     StartCoroutine(((IAttack)this).AttackSequence(playerRef));
                 }
             }

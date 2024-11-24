@@ -7,15 +7,14 @@ public class PlayerAttack : MonoBehaviour, IAttack
 {
     //[Header("Interface stuff")]
     public float attackSpeed { get; set; }
-    public float attackCooldown { get; set; }
+    public float attackCooldown { get; set; } = 2;
     public float damage { get; set; } = 10;
-    public float stunTime { get; set; } = 4;
+    public float stunTime { get; set; } = 6;
     public Vector3 knockbackForce { get; set; }
     public bool isAttacking { get; set; }
     public float attackRadius { get; set; } = 3;
     public void WaitForCooldown(float waitTime = 0) {
-        Invoke("ReadyToAttack", 0);
-        // no cooldown for player :)
+        Invoke("ReadyToAttack", waitTime);
     }
     public void ReadyToAttack() {
         isAttacking = false;
