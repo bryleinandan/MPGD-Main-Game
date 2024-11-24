@@ -13,7 +13,7 @@ public class PlayerControl : MonoBehaviour
     // grounded player check variables
     public float _playerHeight;
     public LayerMask ground;
-    private bool _grounded;
+    public bool _grounded;
 
     // movement drag variables - makes movement feel smoother
     public float groundDrag;
