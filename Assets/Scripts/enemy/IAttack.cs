@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public interface IAttack {
     
@@ -91,13 +92,34 @@ public interface IAttack {
     //     return targetHit;
     // }
 
-    public void ApplyKnockback(GameObject target) {
+    public void ApplyKnockback(GameObject target, Vector3 knockbackDirection = new Vector3()) {
         // the code was supposed to only apply this if the target has a rigidbody to apply knockback to,
         // but the if statement never triggers and I figure if player is the only target we have, it will
         // always have rigid body so
-        Vector3 knockbackDirection = (target.transform.position - transform.position).normalized + Vector3.up;
+        //Vector3 knockbackDirection = (target.transform.position - transform.position).normalized + Vector3.up;
+        
+        if (knockbackDirection== new Vector3()) {
+            knockbackDirection = (target.transform.position - transform.position).normalized + Vector3.up;
+        }
+
+        // Navmesh agent must be disabled before applying force as it will snap object to the ground
+        if (target.TryGetComponent<NavMeshAgent>(out NavMeshAgent targetNavAgent)) {
+            targetNavAgent.enabled = false;
+        }
+
+        // punt the guy
         target.GetComponent<Rigidbody>().AddForce(knockbackDirection * knockbackForce.magnitude, ForceMode.Impulse);
        
+       // if there was a navmeshagent that we disabled, re-enable it after a time
+        if (targetNavAgent != null) {
+            ReenableAgentAfterDelay(targetNavAgent, 5);
+        }
+    }
+
+    private IEnumerator ReenableAgentAfterDelay(NavMeshAgent agent, float delay) {
+        yield return new WaitForSeconds(delay);
+        agent.enabled = true;
+    }
        // if (target.TryGetComponent<Rigidbody>(out Rigidbody targetRigidbody)) {
         //     Debug.Log("rigidbody target found");
         //     Vector3 knockbackDirection = (target.transform.position - transform.position).normalized + Vector3.up;
@@ -105,17 +127,7 @@ public interface IAttack {
         // }
         // else {
         //     target.position += knockbackForce;
-        // }
-    }
-
-    // spinoff knockbacl
-    public void ApplyUppercut(GameObject target, float upwardForce = 10f) {
-        // velocitychange ignores mass
-        target.GetComponent<Rigidbody>().AddForce(Vector3.up * upwardForce, ForceMode.VelocityChange);
-        //Vector3 knockbackDirection = (target.transform.position - transform.position).normalized + Vector3.up;
-        //target.GetComponent<Rigidbody>().AddForce(knockbackDirection * knockbackForce.magnitude, ForceMode.Impulse);
-       
-    }
+        // 
 
 
     //If your GameObject starts to collide with another GameObject with a Collider

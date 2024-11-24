@@ -1836,11 +1836,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2023791185400357427, guid: 71259656a79da9c47904c87fc676a4cf, type: 3}
       propertyPath: m_Drag
-      value: 0.05
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2023791185400357427, guid: 71259656a79da9c47904c87fc676a4cf, type: 3}
       propertyPath: m_AngularDrag
-      value: 0.5
+      value: 0.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 2023791185400357427, guid: 71259656a79da9c47904c87fc676a4cf, type: 3}
+      propertyPath: m_Constraints
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3360919407585783280, guid: 71259656a79da9c47904c87fc676a4cf, type: 3}
       propertyPath: damage

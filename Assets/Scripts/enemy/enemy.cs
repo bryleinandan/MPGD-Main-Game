@@ -179,19 +179,21 @@ public class FieldOfView : MonoBehaviour, IAttack
         }
     }
 
-    private void moveTowardsPlayer(Transform player)
-    {
+    private void moveTowardsPlayer(Transform player) {
         //transform.LookAt(player);
         ManualLookAt(player.transform.position);
 
         // only chase when alerted
-        if (alertStage == AlertStage.Alerted) {
+        if (agent.enabled == true) {
+            if (alertStage == AlertStage.Alerted) {
             agent.isStopped = false;
             agent.SetDestination(player.transform.position);
-        } else {
-            agent.SetDestination(agent.transform.position);
-            agent.isStopped = true;
+            } else {
+                agent.SetDestination(agent.transform.position);
+                agent.isStopped = true;
+            }
         }
+    
 
         // if distance between player and self is small: stop moving
         //Debug.Log(Vector3.Distance(transform.position, player.transform.position));

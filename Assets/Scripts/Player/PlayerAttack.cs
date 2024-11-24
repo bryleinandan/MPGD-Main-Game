@@ -48,8 +48,8 @@ public class PlayerAttack : MonoBehaviour, IAttack
                 // Collider is the component - get game object parent
                 // deal damage + knockback to that collider
                 ((IAttack)this).DealDamage(c.gameObject);
-                //((IAttack)this).ApplyKnockback(c.gameObject);
-                ((IAttack)this).ApplyUppercut(c.gameObject);
+                ((IAttack)this).ApplyKnockback(c.gameObject);
+                //((IAttack)this).ApplyUppercut(c.gameObject);
             }
 
         
