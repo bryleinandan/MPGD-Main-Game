@@ -8,6 +8,7 @@ public class PlayerAttack : MonoBehaviour, IAttack
     public float attackSpeed { get; set; }
     public float attackCooldown { get; set; }
     public float damage { get; set; } = 10;
+    public float stunTime { get; set; } = 4;
     public Vector3 knockbackForce { get; set; }
     public bool isAttacking { get; set; }
     public float attackRadius { get; set; } = 3;
@@ -21,8 +22,8 @@ public class PlayerAttack : MonoBehaviour, IAttack
 
     public void CalculateKnockback() { // basically override
         float x = 0;
-        float y = damage*0.9f;
-        float z = -(damage*0.8f);
+        float y = damage*0.4f;
+        float z = -(damage*0.6f);
         knockbackForce = new Vector3(x, y, z);
     }
 
@@ -43,13 +44,12 @@ public class PlayerAttack : MonoBehaviour, IAttack
             foreach (Collider c in rangeChecks) // check list of colliders for player tag
             {
                 //Debug.Log("damage dealt!");
-                Debug.Log(knockbackForce);
+                //Debug.Log(knockbackForce);
 
                 // Collider is the component - get game object parent
                 // deal damage + knockback to that collider
                 ((IAttack)this).DealDamage(c.gameObject);
                 ((IAttack)this).ApplyKnockback(c.gameObject);
-                //((IAttack)this).ApplyUppercut(c.gameObject);
             }
 
         

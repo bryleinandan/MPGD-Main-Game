@@ -9,6 +9,7 @@ public interface IAttack {
     public float attackCooldown { get; set; }
     public float damage { get; set; }
     public Vector3 knockbackForce { get; set; }
+    public float stunTime { get; set; }
     public bool isAttacking { get; set; }
     public float attackRadius { get; set; }
     Transform transform { get; } // get transform of self
@@ -112,13 +113,37 @@ public interface IAttack {
        
        // if there was a navmeshagent that we disabled, re-enable it after a time
         if (targetNavAgent != null) {
-            ReenableAgentAfterDelay(targetNavAgent, 5);
+            ReenableAgentAfterDelay(targetNavAgent, stunTime);
+            //ReenableAgentOnGround(targetNavAgent);
         }
     }
 
     private IEnumerator ReenableAgentAfterDelay(NavMeshAgent agent, float delay) {
         yield return new WaitForSeconds(delay);
         agent.enabled = true;
+    }
+       
+    // StartCoroutine(ReenableAgentOnGround); 
+    private IEnumerator ReenableAgentOnGround(NavMeshAgent agent, float height = 2) {
+        // checkdistance should be height of object but yeah i'm not getting renderer today thanks
+        // one day
+        // float objectHeight = GetComponent<Renderer>().bounds.size.y;
+        
+        bool grounded = CheckIfGrounded(height);
+        while (!grounded) {
+        grounded = CheckIfGrounded(height);
+        Debug.Log("Grounded: " + grounded);
+        yield return null;
+    }
+
+    Debug.Log("Object is now grounded!");
+
+        agent.enabled = false;
+    }
+
+    bool CheckIfGrounded(float checkDistance) {
+        LayerMask groundLayer = (LayerMask.GetMask("ground"));
+        return Physics.Raycast(transform.position, Vector3.down, checkDistance * 0.5f + 0.3f, groundLayer);
     }
        // if (target.TryGetComponent<Rigidbody>(out Rigidbody targetRigidbody)) {
         //     Debug.Log("rigidbody target found");

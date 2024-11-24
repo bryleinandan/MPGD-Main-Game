@@ -56,4 +56,8 @@ that means if you get the player object as a target, you can call .TakeDamage() 
 
 
 ## Implementing IAttack
-define WaitForCooldown with an invoke and cooldown
+define WaitForCooldown with an invoke and cooldown or however else you want
+
+	by the way, if you're calling IAttack's attacking function on an enemy and the navmeshagent doesn't re-enable:
+	check the ground layermask is set properly,
+	since it gets layermask by name here and not by object reference.

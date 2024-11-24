@@ -37,6 +37,7 @@ public class FieldOfView : MonoBehaviour, IAttack
     }
     [SerializeField] public float attackCooldown { get; set; } = 2;
     [SerializeField] public float damage { get; set; } = 10;
+    public float stunTime { get; set; } = 0;
     public Vector3 knockbackForce { get; set; } = new Vector3(0, 2, -5); // intend to scale this on damage
     [SerializeField] public bool isAttacking { get; set; } = false;
     [SerializeField] public float attackRadius { get; set; } = 1.6f;
