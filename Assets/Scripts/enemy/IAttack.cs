@@ -113,18 +113,24 @@ public interface IAttack {
        
        // if there was a navmeshagent that we disabled, re-enable it after a time
         if (targetNavAgent != null) {
-            ReenableAgentAfterDelay(targetNavAgent, stunTime);
+            //ReenableAgentAfterDelay(targetNavAgent, stunTime);
             //ReenableAgentOnGround(targetNavAgent);
+            //targetNavAgent.enabled = true;
+            AgentReenableCoroutine(targetNavAgent);
         }
     }
 
-    private IEnumerator ReenableAgentAfterDelay(NavMeshAgent agent, float delay) {
+    public void AgentReenableCoroutine(NavMeshAgent agent);
+    // call one or the other
+
+    public IEnumerator ReenableAgentAfterDelay(NavMeshAgent agent, float delay = 5) {
         yield return new WaitForSeconds(delay);
         agent.enabled = true;
     }
        
     // StartCoroutine(ReenableAgentOnGround); 
-    private IEnumerator ReenableAgentOnGround(NavMeshAgent agent, float height = 2) {
+    //StartCoroutine(((IAttack)this).ReenableAgentOnGround(agent)); 
+    public IEnumerator ReenableAgentOnGround(NavMeshAgent agent, float height = 0.6f) {
         // checkdistance should be height of object but yeah i'm not getting renderer today thanks
         // one day
         // float objectHeight = GetComponent<Renderer>().bounds.size.y;
@@ -135,10 +141,8 @@ public interface IAttack {
         Debug.Log("Grounded: " + grounded);
         yield return null;
     }
-
-    Debug.Log("Object is now grounded!");
-
-        agent.enabled = false;
+        Debug.Log("Object is now grounded!");
+        agent.enabled = true;
     }
 
     bool CheckIfGrounded(float checkDistance) {

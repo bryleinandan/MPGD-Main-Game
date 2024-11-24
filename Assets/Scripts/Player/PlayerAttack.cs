@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class PlayerAttack : MonoBehaviour, IAttack
 {
@@ -19,7 +20,13 @@ public class PlayerAttack : MonoBehaviour, IAttack
     public void ReadyToAttack() {
         isAttacking = false;
     }
-
+    public void AgentReenableCoroutine(NavMeshAgent agent) {
+        if(stunEnemies) {
+            StartCoroutine(((IAttack)this).ReenableAgentAfterDelay(agent, stunTime)); 
+        } else {
+            StartCoroutine(((IAttack)this).ReenableAgentOnGround(agent));
+        }
+    }
     public void CalculateKnockback() { // basically override
         float x = 0;
         float y = damage*0.4f;
@@ -27,6 +34,8 @@ public class PlayerAttack : MonoBehaviour, IAttack
         knockbackForce = new Vector3(x, y, z);
     }
 
+    [Header("see script for rest of stats/variables. i'm too tired to making backing vars rn")]
+    public bool stunEnemies = true;
     public LayerMask attackableMask;
 
     void Start() {

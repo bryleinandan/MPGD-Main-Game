@@ -48,6 +48,9 @@ public class FieldOfView : MonoBehaviour, IAttack
     public void ReadyToAttack() {
         isAttacking = false;
     }
+    public void AgentReenableCoroutine(NavMeshAgent agent) {
+        StartCoroutine(((IAttack)this).ReenableAgentOnGround(agent)); 
+    }
 
     [Range(1, 100)] public float aggroSpeed = 20; // how fast alertness increments
     [Range(0, 100)] public float radius;
