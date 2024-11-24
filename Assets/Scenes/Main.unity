@@ -1758,7 +1758,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6294763016107999820, guid: 7bcdd00c2c99f554fb55ab3bcd50cf84, type: 3}
       propertyPath: prompt
-      value: Q to pick up!
+      value: E to pick up!
       objectReference: {fileID: 0}
     - target: {fileID: 6294763016107999820, guid: 7bcdd00c2c99f554fb55ab3bcd50cf84, type: 3}
       propertyPath: playerCam
@@ -1835,12 +1835,8 @@ PrefabInstance:
       value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 2023791185400357427, guid: 71259656a79da9c47904c87fc676a4cf, type: 3}
-      propertyPath: m_Drag
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2023791185400357427, guid: 71259656a79da9c47904c87fc676a4cf, type: 3}
       propertyPath: m_AngularDrag
-      value: 0.05
+      value: 0.09
       objectReference: {fileID: 0}
     - target: {fileID: 2023791185400357427, guid: 71259656a79da9c47904c87fc676a4cf, type: 3}
       propertyPath: m_Constraints
