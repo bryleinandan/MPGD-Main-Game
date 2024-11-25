@@ -2078,6 +2078,10 @@ PrefabInstance:
       propertyPath: m_Constraints
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2419312532329831879, guid: 71259656a79da9c47904c87fc676a4cf, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 278a8a7d638182444ad02184bf40b0c8, type: 3}
     - target: {fileID: 3360919407585783280, guid: 71259656a79da9c47904c87fc676a4cf, type: 3}
       propertyPath: damage
       value: 5
@@ -2173,6 +2177,22 @@ PrefabInstance:
     - target: {fileID: 7611203854687399286, guid: 71259656a79da9c47904c87fc676a4cf, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7611203854687399286, guid: 71259656a79da9c47904c87fc676a4cf, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: -5.3196416
+      objectReference: {fileID: 0}
+    - target: {fileID: 7611203854687399286, guid: 71259656a79da9c47904c87fc676a4cf, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: -2.6700015
+      objectReference: {fileID: 0}
+    - target: {fileID: 7611203854687399286, guid: 71259656a79da9c47904c87fc676a4cf, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 1.4698207
+      objectReference: {fileID: 0}
+    - target: {fileID: 7611203854687399286, guid: 71259656a79da9c47904c87fc676a4cf, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -0.50499916
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
