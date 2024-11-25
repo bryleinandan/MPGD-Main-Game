@@ -35,10 +35,12 @@ public class PlayerAttack : MonoBehaviour, IAttack
 
     [Header("see script for rest of stats/variables. i'm too tired to making backing vars rn")]
     public bool stunEnemies = true;
+    public float stunTimeS = 5;
     public LayerMask attackableMask;
 
     void Start() {
         CalculateKnockback(); // call local one, not the interface's one
+        stunTime = stunTimeS;
     }
 
     void Update() {

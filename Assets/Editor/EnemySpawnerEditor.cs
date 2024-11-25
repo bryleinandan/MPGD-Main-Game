@@ -6,12 +6,12 @@ using UnityEditor;
 
 // REMEMBER, in order to see it, you need to have selected spawner in the tree view
 
-public class AutoSpawnerEditor : Editor {
+public class EnemySpawnerEditor : Editor {
     private void OnSceneGUI() {
         EnemyAutoSpawner spawner = (EnemyAutoSpawner)target;
 
         // make a handle/gizmo to edit the fov in the editor
-        Handles.color = new Color(0.5f, 0.2f, 0.7f, 0.3f); // i just picked a colour
+        Handles.color = new Color(0.8f, 0.3f, 0.7f, 0.3f); // i just picked a colour
         Handles.DrawSolidDisc(spawner.transform.position, spawner.transform.up, spawner.radius);
         // or wiredisk!
 
@@ -19,6 +19,5 @@ public class AutoSpawnerEditor : Editor {
         spawner.radius = Handles.ScaleValueHandle(spawner.radius, spawner.transform.position + spawner.transform.forward 
         * spawner.radius, spawner.transform.rotation, 10, Handles.SphereHandleCap, 1);
     }
-
 }
 

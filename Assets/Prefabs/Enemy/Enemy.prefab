@@ -170,7 +170,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   alertStage: 1
   alertLevel: 0
-  movementSpeed: 1
+  movementSpeed: 5
   _attackSpeedSetter: 0.2
   aggroSpeed: 30
   radius: 15

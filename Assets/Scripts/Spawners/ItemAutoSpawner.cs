@@ -9,37 +9,39 @@ using UnityEngine.Rendering;
 // important consideration: this makes a separate instance of every enemy. this can get heavy on the game processing.
 // should probably think about a de/re-activation radius.
 
-public class EnemyAutoSpawner : MonoBehaviour
+public class ItemAutoSpawner : MonoBehaviour
     // please be aware that this checks the whole level lol
 {
-    public LayerMask enemyLayer;
+    public LayerMask itemLayer;
     public Terrain terrain;
     public float radius = 2000;
     public float checkIntervalS = 15;
 
-    [Tooltip("how high above ground to spawn an enemy")]
+    [Tooltip("how high above ground to spawn an item")]
     public float yOffset = 1f;
 
     // this might be better off as an array but you didn't hear that from me
-    [Header("Assign enemy types")]
-    public GameObject enemy1;
+    [Header("Assign items to spawn")]
+    public GameObject item1;
     public int no1_max = 10;
 
+    // copy n paste in a few places
+
         [Header("checkers (no need to touch these)")]
-    public Enemy no1;
+    public overworldItem no1;
     public int no1_count;
 
     void Start() {
-        Debug.Log("I live");
+        //Debug.Log("I live");
         // get component
-        if(enemy1 != null) {
-            no1 = enemy1.GetComponentInChildren<Enemy>();
-        }
+        // if(item1 != null) {
+        //     no1 = item1.GetComponentInChildren<Enemy>();
+        // }
 
-        // No enemies selected, don't do anything
-        if ((enemy1==null)) {
+        // None selected, don't do anything
+        if ((item1==null)) {
             // do nothing
-            Debug.Log("no enemies selected to spawn!");
+            Debug.Log("no items selected to spawn!");
         } else {
             StartCoroutine(RangeCheckRoutine());
         }
@@ -57,10 +59,11 @@ public class EnemyAutoSpawner : MonoBehaviour
     }
 
     private void RangeCheck() {
-        Collider[] enemies = Physics.OverlapSphere(transform.position, radius, enemyLayer);
-        foreach (Collider c in enemies) {
-                // check what KIND of enemy it is
-                // [not applicable rn but]
+        Collider[] items = Physics.OverlapSphere(transform.position, radius, itemLayer);
+        foreach (Collider c in items) {
+                // the script technically doesn't touch anything that isn't
+                // item1, item2, item3, etc
+                // can add "item" tag checking here if need be
                 if (c.gameObject == no1) {
                     no1_count++;
                 }
@@ -71,16 +74,16 @@ public class EnemyAutoSpawner : MonoBehaviour
 
     private void NumbersChecker() {
         if (no1_count < no1_max) {
-            SpawnEnemy(no1);
+            SpawnItem(no1);
         }
 
         // I should probably despawn things if they're over the max so let's do that
     }
 
-    public void SpawnEnemy(Enemy enemy) {
+    public void SpawnItem(overworldItem item) {
         Vector3 spawnPoint = GeneratePosition(transform.position, radius);
-        Instantiate(enemy.gameObject, spawnPoint, Quaternion.identity);
-        Debug.Log("enemy was spawned: " + enemy);
+        Instantiate(item.gameObject, spawnPoint, Quaternion.identity);
+        Debug.Log("item was spawned: " + item);
     }
 
     // select random location
@@ -103,7 +106,7 @@ public class EnemyAutoSpawner : MonoBehaviour
     public void Despawn(Enemy type, int max) {
         int contestant = RussianRoulette(max);
         int index = 0;
-        Collider[] enemies = Physics.OverlapSphere(transform.position, radius, enemyLayer);
+        Collider[] enemies = Physics.OverlapSphere(transform.position, radius, itemLayer);
         foreach (Collider c in enemies) {
             if (c.gameObject == type) {
                 index++;
