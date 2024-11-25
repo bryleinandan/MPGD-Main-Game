@@ -1792,7 +1792,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0a0a4ededf2e7f419f744e46498c131, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHunger: 50
+  maxHunger: 300
   hungerBar: {fileID: 1819042291}
   hungerDecayRate: 5
   healthDecayRate: 1
