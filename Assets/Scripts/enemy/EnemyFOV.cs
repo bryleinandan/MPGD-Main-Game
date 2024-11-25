@@ -16,8 +16,7 @@ public enum AlertStage
     Alerted
 }
 
-public class FieldOfView : MonoBehaviour, IAttack
-{ 
+public class FieldOfView : MonoBehaviour, IAttack { 
     public AlertStage alertStage;
     [Range(0, 100)] public float alertLevel; // 0=peaceful, 100=alerted
 
@@ -66,6 +65,9 @@ public class FieldOfView : MonoBehaviour, IAttack
     public LayerMask targetMask;
     public LayerMask obstructionMask;
     public bool canSeePlayer;
+
+    public void Initialize()
+    { }
 
     private void Start()
     {
@@ -227,6 +229,19 @@ public class FieldOfView : MonoBehaviour, IAttack
     
     // private void idle()
 
-
-
 } // end of class
+
+public class Enemy : MonoBehaviour {
+    public FieldOfView fieldOfView;
+
+    void Awake()
+    {
+        fieldOfView = new FieldOfView();
+        fieldOfView.Initialize();
+    }
+
+    void Update()
+    {
+        // Use fieldOfView for enemy logic
+    }
+}
