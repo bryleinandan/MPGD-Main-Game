@@ -20,6 +20,9 @@ public class EnemyAutoSpawner : MonoBehaviour
     [Tooltip("how high above ground to spawn an enemy")]
     public float yOffset = 1f;
 
+    [Header("place parent / folder")]
+    public GameObject parent; // get parent.transform and pass it into spawn to instantiate at that parent
+
     // this might be better off as an array but you didn't hear that from me
     [Header("Assign enemy types (prefabs only)")]
     public GameObject enemy1;
@@ -30,7 +33,7 @@ public class EnemyAutoSpawner : MonoBehaviour
     public int no1_count;
 
     void Start() {
-        Debug.Log("I live");
+        //Debug.Log("I live");
         // get component
         if(enemy1 != null) {
             no1 = enemy1.GetComponentInChildren<Enemy>();
@@ -79,8 +82,8 @@ public class EnemyAutoSpawner : MonoBehaviour
 
     public void SpawnEnemy(Enemy enemy) {
         Vector3 spawnPoint = GeneratePosition(transform.position, radius);
-        Instantiate(enemy.gameObject, spawnPoint, Quaternion.identity);
-        Debug.Log("enemy was spawned: " + enemy);
+        Instantiate(enemy.gameObject, spawnPoint, Quaternion.identity, parent.transform);
+        //Debug.Log("enemy was spawned: " + enemy);
     }
 
     // select random location

@@ -8,7 +8,7 @@ using System;
 using UnityEngine.UIElements;
 using Unity.VisualScripting;
 
-public class overworldItem : MonoBehaviour, IInteractable
+public class OverworldItem : MonoBehaviour, IInteractable
 {
     // public Mesh model;
 
@@ -52,7 +52,7 @@ public class overworldItem : MonoBehaviour, IInteractable
     {
 
         // get own first child and get the text mesh
-        promptTextMesh = this.transform.GetChild(0).gameObject.GetComponent<TextMeshPro>();
+        promptTextMesh = this.transform.GetChild(0).gameObject.GetComponentInChildren<TextMeshPro>();
         interactionPromptStr = prompt;
         ((IInteractable)this).HidePrompt();
         textOriginalScale = promptTextMesh.GetComponent<RectTransform>().localScale;
@@ -142,6 +142,22 @@ public class overworldItem : MonoBehaviour, IInteractable
         // Use size (X, Y) to determine label margin size. see IInteractable.cs
         ((IInteractable)this).SetLabelPosition(meshSize.x, meshSize.y, meshSize.z);
         
+    }
+
+    // to CLARIFY
+    // Item.Spawn -> OverworldItem.Spawn
+    // public void Spawn(Vector3 position, Item item) {
+    //     inventoryItem = item;
+    //     interactionPromptStr = item.InteractionPrompt;
+    //     Instantiate(this, position, Quaternion.identity);
+    // }
+
+    public void Initialize(Item item)
+    {
+        // Example: Update visuals or properties
+        //GetComponent<SpriteRenderer>().sprite = data.itemIcon;
+        //transform.position = position;
+        interactionPromptStr = item.InteractionPrompt;
     }
 
 }

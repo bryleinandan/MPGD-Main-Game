@@ -21,21 +21,23 @@ public class ItemAutoSpawner : MonoBehaviour
     public float yOffset = 1f;
 
     // this might be better off as an array but you didn't hear that from me
-    [Header("Assign items to spawn (prefabs only)")]
-    public GameObject item1;
-    public int no1_max = 10;
-
+    [Header("Assign items to spawn - scriptable objects")]
+    public Item item1;
+    //private  GameObject item1;
+    public int item1_max = 10;
     // copy n paste in a few places
 
+    [Header("place parent / folder")]
+    public GameObject parent;
+
     [Header("checkers (no need to touch these)")]
-    public overworldItem no1;
-    public int no1_count;
+    public int item1_count;
 
     void Start() {
         //Debug.Log("I live");
         // get component
         // if(item1 != null) {
-        //     no1 = item1.GetComponentInChildren<Enemy>();
+        //     //no1 = item1.GetComponent<OverworldItem>().inventoryItem;
         // }
 
         // None selected, don't do anything
@@ -64,8 +66,11 @@ public class ItemAutoSpawner : MonoBehaviour
                 // the script technically doesn't touch anything that isn't
                 // item1, item2, item3, etc
                 // can add "item" tag checking here if need be
-                if (c.gameObject == no1) {
-                    no1_count++;
+                var itemObj = c.gameObject;
+                if (itemObj.TryGetComponent<OverworldItem>(out OverworldItem oItem)) {
+                    if (oItem.inventoryItem == item1) { // if the collider is the same type as item1
+                        item1_count++;
+                    }
                 }
             }
         // rangecheck done, call the numbers checker
@@ -73,18 +78,19 @@ public class ItemAutoSpawner : MonoBehaviour
     }
 
     private void NumbersChecker() {
-        if (no1_count < no1_max) {
-            SpawnItem(no1);
+        if (item1_count < item1_max) {
+            item1.Spawn(GeneratePosition(transform.position, radius), (default), parent.transform);
+            //SpawnItem(no1);
         }
 
-        // I should probably despawn things if they're over the max so let's do that
+        // I should probably despawn things if they're over the max so let's do that laterr
     }
 
-    public void SpawnItem(overworldItem item) {
-        Vector3 spawnPoint = GeneratePosition(transform.position, radius);
-        Instantiate(item.gameObject, spawnPoint, Quaternion.identity);
-        Debug.Log("item was spawned: " + item);
-    }
+    // public void SpawnItem(OverworldItem item) { // pass in whole prefab
+    //     Vector3 spawnPoint = GeneratePosition(transform.position, radius);
+    //     Instantiate(item.gameObject, spawnPoint, Quaternion.identity);
+    //     Debug.Log("item was spawned: " + item);
+    // }
 
     // select random location
     public Vector3 GeneratePosition(Vector3 center, float radius) {

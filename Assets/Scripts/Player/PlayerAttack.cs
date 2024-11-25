@@ -28,8 +28,8 @@ public class PlayerAttack : MonoBehaviour, IAttack
     }
     public void CalculateKnockback() { // basically override
         float x = 0;
-        float y = damage*0.4f;
-        float z = -(damage*0.6f);
+        float y = damage*0.3f;
+        float z = -(damage*0.5f);
         knockbackForce = new Vector3(x, y, z);
     }
 

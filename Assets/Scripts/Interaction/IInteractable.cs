@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+//using System.Numerics;
 
 public interface IInteractable {
 
@@ -31,7 +32,7 @@ public interface IInteractable {
         float smooth = 1.0f - Mathf.Pow(0.5f, Time.deltaTime * smoothSpeed);
 
         //Debug.Log("Prompt is visible:" +promptIsVisible);
-        RectTransform txtScale = promptTextMesh.GetComponent<RectTransform>();
+        RectTransform txtScale = promptTextMesh.GetComponentInChildren<RectTransform>();
         if (promptIsVisible) {
             //txtScale.localScale = textOriginalScale;
             txtScale.localScale = Vector3.Lerp(txtScale.localScale, textOriginalScale, smooth);
@@ -70,6 +71,7 @@ public interface IInteractable {
         // so this really only scales the y value to mesh height
         var offset = 0.3f;
         promptTextMesh.margin = new Vector4(8, 0, 8, posY - offset);
+        //promptTextMesh.margin = new Vector4(0, 0, 0, posY-offset);
         
     }
 }

@@ -15,7 +15,7 @@ public class Enemy : MonoBehaviour {
     public Item dropsItem2;
     [Range(0,1)] public float item1Probability = 0.7f;
 
-
+    private GameObject parent;
 
     void Awake() {
         //fieldOfView = new FieldOfView();
@@ -43,6 +43,9 @@ public class Enemy : MonoBehaviour {
             var smooth = 1.0f - Mathf.Pow(0.5f, Time.deltaTime * smoothSpeed);
             transform.localScale = Vector3.Lerp(transform.localScale, new Vector3(0.0f, 0.0f, 0.0f), smooth*2);
         }
+        if(transform.position.y < 0) {
+            setToDestroy = true;
+        }
     }
 
     public virtual void SelfDestruct() {
@@ -56,10 +59,13 @@ public class Enemy : MonoBehaviour {
         // calculate what drops
         float randNum = UnityEngine.Random.Range(0f, 1f);
         Debug.Log(randNum);
+
+        // drop it
+        parent = GameObject.Find("Items"); // item parent
         if (randNum >= item1Probability) {
-            dropsItem1.Spawn(transform.position);
+            dropsItem1.Spawn(transform.position, transform.rotation);
         } else {
-            dropsItem2.Spawn(transform.position);
+            dropsItem2.Spawn(transform.position, transform.rotation);
         }
 
     }
