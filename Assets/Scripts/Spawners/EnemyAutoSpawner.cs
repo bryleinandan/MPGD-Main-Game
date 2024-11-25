@@ -21,7 +21,7 @@ public class EnemyAutoSpawner : MonoBehaviour
     public float yOffset = 1f;
 
     // this might be better off as an array but you didn't hear that from me
-    [Header("Assign enemy types")]
+    [Header("Assign enemy types (prefabs only)")]
     public GameObject enemy1;
     public int no1_max = 10;
 

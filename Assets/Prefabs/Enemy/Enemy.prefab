@@ -154,6 +154,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 754e7e588231a074a87d90860f42f2c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dropsItem1: {fileID: 11400000, guid: f05841060a7dd7f4d946ac2482bb0f70, type: 2}
+  dropsItem2: {fileID: 11400000, guid: f05841060a7dd7f4d946ac2482bb0f70, type: 2}
+  item1Probability: 0.7
   smoothSpeed: 2.5
   setToDestroy: 0
 --- !u!114 &3360919407585783280

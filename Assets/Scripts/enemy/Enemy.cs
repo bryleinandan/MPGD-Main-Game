@@ -1,12 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
 using JetBrains.Annotations;
+using Unity.Properties;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class Enemy : MonoBehaviour {
     //public FieldOfView fieldOfView; 
     private FieldOfView fov;
     private Health healthComponent;
+
+    [Header("Item / ScriptableObject ")]
+    public Item dropsItem1;
+    public Item dropsItem2;
+    [Range(0,1)] public float item1Probability = 0.7f;
+
+
 
     void Awake() {
         //fieldOfView = new FieldOfView();
@@ -29,7 +38,6 @@ public class Enemy : MonoBehaviour {
     public float smoothSpeed = 2.5f;
     public bool setToDestroy = false;
     void LateUpdate() {
-        
         // get small
         if (setToDestroy) {
             var smooth = 1.0f - Mathf.Pow(0.5f, Time.deltaTime * smoothSpeed);
@@ -39,7 +47,20 @@ public class Enemy : MonoBehaviour {
 
     public virtual void SelfDestruct() {
         // this can overwritten in any child class by public override void selfDestruct() ...
+        DropLoot();
         Debug.Log("self destructing.");
         Destroy(gameObject);
+    }
+
+    public virtual void DropLoot() {
+        // calculate what drops
+        float randNum = UnityEngine.Random.Range(0f, 1f);
+        Debug.Log(randNum);
+        if (randNum >= item1Probability) {
+            dropsItem1.Spawn(transform.position);
+        } else {
+            dropsItem2.Spawn(transform.position);
+        }
+
     }
 }

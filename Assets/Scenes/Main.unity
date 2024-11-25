@@ -306,11 +306,6 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 2086710030}
   m_SourcePrefab: {fileID: 100100000, guid: ef37d2126cfed49ada5b417716446b2f, type: 3}
---- !u!1 &345031441 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4571238477727134883, guid: 71259656a79da9c47904c87fc676a4cf, type: 3}
-  m_PrefabInstance: {fileID: 123496293}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &429126313
 GameObject:
   m_ObjectHideFlags: 0
@@ -1985,11 +1980,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 6759627085187705636, guid: 005f24dd5f851442c80008026e8884f2, type: 3}
   m_PrefabInstance: {fileID: 903556499}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1007605351 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8754482096179428875, guid: 7bcdd00c2c99f554fb55ab3bcd50cf84, type: 3}
-  m_PrefabInstance: {fileID: 1308915910}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1017218653
 GameObject:
   m_ObjectHideFlags: 0
@@ -2928,7 +2918,7 @@ PrefabInstance:
     - target: {fileID: 5845598083577852097, guid: eee4cb2c3c85dce46b2d009da45a866d, type: 3}
       propertyPath: enemy1
       value: 
-      objectReference: {fileID: 345031441}
+      objectReference: {fileID: 4571238477727134883, guid: 71259656a79da9c47904c87fc676a4cf, type: 3}
     - target: {fileID: 5845598083577852097, guid: eee4cb2c3c85dce46b2d009da45a866d, type: 3}
       propertyPath: radius
       value: 150
@@ -3071,7 +3061,7 @@ MonoBehaviour:
   radius: 200
   checkIntervalS: 15
   yOffset: 5
-  item1: {fileID: 1007605351}
+  item1: {fileID: 8754482096179428875, guid: 7bcdd00c2c99f554fb55ab3bcd50cf84, type: 3}
   no1_max: 10
   no1: {fileID: 0}
   no1_count: 0

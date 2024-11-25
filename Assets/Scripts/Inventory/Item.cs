@@ -1,6 +1,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.UI;
+
 // using System.ComponentModel;
 using UnityEngine;
 using UnityEngine.Tilemaps;
@@ -10,8 +12,8 @@ public class Item : ScriptableObject
 
 {
     // Uncomment later to allow for overworldItem to be reconstructed
-    // [SerializeField] private string _prompt = "Pick up!";
-    // public string InteractionPrompt => _prompt;
+    [SerializeField] private string _prompt = "Pick up!";
+    public string InteractionPrompt => _prompt;
 
     //public InventoryManager inventoryManager;
 
@@ -30,6 +32,14 @@ public class Item : ScriptableObject
     public bool stackable = true;
     [Header("Both")]
         public Sprite image; //how the item will look like in the inventory
+
+    // Reconstruction functions
+    public virtual void Spawn(Vector3 position) {  // this only spawns, doesn't delete from inventory/etc
+        overworldItem thing = new overworldItem();
+        thing.inventoryItem = this;
+        thing.interactionPromptStr = _prompt;
+        Instantiate(thing, position, Quaternion.identity);
+    }
 
 }
 

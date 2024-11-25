@@ -21,13 +21,13 @@ public class ItemAutoSpawner : MonoBehaviour
     public float yOffset = 1f;
 
     // this might be better off as an array but you didn't hear that from me
-    [Header("Assign items to spawn")]
+    [Header("Assign items to spawn (prefabs only)")]
     public GameObject item1;
     public int no1_max = 10;
 
     // copy n paste in a few places
 
-        [Header("checkers (no need to touch these)")]
+    [Header("checkers (no need to touch these)")]
     public overworldItem no1;
     public int no1_count;
 

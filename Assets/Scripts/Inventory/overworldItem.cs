@@ -12,11 +12,8 @@ public class overworldItem : MonoBehaviour, IInteractable
 {
     // public Mesh model;
 
-    [Header("# Make sure these are set!")]
+    [Header("# Make sure inventory item is set!")]
     public Item inventoryItem; // the Item class equivalent (will be added to inventory)
-
-    [Header("this should just be active camera's position")]
-    public GameObject playerCam;
 
     //public TextMeshProUGUI promptText => this.transform.GetChild(0).gameObject.GetComponent<TextMeshProUGUI>();
     [SerializeField] private string prompt = "Pick up!";
@@ -26,6 +23,9 @@ public class overworldItem : MonoBehaviour, IInteractable
         // "field initialiser cannot reference non static field smoothspeed" ok
     public float smooth;
     public bool autoSetLabelPosition = true;
+
+    [Header("this should just be active camera's position (script does this)")]
+    public GameObject playerCam;
 
     [Header("code does this for you / debugging")]
     public bool setToDestroy = false;
