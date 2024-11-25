@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using JetBrains.Annotations;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -191,10 +192,10 @@ public class FieldOfView : MonoBehaviour, IAttack {
         ManualLookAt(player.transform.position);
 
         // only chase when alerted
-        if (agent.enabled == true) {
+        if (agent != null && agent.enabled == true) {
             if (alertStage == AlertStage.Alerted) {
-            agent.isStopped = false;
-            agent.SetDestination(player.transform.position);
+                agent.isStopped = false;
+                agent.SetDestination(player.transform.position);
             } else {
                 agent.SetDestination(agent.transform.position);
                 agent.isStopped = true;
@@ -230,42 +231,3 @@ public class FieldOfView : MonoBehaviour, IAttack {
     // private void idle()
 
 } // end of class
-
-public class Enemy : MonoBehaviour {
-    public FieldOfView fieldOfView; 
-    private Health healthComponent;
-
-    void Awake() {
-        fieldOfView = new FieldOfView();
-        fieldOfView.Initialize();
-    }
-
-    void Start() {
-        healthComponent = GetComponentInChildren<Health>();
-    }
-    
-    void Update() {
-        // Use fieldOfView for enemy logic
-
-        if(healthComponent.currentHealth == 0) {
-            setToDestroy = true;
-        }
-    }
-
-    public float smoothSpeed = 2.5f;
-    public bool setToDestroy = false;
-    void LateUpdate() {
-        
-        // get small
-        if (setToDestroy) {
-            var smooth = 1.0f - Mathf.Pow(0.5f, Time.deltaTime * smoothSpeed);
-            transform.localScale = Vector3.Lerp(transform.localScale, new Vector3(0.0f, 0.0f, 0.0f), smooth*2);
-        }
-    }
-
-    public virtual void SelfDestruct() {
-        // this can overwritten in any child class by public override void selfDestruct() ...
-        Debug.Log("self destructing.");
-        Destroy(gameObject);
-    }
-}

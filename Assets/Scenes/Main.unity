@@ -2091,17 +2091,9 @@ PrefabInstance:
       value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 3360919407585783280, guid: 71259656a79da9c47904c87fc676a4cf, type: 3}
-      propertyPath: radius
-      value: 15
-      objectReference: {fileID: 0}
-    - target: {fileID: 3360919407585783280, guid: 71259656a79da9c47904c87fc676a4cf, type: 3}
       propertyPath: playerRef
       value: 
       objectReference: {fileID: 66148236}
-    - target: {fileID: 3360919407585783280, guid: 71259656a79da9c47904c87fc676a4cf, type: 3}
-      propertyPath: aggroSpeed
-      value: 35.6
-      objectReference: {fileID: 0}
     - target: {fileID: 3360919407585783280, guid: 71259656a79da9c47904c87fc676a4cf, type: 3}
       propertyPath: attackSpeed
       value: 0.198

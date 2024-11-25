@@ -30,9 +30,10 @@ public class EnemyAutoSpawner : MonoBehaviour
     public int no1_count;
 
     void Start() {
+        Debug.Log("I live");
         // get component
         if(enemy1 != null) {
-            no1 = enemy1.GetComponent<Enemy>();
+            no1 = enemy1.GetComponentInChildren<Enemy>();
         }
 
         // No enemies selected, don't do anything
@@ -42,6 +43,7 @@ public class EnemyAutoSpawner : MonoBehaviour
         } else {
             StartCoroutine(RangeCheckRoutine());
         }
+
     }
 
     private IEnumerator RangeCheckRoutine() {
