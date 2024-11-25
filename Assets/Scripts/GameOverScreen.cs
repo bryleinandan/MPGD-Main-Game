@@ -19,8 +19,8 @@ public class GameOverScreen : MonoBehaviour
 
 
     public void RestartButton() {
-        Debug.Log("replace scene name to final game scene name");
-        SceneManager.LoadScene("Sahra2"); // replace with final game scene name
+        Debug.Log("scene should be main");
+        SceneManager.LoadScene("Main"); // replace with final game scene name
     }
     public void ExitButton() {
         SceneManager.LoadScene("MainMenu");
