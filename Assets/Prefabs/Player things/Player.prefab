@@ -183,6 +183,8 @@ GameObject:
   - component: {fileID: 7332446570959644245}
   - component: {fileID: 4995300230285882335}
   - component: {fileID: 6891329439046638975}
+  - component: {fileID: 812068245715034557}
+  - component: {fileID: 8825724518695053558}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -251,6 +253,7 @@ MonoBehaviour:
   ground:
     serializedVersion: 2
     m_Bits: 1024
+  _grounded: 0
   groundDrag: 5
   jumpCooldown: 0.25
   jumpHeight: 12
@@ -300,7 +303,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa6f3d19744a8e842bf2271d49e26079, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  interactKey: 113
+  interactKey: 101
   interactionPoint: {fileID: 2319736956675224901}
   interactionPointRadius: 2
   interactableMask:
@@ -324,3 +327,34 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerHealthBar: {fileID: 0}
+--- !u!114 &812068245715034557
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9109894608080277335}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc50bfb08a19ed8459ad9223beabe01d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackableMask:
+    serializedVersion: 2
+    m_Bits: 64
+--- !u!114 &8825724518695053558
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9109894608080277335}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a39b7fe863bf98847b185977a8d22889, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isGrounded: 1
+  lastGroundedPosition: {x: 0, y: 0, z: 0}
+  Yboundary: -100
+  inAirOffset: {x: 0, y: 0.5, z: 0}

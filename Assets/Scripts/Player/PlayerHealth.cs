@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerHealth : MonoBehaviour
+// pretty sure this isn't in use anywhere but sahra's original code
 {
     private Health healthComponent;
     public HealthBar healthBar;
@@ -18,7 +19,7 @@ public class PlayerHealth : MonoBehaviour
 
     void Update()
     {
-        HealthBarControl();
+        //HealthBarControl();
     }
     void HealthBarControl() {
         if (Input.GetKeyDown(KeyCode.LeftArrow))
