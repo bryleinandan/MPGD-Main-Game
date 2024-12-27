@@ -18,7 +18,7 @@ public interface IInteractable {
     public bool Interact(Interactor interactor); // takes as input the thing that initiated
 
     //private Camera mainCam = GameObject.Find("InventoryManager").GetComponent<Camera>();
-    abstract Transform playerTransform { get; }
+    abstract Transform playerTransform { get; } // dont forget to constantly update this
     abstract TextMeshPro promptTextMesh { get; set;}
     public bool promptIsVisible { get; set; }
     public Vector3 textOriginalScale { get; set; }
@@ -43,8 +43,12 @@ public interface IInteractable {
         }
     }
 
-    void LateUpdateLabelRotation() {
+    void LateUpdateLabelRotation(Quaternion? newRot = null) {
         //promptTextMesh.transform.rotation = player.transform.rotation;
+        Quaternion turnTo;
+        if (newRot == null) {
+            turnTo = playerTransform.rotation;
+        }
         promptTextMesh.transform.rotation = playerTransform.rotation;
     }
 
@@ -69,9 +73,12 @@ public interface IInteractable {
         // var rect = promptTextMesh.GetComponent<RectTransform>();
         // rect.anchoredPosition3D = new Vector3(posX, posY, posZ);
         // so this really only scales the y value to mesh height
-        var offset = 0.3f;
-        promptTextMesh.margin = new Vector4(8, 0, 8, posY - offset);
+        //var offset = 0.3f;
+        //promptTextMesh.margin = new Vector4(8, 0, 8, posY - offset);
         //promptTextMesh.margin = new Vector4(0, 0, 0, posY-offset);
+
+        var offset = 2.0f; // screw it. player is 2 units tall
+        promptTextMesh.margin = new Vector4(8, 0, 8, posY + offset);
         
     }
 }

@@ -65,20 +65,28 @@ public class OverworldItem : MonoBehaviour, IInteractable
         inventoryManager = inventoryManagerObj.GetComponent<InventoryManager>();
 
         // get player pos
-        if (playerCam == null) {
-           playerCam = GameObject.Find("PlayerCam");
-           playerTransform = playerCam.transform;
-        } else {
+        // if (playerCam == null) {
+        //    playerCam = GameObject.Find("Orientation");
+        //    playerTransform = playerCam.transform;
+        // } else {
+        //     playerTransform = playerCam.transform;
+        // }
+        // // if still can't find - just set to whatever main camera
+        // if (playerCam == null) {
+        //     //playerTransform = Camera.main.transform;
+        //     playerCam = GameObject.Find("Player");
+        // }
+        if (playerCam == null) { // i needed something who stores rotation lol
+            playerCam = GameObject.Find("Orientation");
             playerTransform = playerCam.transform;
-        }
-        // if still can't find - just set to whatever main camera
-        if (playerCam == null) {
-            playerTransform = Camera.main.transform;
         }
 
     }
 
     void Update() {
+        playerTransform = playerCam.transform;
+        //Debug.Log(playerCam);
+
         ((IInteractable)this).UpdateVisibility();
         if(autoSetLabelPosition) {
             AutoSetLabelPosition();
