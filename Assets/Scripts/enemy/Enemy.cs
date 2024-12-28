@@ -63,7 +63,7 @@ public class Enemy : MonoBehaviour {
     public virtual void DropLoot() {
         // calculate what drops
         float randNum = UnityEngine.Random.Range(0f, 1f);
-        Debug.Log(randNum);
+        //Debug.Log(randNum);
 
         // drop it
         var spawnOffset =  new Vector3(0.0f, spawnAboveOffset, 0.0f);

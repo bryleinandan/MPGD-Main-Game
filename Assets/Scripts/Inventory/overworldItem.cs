@@ -84,6 +84,8 @@ public class OverworldItem : MonoBehaviour, IInteractable
     }
 
     void Update() {
+        if (this == null) return;
+        
         playerTransform = playerCam.transform;
         //Debug.Log(playerCam);
 
@@ -100,6 +102,8 @@ public class OverworldItem : MonoBehaviour, IInteractable
     }
 
     void LateUpdate() {
+        if (this == null) return; // don't call if self is null
+
         ((IInteractable)this).LateUpdateLabelRotation();
         smooth = 1.0f - Mathf.Pow(0.5f, Time.deltaTime * smoothSpeed);
         if (setToDestroy) {

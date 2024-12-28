@@ -45,7 +45,13 @@ public class Item : ScriptableObject
         //     return null;
         // }
 
-        GameObject instance = Instantiate(overworldObject, pos, rotation, parent);
+        // Make a smoke
+        GameObject smoke = GameObject.Find("PuffOfSmoke");
+        if (smoke != null) {
+            GameObject smokePuff = Instantiate(smoke, pos, rotation);
+        }
+
+        GameObject instance = Instantiate(overworldObject, pos, rotation, parent.transform);
 
         // Initialize the prefab with this item's data
         OverworldItem item = instance.GetComponent<OverworldItem>();
