@@ -12,15 +12,17 @@ public class GameOverScreen : MonoBehaviour
         gameObject.transform.localScale = Vector3.zero; // hide game over screen
     }
     void Update() {
-        if (playerHealth.currentHealth <= 0) { // when player health 0, show game over screen
-            gameObject.transform.localScale = Vector3.one;
+        if (playerHealth.currentHealth <= 0) { // when player health 0
+            Cursor.lockState = CursorLockMode.None; // Unlock the cursor
+            Cursor.visible = true; // Make cursor visible
+            gameObject.transform.localScale = Vector3.one; // show game over screen
         }
     }
 
 
     public void RestartButton() {
-        Debug.Log("replace scene name to final game scene name");
-        SceneManager.LoadScene("Sahra2"); // replace with final game scene name
+        Debug.Log("scene should be main");
+        SceneManager.LoadScene("Main"); // replace with final game scene name
     }
     public void ExitButton() {
         SceneManager.LoadScene("MainMenu");

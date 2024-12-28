@@ -26,3 +26,4 @@ public class HealthBar : MonoBehaviour
         //slider.value = Mathf.Lerp(minimum, maximum, t), 0, 0);
     }
 }
+

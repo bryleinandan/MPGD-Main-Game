@@ -60,11 +60,11 @@ public class Item : ScriptableObject
 }
 
 public enum ItemType {
-    BuildingBlock,
+    Hazelnut,
     Tool
 }
 
 public enum ActionType {
-    Dig,
-    Mine
+    Eat,
+    Attack
 }

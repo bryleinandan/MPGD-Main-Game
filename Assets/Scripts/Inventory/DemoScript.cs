@@ -15,7 +15,7 @@ public class DemoScript : MonoBehaviour
             Debug.Log("ITEM NOT ADDED");
         }
     }
-    public void GetSelectedItem() {
+    public void UseSelectedItem() {
         Item receivedItem = inventoryManager.GetSelectedItem(false);
         if (receivedItem != null) {
             Debug.Log("Reveived item: " + receivedItem);

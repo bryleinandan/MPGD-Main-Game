@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class MainMenuScreen : MonoBehaviour
 {
     public void PlayButton() {
-        Debug.Log("replace scene name to final game scene name");
-        SceneManager.LoadScene("Sahra2");
+        Debug.Log("scene should be main");
+        SceneManager.LoadScene("Main");
     }
 }
