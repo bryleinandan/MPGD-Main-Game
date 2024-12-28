@@ -2840,6 +2840,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2086710033}
     m_Modifications:
+    - target: {fileID: 701882697711142211, guid: 8f5695a591e507342890e98d94b5f051, type: 3}
+      propertyPath: parent
+      value: 
+      objectReference: {fileID: 2000196165}
+    - target: {fileID: 701882697711142211, guid: 8f5695a591e507342890e98d94b5f051, type: 3}
+      propertyPath: terrain
+      value: 
+      objectReference: {fileID: 2086710032}
     - target: {fileID: 7605252589862634917, guid: 8f5695a591e507342890e98d94b5f051, type: 3}
       propertyPath: m_LocalPosition.x
       value: 190.6
@@ -2887,44 +2895,13 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 7741676035209672930, guid: 8f5695a591e507342890e98d94b5f051, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 3544422010409319273}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8f5695a591e507342890e98d94b5f051, type: 3}
 --- !u!4 &3544422010409319271 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7605252589862634917, guid: 8f5695a591e507342890e98d94b5f051, type: 3}
   m_PrefabInstance: {fileID: 3544422010409319270}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &3544422010409319272 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7741676035209672930, guid: 8f5695a591e507342890e98d94b5f051, type: 3}
-  m_PrefabInstance: {fileID: 3544422010409319270}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &3544422010409319273
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3544422010409319272}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 57be39b2813795e42b4b26b06a632097, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  itemLayer:
-    serializedVersion: 2
-    m_Bits: 128
-  terrain: {fileID: 2086710032}
-  radius: 39.429657
-  checkIntervalS: 15
-  yOffset: 5
-  item1: {fileID: 11400000, guid: f05841060a7dd7f4d946ac2482bb0f70, type: 2}
-  item1_max: 10
-  parent: {fileID: 2000196165}
-  item1_count: 0
 --- !u!1001 &5680733887744832621
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -48,10 +48,11 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   terrain: {fileID: 0}
-  radius: 500
+  radius: 100
   checkIntervalS: 15
   yOffset: 1
-  enemy1: {fileID: 0}
+  parent: {fileID: 0}
+  enemy1: {fileID: 4571238477727134883, guid: 71259656a79da9c47904c87fc676a4cf, type: 3}
   no1_max: 10
   no1: {fileID: 0}
   no1_count: 0
