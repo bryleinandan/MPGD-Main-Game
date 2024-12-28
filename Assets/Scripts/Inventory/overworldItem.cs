@@ -24,10 +24,9 @@ public class OverworldItem : MonoBehaviour, IInteractable
     public float smooth;
     public bool autoSetLabelPosition = true;
 
-    [Header("this should just be active camera's position (script does this)")]
-    public GameObject playerCam;
-
     [Header("code does this for you / debugging")]
+    
+    public GameObject playerCam;
     public bool setToDestroy = false;
     public GameObject inventoryManagerObj;
         // for assigning in inspector because it says InventoryManager is just a GameObject
@@ -50,7 +49,6 @@ public class OverworldItem : MonoBehaviour, IInteractable
 
     void Start()
     {
-
         // get own first child and get the text mesh
         promptTextMesh = this.transform.GetChild(0).gameObject.GetComponentInChildren<TextMeshPro>();
         interactionPromptStr = prompt;
@@ -76,11 +74,13 @@ public class OverworldItem : MonoBehaviour, IInteractable
         //     //playerTransform = Camera.main.transform;
         //     playerCam = GameObject.Find("Player");
         // }
-        if (playerCam == null) { // i needed something who stores rotation lol
-            playerCam = GameObject.Find("Orientation");
-            playerTransform = playerCam.transform;
-        }
+        // if (playerCam == null) { // i needed something who stores rotation lol
+        //     playerCam = GameObject.Find("Orientation");
+        //     playerTransform = playerCam.transform;
+        // }
 
+        // unity editor is not updating a reference somewhere, so I'm overwriting it
+        playerCam = GameObject.Find("Orientation");
     }
 
     void Update() {
