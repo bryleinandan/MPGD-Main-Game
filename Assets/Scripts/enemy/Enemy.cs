@@ -16,7 +16,7 @@ public class Enemy : MonoBehaviour {
     [Range(0,1)] public float item1Probability = 0.7f;
     public float spawnAboveOffset = 1.0f;
 
-    private GameObject parent;
+    private GameObject parent; // for spawning items
 
     void Awake() {
         //fieldOfView = new FieldOfView();
@@ -26,6 +26,7 @@ public class Enemy : MonoBehaviour {
     void Start() {
         fov = GetComponent<FieldOfView>();
         healthComponent = GetComponentInChildren<Health>();
+        parent = GameObject.Find("Items");
     }
     
     void Update() {

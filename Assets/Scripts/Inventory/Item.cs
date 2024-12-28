@@ -51,7 +51,7 @@ public class Item : ScriptableObject
             GameObject smokePuff = Instantiate(smoke, pos, rotation);
         }
 
-        GameObject instance = Instantiate(overworldObject, pos, rotation, parent.transform);
+        GameObject instance = Instantiate(overworldObject, pos, rotation, parent);
 
         // Initialize the prefab with this item's data
         OverworldItem item = instance.GetComponent<OverworldItem>();
