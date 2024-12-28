@@ -8,15 +8,12 @@ using System;
 using UnityEngine.UIElements;
 using Unity.VisualScripting;
 
-public class overworldItem : MonoBehaviour, IInteractable
+public class OverworldItem : MonoBehaviour, IInteractable
 {
     // public Mesh model;
 
-    [Header("# Make sure these are set!")]
+    [Header("# Make sure inventory item is set!")]
     public Item inventoryItem; // the Item class equivalent (will be added to inventory)
-
-    [Header("this should just be active camera's position")]
-    public GameObject playerCam;
 
     //public TextMeshProUGUI promptText => this.transform.GetChild(0).gameObject.GetComponent<TextMeshProUGUI>();
     [SerializeField] private string prompt = "Pick up!";
@@ -28,6 +25,8 @@ public class overworldItem : MonoBehaviour, IInteractable
     public bool autoSetLabelPosition = true;
 
     [Header("code does this for you / debugging")]
+    
+    public GameObject playerCam;
     public bool setToDestroy = false;
     public GameObject inventoryManagerObj;
         // for assigning in inspector because it says InventoryManager is just a GameObject
@@ -50,9 +49,8 @@ public class overworldItem : MonoBehaviour, IInteractable
 
     void Start()
     {
-
         // get own first child and get the text mesh
-        promptTextMesh = this.transform.GetChild(0).gameObject.GetComponent<TextMeshPro>();
+        promptTextMesh = this.transform.GetChild(0).gameObject.GetComponentInChildren<TextMeshPro>();
         interactionPromptStr = prompt;
         ((IInteractable)this).HidePrompt();
         textOriginalScale = promptTextMesh.GetComponent<RectTransform>().localScale;
@@ -65,20 +63,32 @@ public class overworldItem : MonoBehaviour, IInteractable
         inventoryManager = inventoryManagerObj.GetComponent<InventoryManager>();
 
         // get player pos
-        if (playerCam == null) {
-           playerCam = GameObject.Find("PlayerCam");
-           playerTransform = playerCam.transform;
-        } else {
-            playerTransform = playerCam.transform;
-        }
-        // if still can't find - just set to whatever main camera
-        if (playerCam == null) {
-            playerTransform = Camera.main.transform;
-        }
+        // if (playerCam == null) {
+        //    playerCam = GameObject.Find("Orientation");
+        //    playerTransform = playerCam.transform;
+        // } else {
+        //     playerTransform = playerCam.transform;
+        // }
+        // // if still can't find - just set to whatever main camera
+        // if (playerCam == null) {
+        //     //playerTransform = Camera.main.transform;
+        //     playerCam = GameObject.Find("Player");
+        // }
+        // if (playerCam == null) { // i needed something who stores rotation lol
+        //     playerCam = GameObject.Find("Orientation");
+        //     playerTransform = playerCam.transform;
+        // }
 
+        // unity editor is not updating a reference somewhere, so I'm overwriting it
+        playerCam = GameObject.Find("Orientation");
     }
 
     void Update() {
+        if (this == null) return;
+        
+        playerTransform = playerCam.transform;
+        //Debug.Log(playerCam);
+
         ((IInteractable)this).UpdateVisibility();
         if(autoSetLabelPosition) {
             AutoSetLabelPosition();
@@ -92,6 +102,8 @@ public class overworldItem : MonoBehaviour, IInteractable
     }
 
     void LateUpdate() {
+        if (this == null) return; // don't call if self is null
+
         ((IInteractable)this).LateUpdateLabelRotation();
         smooth = 1.0f - Mathf.Pow(0.5f, Time.deltaTime * smoothSpeed);
         if (setToDestroy) {
@@ -142,6 +154,22 @@ public class overworldItem : MonoBehaviour, IInteractable
         // Use size (X, Y) to determine label margin size. see IInteractable.cs
         ((IInteractable)this).SetLabelPosition(meshSize.x, meshSize.y, meshSize.z);
         
+    }
+
+    // to CLARIFY
+    // Item.Spawn -> OverworldItem.Spawn
+    // public void Spawn(Vector3 position, Item item) {
+    //     inventoryItem = item;
+    //     interactionPromptStr = item.InteractionPrompt;
+    //     Instantiate(this, position, Quaternion.identity);
+    // }
+
+    public void Initialize(Item item)
+    {
+        // Example: Update visuals or properties
+        //GetComponent<SpriteRenderer>().sprite = data.itemIcon;
+        //transform.position = position;
+        interactionPromptStr = item.InteractionPrompt;
     }
 
 }

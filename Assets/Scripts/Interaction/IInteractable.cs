@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+//using System.Numerics;
 
 public interface IInteractable {
 
@@ -17,7 +18,7 @@ public interface IInteractable {
     public bool Interact(Interactor interactor); // takes as input the thing that initiated
 
     //private Camera mainCam = GameObject.Find("InventoryManager").GetComponent<Camera>();
-    abstract Transform playerTransform { get; }
+    abstract Transform playerTransform { get; } // dont forget to constantly update this
     abstract TextMeshPro promptTextMesh { get; set;}
     public bool promptIsVisible { get; set; }
     public Vector3 textOriginalScale { get; set; }
@@ -31,7 +32,7 @@ public interface IInteractable {
         float smooth = 1.0f - Mathf.Pow(0.5f, Time.deltaTime * smoothSpeed);
 
         //Debug.Log("Prompt is visible:" +promptIsVisible);
-        RectTransform txtScale = promptTextMesh.GetComponent<RectTransform>();
+        RectTransform txtScale = promptTextMesh.GetComponentInChildren<RectTransform>();
         if (promptIsVisible) {
             //txtScale.localScale = textOriginalScale;
             txtScale.localScale = Vector3.Lerp(txtScale.localScale, textOriginalScale, smooth);
@@ -68,8 +69,12 @@ public interface IInteractable {
         // var rect = promptTextMesh.GetComponent<RectTransform>();
         // rect.anchoredPosition3D = new Vector3(posX, posY, posZ);
         // so this really only scales the y value to mesh height
-        var offset = 0.3f;
-        promptTextMesh.margin = new Vector4(8, 0, 8, posY - offset);
+        //var offset = 0.3f;
+        //promptTextMesh.margin = new Vector4(8, 0, 8, posY - offset);
+        //promptTextMesh.margin = new Vector4(0, 0, 0, posY-offset);
+
+        var offset = 2.0f; // screw it. player is 2 units tall
+        promptTextMesh.margin = new Vector4(8, 0, 8, posY + offset);
         
     }
 }
