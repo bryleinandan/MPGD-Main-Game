@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using JetBrains.Annotations;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -17,7 +16,8 @@ public enum AlertStage
     Alerted
 }
 
-public class FieldOfView : MonoBehaviour, IAttack { 
+public class FieldOfView : MonoBehaviour, IAttack
+{ 
     public AlertStage alertStage;
     [Range(0, 100)] public float alertLevel; // 0=peaceful, 100=alerted
 
@@ -66,9 +66,6 @@ public class FieldOfView : MonoBehaviour, IAttack {
     public LayerMask targetMask;
     public LayerMask obstructionMask;
     public bool canSeePlayer;
-
-    public void Initialize()
-    { }
 
     private void Start()
     {
@@ -192,10 +189,10 @@ public class FieldOfView : MonoBehaviour, IAttack {
         ManualLookAt(player.transform.position);
 
         // only chase when alerted
-        if ((agent != null) && (agent.enabled == true)) {
+        if (agent.enabled == true) {
             if (alertStage == AlertStage.Alerted) {
-                agent.isStopped = false;
-                agent.SetDestination(player.transform.position);
+            agent.isStopped = false;
+            agent.SetDestination(player.transform.position);
             } else {
                 agent.SetDestination(agent.transform.position);
                 agent.isStopped = true;
@@ -229,5 +226,7 @@ public class FieldOfView : MonoBehaviour, IAttack {
     }
     
     // private void idle()
+
+
 
 } // end of class

@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ab0687e676ca967489a234c37e4a259f, type: 3}
-  m_Name: Loot1
+  m_Name: cylinder
   m_EditorClassIdentifier: 
-  _prompt: Tap it
-  overworldObject: {fileID: 4571238477727134883, guid: 71259656a79da9c47904c87fc676a4cf, type: 3}
+  inventoryManager: {fileID: 0}
+  overworldObject: {fileID: 0}
   type: 0
   actionType: 0
   range: {x: 5, y: 4}
   stackable: 1
-  image: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
+  image: {fileID: 0}
