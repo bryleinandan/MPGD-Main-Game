@@ -35,7 +35,7 @@ public class OutOfBoundsChecker : MonoBehaviour {
         // check if player surpassed boundary(/ies)
         if(transform.position.y <= Yboundary) {
             // message: you've surpassed the boundary!
-            Debug.Log("so you have jumped off the world.");
+            Debug.Log("oops");
 
             var newPosition = lastGroundedPosition + inAirOffset;
             transform.position = newPosition;

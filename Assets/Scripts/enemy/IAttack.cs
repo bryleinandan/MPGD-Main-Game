@@ -120,26 +120,6 @@ public interface IAttack {
         }
     }
 
-    // velocity change mode.
-    public void ApplyKnockbackIgnoreMass(GameObject target, Vector3 knockbackDirection = new Vector3()) {
-
-        if (knockbackDirection== new Vector3()) {
-            knockbackDirection = (target.transform.position - transform.position).normalized + Vector3.up;
-        }
-
-        // Navmesh agent must be disabled before applying force as it will snap object to the ground
-        if (target.TryGetComponent<NavMeshAgent>(out NavMeshAgent targetNavAgent)) {
-            targetNavAgent.enabled = false;
-        }
-
-        target.GetComponent<Rigidbody>().AddForce(knockbackDirection * knockbackForce.magnitude, ForceMode.VelocityChange);
-       
-       // if there was a navmeshagent that we disabled, re-enable it after a time
-        if (targetNavAgent != null) {
-            AgentReenableCoroutine(targetNavAgent);
-        }
-    }
-
     public void AgentReenableCoroutine(NavMeshAgent agent);
     // call one or the other
 
