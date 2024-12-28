@@ -43,12 +43,8 @@ public interface IInteractable {
         }
     }
 
-    void LateUpdateLabelRotation(Quaternion? newRot = null) {
+    void LateUpdateLabelRotation() {
         //promptTextMesh.transform.rotation = player.transform.rotation;
-        Quaternion turnTo;
-        if (newRot == null) {
-            turnTo = playerTransform.rotation;
-        }
         promptTextMesh.transform.rotation = playerTransform.rotation;
     }
 
