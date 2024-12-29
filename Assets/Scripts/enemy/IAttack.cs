@@ -172,33 +172,5 @@ public interface IAttack {
         // i don't remember why we 0.5f + 0.3f but maybe it was important. it doesn't work when the enemy is upside down
         return Physics.Raycast(transform.position, Vector3.down, checkDistance *1.1f, groundLayer);
     }
-       // if (target.TryGetComponent<Rigidbody>(out Rigidbody targetRigidbody)) {
-        //     Debug.Log("rigidbody target found");
-        //     Vector3 knockbackDirection = (target.transform.position - transform.position).normalized + Vector3.up;
-        //     targetRigidbody.AddForce(knockbackDirection * knockbackForce.magnitude, ForceMode.Impulse);
-        // }
-        // else {
-        //     target.position += knockbackForce;
-        // 
-
-
-    //If your GameObject starts to collide with another GameObject with a Collider
-    // void OnCollisionEnter(Collision collision)
-    // {
-    //     //Output the Collider's GameObject's name
-    //     Debug.Log(collision.collider.name);
-    // }
-
-    // //If your GameObject keeps colliding with another GameObject with a Collider, do something
-    // void OnCollisionStay(Collision collision)
-    // {
-    //     //Check to see if the Collider's name is "Chest"
-    //     if (collision.collider.name == "Chest")
-    //     {
-    //         //Output the message
-    //         Debug.Log("Chest is here!");
-    //     }
-    // {
-
 
 }

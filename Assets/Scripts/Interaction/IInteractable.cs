@@ -7,11 +7,6 @@ using TMPro;
 
 public interface IInteractable {
 
-    // interface means whatever is defined here should be re-defined / overwritten in the child
-
-    //text shown when you get close.
-    // [SerializeField] private string _prompt;
-    // public string InteractionPrompt => _prompt;
     public String interactionPromptStr { get; set;}
 
     // function that plays when you press the interaction key.
@@ -44,7 +39,6 @@ public interface IInteractable {
     }
 
     void LateUpdateLabelRotation() {
-        //promptTextMesh.transform.rotation = player.transform.rotation;
         promptTextMesh.transform.rotation = playerTransform.rotation;
     }
 
@@ -69,9 +63,6 @@ public interface IInteractable {
         // var rect = promptTextMesh.GetComponent<RectTransform>();
         // rect.anchoredPosition3D = new Vector3(posX, posY, posZ);
         // so this really only scales the y value to mesh height
-        //var offset = 0.3f;
-        //promptTextMesh.margin = new Vector4(8, 0, 8, posY - offset);
-        //promptTextMesh.margin = new Vector4(0, 0, 0, posY-offset);
 
         var offset = 2.0f; // screw it. player is 2 units tall
         promptTextMesh.margin = new Vector4(8, 0, 8, posY + offset);

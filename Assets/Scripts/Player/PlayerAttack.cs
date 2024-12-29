@@ -68,46 +68,6 @@ public class PlayerAttack : MonoBehaviour, IAttack
         }
     }
 
-    //public override IEnumerator AttackSequence(GameObject target) {
-        // isAttacking = true;
-
-        // Transform targetTransform = target.transform;
-        // // Initial position of the enemy
-        // Vector3 startPosition = transform.position;
-        // Vector3 targetPosition = targetTransform.position;
-        // float elapsedTime = 0f;
-
-        // while (elapsedTime < attackSpeed) // Move toward target with predefined speed
-        // {
-        //     elapsedTime += Time.deltaTime;
-        //     float t = elapsedTime / attackSpeed;
-        //     transform.position = Vector3.Lerp(startPosition, targetPosition, t);
-        //     yield return null;
-        // }
-
-        // // make sure final position aligns with the target's
-        // transform.position = targetPosition;
-
-        // // Check if hit the target!
-        // //if (CheckTargetHit()) { ApplyKnockback(target); }
-        // // caused an error where if you were a certain distance, the enemy would just not attack
-        
-        // // I fervently believe that if the attack movement is short enough then it is unstoppable
-        // ApplyKnockback(target);
-
-        // // deal damage: get health system component
-        // // check if player has Player tag, then get component accordingly
-        // if (target.CompareTag("Player")) {
-        //     target.GetComponent<PlayerHealthController>().TakeDamage(damage);
-        // } else {
-        //     //target.GetComponent<PlayerHealthController>().TakeDamage(damage);
-        // }
-        
-        // WaitForCooldown(attackCooldown);
-    //}
-
-
-
     // this was supposed to be an extra check to make sure target is hit after movement
     // private bool CheckTargetHit() {
     //     bool targetHit = false;

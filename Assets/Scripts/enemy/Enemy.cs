@@ -8,7 +8,6 @@ using UnityEngine.Analytics;
 using UnityEngine.Rendering;
 
 public class Enemy : MonoBehaviour {
-    //public FieldOfView fieldOfView; 
     private FieldOfView fov;
     private Health healthComponent;
 
