@@ -8,7 +8,7 @@ using System;
 using UnityEngine.UIElements;
 using Unity.VisualScripting;
 
-public class overworldItem : MonoBehaviour, IInteractable
+public class OverworldItem : MonoBehaviour, IInteractable
 {
     // public Mesh model;
 

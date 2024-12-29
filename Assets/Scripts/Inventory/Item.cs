@@ -10,8 +10,10 @@ public class Item : ScriptableObject
 
 {
     // Uncomment later to allow for overworldItem to be reconstructed
-    // [SerializeField] private string _prompt = "Pick up!";
-    // public string InteractionPrompt => _prompt;
+    [SerializeField] private string _prompt = "Pick up!";
+    public string InteractionPrompt => _prompt;
+    [Tooltip("how high above ground to spawn an item")]
+    public float yOffset = 0.5f;
 
     //public InventoryManager inventoryManager;
 
@@ -30,6 +32,34 @@ public class Item : ScriptableObject
     public bool stackable = true;
     [Header("Both")]
         public Sprite image; //how the item will look like in the inventory
+
+    // Reconstruction functions
+    public virtual void Spawn(Vector3 pos, Quaternion rotation = (default), Transform parent = (default)) {  // this only spawns, doesn't delete from inventory/etc
+        OverworldItem oItem = overworldObject.GetComponent<OverworldItem>();
+        //oItem.Spawn(position, this); // calling from overworlditem btw
+
+        // if (overworldObject== null) {
+        //     Debug.LogError("Overworld prefab not assigned in ScriptableObject: " + itemName);
+        //     return null;
+        // }
+
+        // Make a smoke
+        GameObject smoke = GameObject.Find("PuffOfSmoke");
+        if (smoke != null) {
+            GameObject smokePuff = Instantiate(smoke, pos, rotation);
+        }
+
+        GameObject instance = Instantiate(overworldObject, pos, rotation, parent);
+
+        // Initialize the prefab with this item's data
+        OverworldItem item = instance.GetComponent<OverworldItem>();
+        if (item != null) {
+            //item.Initialize(this);
+            Debug.Log("I spawned an item at " + pos);
+        }
+
+        //return instance;
+    }
 
 }
 
