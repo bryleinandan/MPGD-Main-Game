@@ -151,8 +151,10 @@ public interface IAttack {
         }
     }
        
-    public IEnumerator ReenableAgentOnGround(NavMeshAgent agent, float height = 1.5f) {
-        Debug.Log("reenable agent on ground...");
+    public IEnumerator ReenableAgentOnGround(NavMeshAgent agent, float height = 1.5f, float delay = 1.5f) {
+        yield return new WaitForSeconds(delay);
+
+        //Debug.Log("reenable agent on ground...");
         
         bool grounded = CheckIfGrounded(height);
         while (!grounded) {
@@ -168,7 +170,7 @@ public interface IAttack {
         LayerMask groundLayer = (LayerMask.GetMask("ground"));
         //return Physics.Raycast(transform.position, Vector3.down, checkDistance * 0.5f + 0.3f, groundLayer);
         // i don't remember why we 0.5f + 0.3f but maybe it was important. it doesn't work when the enemy is upside down
-        return Physics.Raycast(transform.position, Vector3.down, checkDistance + 0.5f, groundLayer);
+        return Physics.Raycast(transform.position, Vector3.down, checkDistance *1.1f, groundLayer);
     }
        // if (target.TryGetComponent<Rigidbody>(out Rigidbody targetRigidbody)) {
         //     Debug.Log("rigidbody target found");

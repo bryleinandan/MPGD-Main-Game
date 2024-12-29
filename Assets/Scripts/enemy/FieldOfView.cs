@@ -196,7 +196,7 @@ public class FieldOfView : MonoBehaviour, IAttack {
 
         // only chase when alerted
         if (agent != null) {
-            Debug.Log(agent.enabled);
+            //Debug.Log(agent.enabled);
             if (agent.enabled == true) {
                 if (alertStage == AlertStage.Alerted) {
                     agent.isStopped = false;
