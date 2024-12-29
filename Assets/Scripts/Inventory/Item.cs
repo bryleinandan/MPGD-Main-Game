@@ -1,8 +1,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.UI;
-
 // using System.ComponentModel;
 using UnityEngine;
 using UnityEngine.Tilemaps;
@@ -15,7 +13,7 @@ public class Item : ScriptableObject
     [SerializeField] private string _prompt = "Pick up!";
     public string InteractionPrompt => _prompt;
     [Tooltip("how high above ground to spawn an item")]
-    public float yOffset = 1.0f;
+    public float yOffset = 0.5f;
 
     //public InventoryManager inventoryManager;
 
@@ -45,12 +43,18 @@ public class Item : ScriptableObject
         //     return null;
         // }
 
+        // Make a smoke
+        GameObject smoke = GameObject.Find("PuffOfSmoke");
+        if (smoke != null) {
+            GameObject smokePuff = Instantiate(smoke, pos, rotation);
+        }
+
         GameObject instance = Instantiate(overworldObject, pos, rotation, parent);
 
         // Initialize the prefab with this item's data
         OverworldItem item = instance.GetComponent<OverworldItem>();
         if (item != null) {
-            item.Initialize(this);
+            //item.Initialize(this);
             Debug.Log("I spawned an item at " + pos);
         }
 
