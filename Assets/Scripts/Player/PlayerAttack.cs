@@ -19,13 +19,15 @@ public class PlayerAttack : MonoBehaviour, IAttack
     public void ReadyToAttack() {
         isAttacking = false;
     }
-    public void AgentReenableCoroutine(NavMeshAgent agent) {
-        if(stunEnemies) {
-            StartCoroutine(((IAttack)this).ReenableAgentAfterDelay(agent, stunTime)); 
-        } else {
-            StartCoroutine(((IAttack)this).ReenableAgentOnGround(agent));
-        }
-    }
+
+    // public void AgentReenableCoroutine(NavMeshAgent agent) {
+    //     if(stunEnemies) {
+    //         StartCoroutine(((IAttack)this).ReenableAgentAfterDelay(agent, stunTime)); 
+    //     } else {
+    //         StartCoroutine(((IAttack)this).ReenableAgentOnGround(agent));
+    //     }
+    // }
+
     public void CalculateKnockback() { // basically override
         float x = 0;
         float y = damage*0.3f;
@@ -34,7 +36,7 @@ public class PlayerAttack : MonoBehaviour, IAttack
     }
 
     [Header("see script for rest of stats/variables. i'm too tired to making backing vars rn")]
-    public bool stunEnemies = true;
+    public bool stunEnemies = false;
     public float stunTimeS = 5;
     public LayerMask attackableMask;
 

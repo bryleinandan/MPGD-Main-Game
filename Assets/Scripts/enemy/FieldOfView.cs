@@ -48,9 +48,10 @@ public class FieldOfView : MonoBehaviour, IAttack {
     public void ReadyToAttack() {
         isAttacking = false;
     }
-    // not needed as it only attacks player, but:
+
     public void AgentReenableCoroutine(NavMeshAgent agent) {
-        //StartCoroutine(((IAttack)this).ReenableAgentOnGround(agent)); 
+        Debug.Log("i am calling from FOV - renable the agent pls");
+        StartCoroutine(((IAttack)this).ReenableAgentOnGround(agent, ownHeight)); 
     }
 
     [Range(1, 100)] public float aggroSpeed = 20; // how fast alertness increments
@@ -58,6 +59,7 @@ public class FieldOfView : MonoBehaviour, IAttack {
     [Range(0, 360)] public float angle;
         //private float maxNumberEnemies = 3; // max number of enemies to be attacking player at once
     // probably need to set this in a game settings later
+    private float ownHeight;
 
     public GameObject playerRef;
     private NavMeshAgent agent;
@@ -88,6 +90,7 @@ public class FieldOfView : MonoBehaviour, IAttack {
         agent.speed = movementSpeed;
 
         ((IAttack)this).CalculateKnockback();
+        ownHeight = GetComponent<Renderer>().bounds.size.y;
     }
 
     private IEnumerator FOVRoutine() // core routine to reduce number of calls per frame (for performance)
@@ -193,6 +196,7 @@ public class FieldOfView : MonoBehaviour, IAttack {
 
         // only chase when alerted
         if (agent != null) {
+            Debug.Log(agent.enabled);
             if (agent.enabled == true) {
                 if (alertStage == AlertStage.Alerted) {
                     agent.isStopped = false;
@@ -201,6 +205,10 @@ public class FieldOfView : MonoBehaviour, IAttack {
                     agent.SetDestination(agent.transform.position);
                     agent.isStopped = true;
                 }
+            } else { // agent must be disabled due to an attack - re-enable it
+                float ownHeight = GetComponent<Renderer>().bounds.size.y;
+                //Debug.Log(ownHeight);
+                AgentReenableCoroutine(agent);
             }
         }
     

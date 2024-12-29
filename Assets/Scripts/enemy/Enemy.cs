@@ -37,7 +37,7 @@ public class Enemy : MonoBehaviour {
     }
     
     void Update() {
-        // Use fieldOfView for enemy logic
+        // Use fieldOfView for enemy movement logic
 
         if(healthComponent.currentHealth == 0) {
             setToDestroy = true;

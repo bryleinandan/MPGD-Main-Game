@@ -111,13 +111,14 @@ public interface IAttack {
         // punt the guy
         target.GetComponent<Rigidbody>().AddForce(knockbackDirection * knockbackForce.magnitude, ForceMode.Impulse);
        
-       // if there was a navmeshagent that we disabled, re-enable it after a time
-        if (targetNavAgent != null) {
-            //ReenableAgentAfterDelay(targetNavAgent, stunTime);
-            //ReenableAgentOnGround(targetNavAgent);
-            //targetNavAgent.enabled = true;
-            AgentReenableCoroutine(targetNavAgent);
-        }
+        // if there was a navmeshagent that we disabled, re-enable it after a time
+        // if (targetNavAgent != null) {
+        //     //ReenableAgentAfterDelay(targetNavAgent, stunTime);
+        //     //ReenableAgentOnGround(targetNavAgent);
+        //     //targetNavAgent.enabled = true;
+        //     AgentReenableCoroutine(targetNavAgent);
+        // }
+        // this is handled elsewhere.
     }
 
     // velocity change mode.
@@ -135,13 +136,13 @@ public interface IAttack {
         target.GetComponent<Rigidbody>().AddForce(knockbackDirection * knockbackForce.magnitude, ForceMode.VelocityChange);
        
        // if there was a navmeshagent that we disabled, re-enable it after a time
-        if (targetNavAgent != null) {
-            AgentReenableCoroutine(targetNavAgent);
-        }
+        // if (targetNavAgent != null) {
+        //     AgentReenableCoroutine(targetNavAgent);
+        // }
     }
 
-    public void AgentReenableCoroutine(NavMeshAgent agent);
-    // call one or the other
+    //public void AgentReenableCoroutine(NavMeshAgent agent);
+    // call one or the other - this is dictated in fieldofview and playerattack.cs
 
     public IEnumerator ReenableAgentAfterDelay(NavMeshAgent agent, float delay = 5) {
         yield return new WaitForSeconds(delay);
@@ -150,26 +151,24 @@ public interface IAttack {
         }
     }
        
-    // StartCoroutine(ReenableAgentOnGround); 
-    //StartCoroutine(((IAttack)this).ReenableAgentOnGround(agent)); 
-    public IEnumerator ReenableAgentOnGround(NavMeshAgent agent, float height = 0.6f) {
-        // checkdistance should be height of object but yeah i'm not getting renderer today thanks
-        // one day
-        // float objectHeight = GetComponent<Renderer>().bounds.size.y;
+    public IEnumerator ReenableAgentOnGround(NavMeshAgent agent, float height = 1.5f) {
+        Debug.Log("reenable agent on ground...");
         
         bool grounded = CheckIfGrounded(height);
         while (!grounded) {
-        grounded = CheckIfGrounded(height);
-        Debug.Log("Grounded: " + grounded);
-        yield return null;
-    }
+            grounded = CheckIfGrounded(height);
+            Debug.Log("Grounded: " + grounded);
+            yield return null;
+        }
         Debug.Log("Object is now grounded!");
         agent.enabled = true;
     }
 
     bool CheckIfGrounded(float checkDistance) {
         LayerMask groundLayer = (LayerMask.GetMask("ground"));
-        return Physics.Raycast(transform.position, Vector3.down, checkDistance * 0.5f + 0.3f, groundLayer);
+        //return Physics.Raycast(transform.position, Vector3.down, checkDistance * 0.5f + 0.3f, groundLayer);
+        // i don't remember why we 0.5f + 0.3f but maybe it was important. it doesn't work when the enemy is upside down
+        return Physics.Raycast(transform.position, Vector3.down, checkDistance + 0.5f, groundLayer);
     }
        // if (target.TryGetComponent<Rigidbody>(out Rigidbody targetRigidbody)) {
         //     Debug.Log("rigidbody target found");
@@ -198,7 +197,6 @@ public interface IAttack {
     //         Debug.Log("Chest is here!");
     //     }
     // {
-
 
 
 }
