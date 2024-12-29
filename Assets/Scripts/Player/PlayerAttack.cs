@@ -28,17 +28,19 @@ public class PlayerAttack : MonoBehaviour, IAttack
     }
     public void CalculateKnockback() { // basically override
         float x = 0;
-        float y = damage*0.4f;
-        float z = -(damage*0.6f);
+        float y = damage*0.3f;
+        float z = -(damage*0.5f);
         knockbackForce = new Vector3(x, y, z);
     }
 
     [Header("see script for rest of stats/variables. i'm too tired to making backing vars rn")]
     public bool stunEnemies = true;
+    public float stunTimeS = 5;
     public LayerMask attackableMask;
 
     void Start() {
         CalculateKnockback(); // call local one, not the interface's one
+        stunTime = stunTimeS;
     }
 
     void Update() {

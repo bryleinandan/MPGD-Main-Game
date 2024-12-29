@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: Loot1
   m_EditorClassIdentifier: 
   _prompt: Tap it
-  overworldObject: {fileID: 4571238477727134883, guid: 71259656a79da9c47904c87fc676a4cf, type: 3}
+  yOffset: 0.5
+  overworldObject: {fileID: 8634385800931006343, guid: 8de28c83e3e70b94896c7fe0cc09fdb5, type: 3}
   type: 0
   actionType: 0
   range: {x: 5, y: 4}
