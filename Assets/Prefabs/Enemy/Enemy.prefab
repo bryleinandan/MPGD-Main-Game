@@ -111,7 +111,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6085622505290389798}
-  - component: {fileID: 6782541688706776760}
   - component: {fileID: 3360919407585783280}
   - component: {fileID: 1988794748266474298}
   - component: {fileID: 2023791185400357427}
@@ -173,11 +172,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   alertStage: 1
   alertLevel: 0
-  movementSpeed: 5
+  movementSpeed: 1
   _attackSpeedSetter: 0.2
-  aggroSpeed: 30
-  radius: 15
-  angle: 130
+  aggroSpeed: 1
+  radius: 6.0174193
+  angle: 116
   playerRef: {fileID: 0}
   targetMask:
     serializedVersion: 2
