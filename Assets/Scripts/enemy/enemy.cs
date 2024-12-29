@@ -4,6 +4,8 @@ using JetBrains.Annotations;
 using Unity.Properties;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Analytics;
+using UnityEngine.Rendering;
 
 public class Enemy : MonoBehaviour {
     //public FieldOfView fieldOfView; 
@@ -18,6 +20,10 @@ public class Enemy : MonoBehaviour {
 
     private GameObject parent; // for spawning items
 
+    [Header("Optional - drop prefab for spawning items in smoke")]
+    public GameObject smoke;
+    public GameObject itemSpawnParent;
+
     void Awake() {
         //fieldOfView = new FieldOfView();
         //fieldOfView.Initialize();
@@ -26,7 +32,7 @@ public class Enemy : MonoBehaviour {
     void Start() {
         fov = GetComponent<FieldOfView>();
         healthComponent = GetComponentInChildren<Health>();
-        parent = GameObject.Find("Items");
+        itemSpawnParent = GameObject.Find("Items");
     }
     
     void Update() {
@@ -66,14 +72,26 @@ public class Enemy : MonoBehaviour {
         float randNum = UnityEngine.Random.Range(0f, 1f);
         //Debug.Log(randNum);
 
+        // Make a smoke
+        //GameObject smoke = GameObject.Find("PuffOfSmoke");
+        Debug.Log(smoke);
+        try {
+            GameObject smokePuff = Instantiate(smoke, this.transform);
+            SmokePuff smokeScript = smokePuff.GetComponent<SmokePuff>();
+            // call functions on smokeScript here
+        } catch {
+            Debug.Log("failed to play smoke animation");
+        }
+
+
         // drop it
         var spawnOffset =  new Vector3(0.0f, spawnAboveOffset, 0.0f);
-        parent = GameObject.Find("Items"); // item parent
         if (randNum >= item1Probability) {
-            dropsItem1.Spawn(transform.position + spawnOffset, transform.rotation);
+            dropsItem1.Spawn(transform.position + spawnOffset, transform.rotation, itemSpawnParent.transform);
         } else {
-            dropsItem2.Spawn(transform.position + spawnOffset, transform.rotation);
+            dropsItem2.Spawn(transform.position + spawnOffset, transform.rotation, itemSpawnParent.transform);
         }
+        // the last argument is the "folder" the gameobject goes into
 
     }
 }
