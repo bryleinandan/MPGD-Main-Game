@@ -111,6 +111,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6085622505290389798}
+  - component: {fileID: 6782541688706776760}
   - component: {fileID: 3360919407585783280}
   - component: {fileID: 1988794748266474298}
   - component: {fileID: 2023791185400357427}
@@ -156,6 +157,8 @@ MonoBehaviour:
   dropsItem1: {fileID: 11400000, guid: f05841060a7dd7f4d946ac2482bb0f70, type: 2}
   dropsItem2: {fileID: 11400000, guid: f05841060a7dd7f4d946ac2482bb0f70, type: 2}
   item1Probability: 0.7
+  spawnAboveOffset: 1
+  smoke: {fileID: 3863007502411726427, guid: 33cc06cdc9624ba42b696b80d04dae78, type: 3}
   smoothSpeed: 2.5
   setToDestroy: 0
 --- !u!114 &3360919407585783280
@@ -172,11 +175,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   alertStage: 1
   alertLevel: 0
-  movementSpeed: 1
+  movementSpeed: 5
   _attackSpeedSetter: 0.2
-  aggroSpeed: 1
-  radius: 6.0174193
-  angle: 116
+  aggroSpeed: 30
+  radius: 15
+  angle: 130
   playerRef: {fileID: 0}
   targetMask:
     serializedVersion: 2

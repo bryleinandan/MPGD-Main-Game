@@ -45,6 +45,6 @@ public class Hunger : MonoBehaviour
         remainingHunger = Mathf.Clamp(remainingHunger + amount, 0, maxHunger);
         hungerBar.SetHunger(remainingHunger);
 
-        //Debug.Log($"Hunger updated: {remainingHunger}");
+        Debug.Log($"Hunger updated: {remainingHunger}");
     }
 }
