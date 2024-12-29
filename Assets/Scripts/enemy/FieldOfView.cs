@@ -50,7 +50,6 @@ public class FieldOfView : MonoBehaviour, IAttack {
     }
 
     public void AgentReenableCoroutine(NavMeshAgent agent) {
-        Debug.Log("i am calling from FOV - renable the agent pls");
         StartCoroutine(((IAttack)this).ReenableAgentOnGround(agent, ownHeight)); 
     }
 

@@ -70,8 +70,8 @@ public class Enemy : MonoBehaviour {
 
     // limit rotation speed (and 'glitchiness')
     Rigidbody rb = GetComponent<Rigidbody>();
-    rb.angularDrag = 5f; // Adjust as needed for smoother damping
-    //rb.angularVelocity = Vector3.Lerp(rb.angularVelocity, Vector3.zero, Time.fixedDeltaTime * 5f); // gradually reduce damping speed
+    //rb.angularDrag = 5f; // Adjust as needed for smoother damping
+    rb.angularVelocity = Vector3.Lerp(rb.angularVelocity, Vector3.zero, Time.fixedDeltaTime * 5f); // gradually reduce damping speed
 }
 
     public virtual void SelfDestruct() {
