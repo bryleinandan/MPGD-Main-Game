@@ -54,7 +54,7 @@ public class Item : ScriptableObject
         // Initialize the prefab with this item's data
         OverworldItem item = instance.GetComponent<OverworldItem>();
         if (item != null) {
-            item.Initialize(this);
+            //item.Initialize(this);
             Debug.Log("I spawned an item at " + pos);
         }
 
