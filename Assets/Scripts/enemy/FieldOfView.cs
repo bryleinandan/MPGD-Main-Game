@@ -192,13 +192,15 @@ public class FieldOfView : MonoBehaviour, IAttack {
         ManualLookAt(player.transform.position);
 
         // only chase when alerted
-        if ((agent != null) && (agent.enabled == true)) {
-            if (alertStage == AlertStage.Alerted) {
-                agent.isStopped = false;
-                agent.SetDestination(player.transform.position);
-            } else {
-                agent.SetDestination(agent.transform.position);
-                agent.isStopped = true;
+        if (agent != null) {
+            if (agent.enabled == true) {
+                if (alertStage == AlertStage.Alerted) {
+                    agent.isStopped = false;
+                    agent.SetDestination(player.transform.position);
+                } else {
+                    agent.SetDestination(agent.transform.position);
+                    agent.isStopped = true;
+                }
             }
         }
     

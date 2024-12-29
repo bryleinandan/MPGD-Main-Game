@@ -81,6 +81,7 @@ public class OverworldItem : MonoBehaviour, IInteractable
 
         // unity editor is not updating a reference somewhere, so I'm overwriting it
         playerCam = GameObject.Find("Orientation");
+        playerTransform = playerCam.transform;
     }
 
     void Update() {

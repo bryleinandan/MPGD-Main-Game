@@ -17,6 +17,7 @@ public class Enemy : MonoBehaviour {
     public Item dropsItem2;
     [Range(0,1)] public float item1Probability = 0.7f;
     public float spawnAboveOffset = 1.0f;
+    private bool droppedLoot = false;
 
     private GameObject parent; // for spawning items
 
@@ -41,8 +42,12 @@ public class Enemy : MonoBehaviour {
         if(healthComponent.currentHealth == 0) {
             setToDestroy = true;
 
-            if (transform.localScale == new Vector3(0.0f, 0.0f, 0.0f)) {
+            if(!droppedLoot) { 
                 DropLoot();
+                droppedLoot = true;
+            }
+
+            if (transform.localScale == new Vector3(0.0f, 0.0f, 0.0f)) {
                 SelfDestruct();
             }
         }

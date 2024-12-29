@@ -145,7 +145,9 @@ public interface IAttack {
 
     public IEnumerator ReenableAgentAfterDelay(NavMeshAgent agent, float delay = 5) {
         yield return new WaitForSeconds(delay);
-        agent.enabled = true;
+        if (agent != null) {  
+            agent.enabled = true;
+        }
     }
        
     // StartCoroutine(ReenableAgentOnGround); 
