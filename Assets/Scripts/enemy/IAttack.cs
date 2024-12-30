@@ -111,72 +111,66 @@ public interface IAttack {
         // punt the guy
         target.GetComponent<Rigidbody>().AddForce(knockbackDirection * knockbackForce.magnitude, ForceMode.Impulse);
        
-       // if there was a navmeshagent that we disabled, re-enable it after a time
-        if (targetNavAgent != null) {
-            //ReenableAgentAfterDelay(targetNavAgent, stunTime);
-            //ReenableAgentOnGround(targetNavAgent);
-            //targetNavAgent.enabled = true;
-            AgentReenableCoroutine(targetNavAgent);
-        }
+        // if there was a navmeshagent that we disabled, re-enable it after a time
+        // if (targetNavAgent != null) {
+        //     //ReenableAgentAfterDelay(targetNavAgent, stunTime);
+        //     //ReenableAgentOnGround(targetNavAgent);
+        //     //targetNavAgent.enabled = true;
+        //     AgentReenableCoroutine(targetNavAgent);
+        // }
+        // this is handled elsewhere.
     }
 
-    public void AgentReenableCoroutine(NavMeshAgent agent);
-    // call one or the other
+    // velocity change mode.
+    public void ApplyKnockbackIgnoreMass(GameObject target, Vector3 knockbackDirection = new Vector3()) {
+
+        if (knockbackDirection== new Vector3()) {
+            knockbackDirection = (target.transform.position - transform.position).normalized + Vector3.up;
+        }
+
+        // Navmesh agent must be disabled before applying force as it will snap object to the ground
+        if (target.TryGetComponent<NavMeshAgent>(out NavMeshAgent targetNavAgent)) {
+            targetNavAgent.enabled = false;
+        }
+
+        target.GetComponent<Rigidbody>().AddForce(knockbackDirection * knockbackForce.magnitude, ForceMode.VelocityChange);
+       
+       // if there was a navmeshagent that we disabled, re-enable it after a time
+        // if (targetNavAgent != null) {
+        //     AgentReenableCoroutine(targetNavAgent);
+        // }
+    }
+
+    //public void AgentReenableCoroutine(NavMeshAgent agent);
+    // call one or the other - this is dictated in fieldofview and playerattack.cs
 
     public IEnumerator ReenableAgentAfterDelay(NavMeshAgent agent, float delay = 5) {
         yield return new WaitForSeconds(delay);
-        agent.enabled = true;
+        if (agent != null) {  
+            agent.enabled = true;
+        }
     }
        
-    // StartCoroutine(ReenableAgentOnGround); 
-    //StartCoroutine(((IAttack)this).ReenableAgentOnGround(agent)); 
-    public IEnumerator ReenableAgentOnGround(NavMeshAgent agent, float height = 0.6f) {
-        // checkdistance should be height of object but yeah i'm not getting renderer today thanks
-        // one day
-        // float objectHeight = GetComponent<Renderer>().bounds.size.y;
+    public IEnumerator ReenableAgentOnGround(NavMeshAgent agent, float height = 1.5f, float delay = 1.5f) {
+        yield return new WaitForSeconds(delay);
+
+        //Debug.Log("reenable agent on ground...");
         
         bool grounded = CheckIfGrounded(height);
         while (!grounded) {
-        grounded = CheckIfGrounded(height);
-        Debug.Log("Grounded: " + grounded);
-        yield return null;
-    }
+            grounded = CheckIfGrounded(height);
+            Debug.Log("Grounded: " + grounded);
+            yield return null;
+        }
         Debug.Log("Object is now grounded!");
         agent.enabled = true;
     }
 
     bool CheckIfGrounded(float checkDistance) {
         LayerMask groundLayer = (LayerMask.GetMask("ground"));
-        return Physics.Raycast(transform.position, Vector3.down, checkDistance * 0.5f + 0.3f, groundLayer);
+        //return Physics.Raycast(transform.position, Vector3.down, checkDistance * 0.5f + 0.3f, groundLayer);
+        // i don't remember why we 0.5f + 0.3f but maybe it was important. it doesn't work when the enemy is upside down
+        return Physics.Raycast(transform.position, Vector3.down, checkDistance *1.1f, groundLayer);
     }
-       // if (target.TryGetComponent<Rigidbody>(out Rigidbody targetRigidbody)) {
-        //     Debug.Log("rigidbody target found");
-        //     Vector3 knockbackDirection = (target.transform.position - transform.position).normalized + Vector3.up;
-        //     targetRigidbody.AddForce(knockbackDirection * knockbackForce.magnitude, ForceMode.Impulse);
-        // }
-        // else {
-        //     target.position += knockbackForce;
-        // 
-
-
-    //If your GameObject starts to collide with another GameObject with a Collider
-    // void OnCollisionEnter(Collision collision)
-    // {
-    //     //Output the Collider's GameObject's name
-    //     Debug.Log(collision.collider.name);
-    // }
-
-    // //If your GameObject keeps colliding with another GameObject with a Collider, do something
-    // void OnCollisionStay(Collision collision)
-    // {
-    //     //Check to see if the Collider's name is "Chest"
-    //     if (collision.collider.name == "Chest")
-    //     {
-    //         //Output the message
-    //         Debug.Log("Chest is here!");
-    //     }
-    // {
-
-
 
 }

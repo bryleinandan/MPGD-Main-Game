@@ -8,7 +8,6 @@ using UnityEngine.Analytics;
 using UnityEngine.Rendering;
 
 public class Enemy : MonoBehaviour {
-    //public FieldOfView fieldOfView; 
     private FieldOfView fov;
     private Health healthComponent;
 
@@ -17,6 +16,7 @@ public class Enemy : MonoBehaviour {
     public Item dropsItem2;
     [Range(0,1)] public float item1Probability = 0.7f;
     public float spawnAboveOffset = 1.0f;
+    private bool droppedLoot = false;
 
     private GameObject parent; // for spawning items
 
@@ -36,13 +36,17 @@ public class Enemy : MonoBehaviour {
     }
     
     void Update() {
-        // Use fieldOfView for enemy logic
+        // Use fieldOfView for enemy movement logic
 
         if(healthComponent.currentHealth == 0) {
             setToDestroy = true;
 
-            if (transform.localScale == new Vector3(0.0f, 0.0f, 0.0f)) {
+            if(!droppedLoot) { 
                 DropLoot();
+                droppedLoot = true;
+            }
+
+            if (transform.localScale == new Vector3(0.0f, 0.0f, 0.0f)) {
                 SelfDestruct();
             }
         }
@@ -61,6 +65,14 @@ public class Enemy : MonoBehaviour {
         }
     }
 
+    void FixedUpdate() {
+
+    // limit rotation speed (and 'glitchiness')
+    Rigidbody rb = GetComponent<Rigidbody>();
+    //rb.angularDrag = 5f; // Adjust as needed for smoother damping
+    rb.angularVelocity = Vector3.Lerp(rb.angularVelocity, Vector3.zero, Time.fixedDeltaTime * 5f); // gradually reduce damping speed
+}
+
     public virtual void SelfDestruct() {
         // this can overwritten in any child class by public override void selfDestruct() ...
         Debug.Log("self destructing.");
@@ -74,7 +86,7 @@ public class Enemy : MonoBehaviour {
 
         // Make a smoke
         //GameObject smoke = GameObject.Find("PuffOfSmoke");
-        Debug.Log(smoke);
+        //Debug.Log(smoke);
         try {
             GameObject smokePuff = Instantiate(smoke, this.transform);
             SmokePuff smokeScript = smokePuff.GetComponent<SmokePuff>();

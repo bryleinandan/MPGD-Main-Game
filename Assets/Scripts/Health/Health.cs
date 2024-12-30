@@ -25,6 +25,6 @@ public class Health : MonoBehaviour {
 
     protected virtual void Die() {
         // Override this method in subclasses if needed
-        Debug.Log($"{gameObject.name} died lol");
+        //Debug.Log($"{gameObject.name} died lol");
     }
 }

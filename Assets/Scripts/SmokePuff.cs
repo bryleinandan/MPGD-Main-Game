@@ -11,7 +11,10 @@ public class SmokePuff : MonoBehaviour
     // destroy self after the particle times out
 
     void Start() {
+        Debug.Log("i am smoke");
         particles = GetComponent<ParticleSystem>();
+        particles.Play();
+
         destroyAfter = particles.main.duration + 1.0f;
         StartCoroutine(Timeout());
         Debug.Log("destroying smoke");

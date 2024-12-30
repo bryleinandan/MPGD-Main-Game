@@ -19,26 +19,30 @@ public class PlayerAttack : MonoBehaviour, IAttack
     public void ReadyToAttack() {
         isAttacking = false;
     }
-    public void AgentReenableCoroutine(NavMeshAgent agent) {
-        if(stunEnemies) {
-            StartCoroutine(((IAttack)this).ReenableAgentAfterDelay(agent, stunTime)); 
-        } else {
-            StartCoroutine(((IAttack)this).ReenableAgentOnGround(agent));
-        }
-    }
+
+    // public void AgentReenableCoroutine(NavMeshAgent agent) {
+    //     if(stunEnemies) {
+    //         StartCoroutine(((IAttack)this).ReenableAgentAfterDelay(agent, stunTime)); 
+    //     } else {
+    //         StartCoroutine(((IAttack)this).ReenableAgentOnGround(agent));
+    //     }
+    // }
+
     public void CalculateKnockback() { // basically override
         float x = 0;
-        float y = damage*0.4f;
-        float z = -(damage*0.6f);
+        float y = damage*0.3f;
+        float z = -(damage*0.5f);
         knockbackForce = new Vector3(x, y, z);
     }
 
     [Header("see script for rest of stats/variables. i'm too tired to making backing vars rn")]
-    public bool stunEnemies = true;
+    public bool stunEnemies = false;
+    public float stunTimeS = 5;
     public LayerMask attackableMask;
 
     void Start() {
         CalculateKnockback(); // call local one, not the interface's one
+        stunTime = stunTimeS;
     }
 
     void Update() {
@@ -63,46 +67,6 @@ public class PlayerAttack : MonoBehaviour, IAttack
         
         }
     }
-
-    //public override IEnumerator AttackSequence(GameObject target) {
-        // isAttacking = true;
-
-        // Transform targetTransform = target.transform;
-        // // Initial position of the enemy
-        // Vector3 startPosition = transform.position;
-        // Vector3 targetPosition = targetTransform.position;
-        // float elapsedTime = 0f;
-
-        // while (elapsedTime < attackSpeed) // Move toward target with predefined speed
-        // {
-        //     elapsedTime += Time.deltaTime;
-        //     float t = elapsedTime / attackSpeed;
-        //     transform.position = Vector3.Lerp(startPosition, targetPosition, t);
-        //     yield return null;
-        // }
-
-        // // make sure final position aligns with the target's
-        // transform.position = targetPosition;
-
-        // // Check if hit the target!
-        // //if (CheckTargetHit()) { ApplyKnockback(target); }
-        // // caused an error where if you were a certain distance, the enemy would just not attack
-        
-        // // I fervently believe that if the attack movement is short enough then it is unstoppable
-        // ApplyKnockback(target);
-
-        // // deal damage: get health system component
-        // // check if player has Player tag, then get component accordingly
-        // if (target.CompareTag("Player")) {
-        //     target.GetComponent<PlayerHealthController>().TakeDamage(damage);
-        // } else {
-        //     //target.GetComponent<PlayerHealthController>().TakeDamage(damage);
-        // }
-        
-        // WaitForCooldown(attackCooldown);
-    //}
-
-
 
     // this was supposed to be an extra check to make sure target is hit after movement
     // private bool CheckTargetHit() {
