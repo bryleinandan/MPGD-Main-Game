@@ -139,7 +139,7 @@ public class InventoryManager : MonoBehaviour
         InventoryItem inventoryItem = newItemGo.GetComponent<InventoryItem>();
         inventoryItem.InitialiseItem(item);
     }
-    //remove item from inventory - try to make this 
+    //remove item from inventory - aka eat food
     public Item GetSelectedItem(bool remove) {
         if (selectedSlot != -1) {
             InventorySlot slot = inventorySlots[selectedSlot];
@@ -147,7 +147,7 @@ public class InventoryManager : MonoBehaviour
             
             if (itemInSlot != null) { //if item is in selected slot
                 Item item = itemInSlot.item;
-                if (remove == true) { //if user removes(or uses) this item
+                if (remove == true && item.actionType == ActionType.Eat) { //if user removes(or uses) this item and it is food
                     itemInSlot.count--; //remove item
                     if (itemInSlot.count <= 0) { //if there was only 1 item in slot
                         Destroy(itemInSlot.gameObject); //DESTROY it
