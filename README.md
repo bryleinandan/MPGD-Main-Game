@@ -6,3 +6,4 @@
 - I : open inventory
 - Scrollwheel to go through hotbar
 - Left click: use selected item in hotbar
+- ~~F : use currently selected item~~
