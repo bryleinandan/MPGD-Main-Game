@@ -1,9 +1,10 @@
 # AstroNuts
 
 - WASD / arrow keys : move
+- Spacebar: jump
 - E : pick up items
 - Q : melee
-- I : open inventory
+- I : open/close inventory
 - Scrollwheel to go through hotbar
-- Left click: use selected item in hotbar
+- Left click: eat selected item
 - ~~F : use currently selected item~~
