@@ -136,7 +136,7 @@ public class OverworldItem : MonoBehaviour, IInteractable
     public virtual void SelfDestruct() { // you'll never guess what this does
         // this can overwritten in any child class by public override void selfDestruct() ...
 
-        Debug.Log("self destructing.");
+        //Debug.Log("self destructing.");
 
         // animation? poof of smoke? scaling for now
         // (implemented in update())

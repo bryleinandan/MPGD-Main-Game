@@ -44,8 +44,7 @@ public interface IInteractable {
 
     void ShowPrompt(string setTo = "DEFAULT_") {
         if (promptTextMesh == null) {
-            Debug.Log("there is no text mesh to display in:");
-            Debug.Log(this);
+            Debug.Log("label text mesh issue in " + this);
         } else {
             if (setTo == "DEFAULT_") {
                 setTo = interactionPromptStr;
