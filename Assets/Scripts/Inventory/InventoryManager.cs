@@ -63,7 +63,7 @@ public class InventoryManager : MonoBehaviour
     }
 
     private void Update() {
-        Debug.Log(selectedSlot);
+        // Debug.Log(selectedSlot);
         if (Input.inputString != null) {
             bool isNumber = int.TryParse(Input.inputString, out int number);
             if (isNumber && number > 0 && number < 9) {
@@ -139,21 +139,24 @@ public class InventoryManager : MonoBehaviour
         InventoryItem inventoryItem = newItemGo.GetComponent<InventoryItem>();
         inventoryItem.InitialiseItem(item);
     }
-    //remove item from inventory - try to make this 
+    //remove item from inventory - aka eat food
     public Item GetSelectedItem(bool remove) {
-        InventorySlot slot = inventorySlots[selectedSlot];
-        InventoryItem itemInSlot = slot.GetComponentInChildren<InventoryItem>();
-        if (itemInSlot != null) { //if item is in selected slot
-            Item item = itemInSlot.item;
-            if (remove == true) { //if user removes(or uses) this item
-                itemInSlot.count--; //remove item
-                if (itemInSlot.count <= 0) { //if there was only 1 item in slot
-                    Destroy(itemInSlot.gameObject); //DESTROY it
-                } else { //if there was more than 1 item in slot
-                    itemInSlot.RefreshCount(); //update UI to have correct number, now decreased by 1
+        if (selectedSlot != -1) {
+            InventorySlot slot = inventorySlots[selectedSlot];
+            InventoryItem itemInSlot = slot.GetComponentInChildren<InventoryItem>();
+            
+            if (itemInSlot != null) { //if item is in selected slot
+                Item item = itemInSlot.item;
+                if (remove == true && item.actionType == ActionType.Eat) { //if user removes(or uses) this item and it is food
+                    itemInSlot.count--; //remove item
+                    if (itemInSlot.count <= 0) { //if there was only 1 item in slot
+                        Destroy(itemInSlot.gameObject); //DESTROY it
+                    } else { //if there was more than 1 item in slot
+                        itemInSlot.RefreshCount(); //update UI to have correct number, now decreased by 1
+                    }
                 }
+                return item;
             }
-            return item;
         }
         return null;
     }

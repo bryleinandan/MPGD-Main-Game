@@ -21,7 +21,7 @@ public class PlayerHealth : MonoBehaviour
     {
         //HealthBarControl();
     }
-    void HealthBarControl() {
+    void HealthBarControl() { //for debugging
         if (Input.GetKeyDown(KeyCode.LeftArrow))
         {
             healthComponent.TakeDamage(10);
