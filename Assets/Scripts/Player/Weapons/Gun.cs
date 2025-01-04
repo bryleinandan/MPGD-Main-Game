@@ -12,7 +12,7 @@ public class Gun : MonoBehaviour, IAttack {
     public float stunTime { get; set; } = 6;
     public Vector3 knockbackForce { get; set; }
     public bool isAttacking { get; set; }
-    public float attackRadius { get; set; } = 3;
+    public float attackRadius { get; set; } = 3f;
     public void WaitForCooldown(float waitTime = 0) {
         Invoke("ReadyToAttack", waitTime);
     }
@@ -20,7 +20,7 @@ public class Gun : MonoBehaviour, IAttack {
         isAttacking = false;
     }
 
-    public float range = 50f;
+    [Range(0.01f,50f)]public float range = 2.0f;
     public Camera playerCam;
     //public InputAction Fire;
     public PlayerInput playerInput;
@@ -28,6 +28,7 @@ public class Gun : MonoBehaviour, IAttack {
 
     void Start() {
         CalculateKnockback();
+        attackRadius = range;
 
         if (playerCam == null) {
             playerCam = GameObject.Find("PlayerCam").GetComponent<Camera>();
@@ -45,8 +46,8 @@ public class Gun : MonoBehaviour, IAttack {
 
     public void CalculateKnockback() { // basically override
         float x = 0;
-        float y = damage*0.2f;
-        float z = -(damage*0.4f);
+        float y = damage*0.07f;
+        float z = -(damage*0.2f);
         knockbackForce = new Vector3(x, y, z);
     }
 
@@ -59,7 +60,7 @@ public class Gun : MonoBehaviour, IAttack {
 
         void Shoot() {
             RaycastHit hit;
-            if (Physics.Raycast(playerCam.transform.position, playerCam.transform.forward, out hit, range)) {
+            if (Physics.Raycast(playerCam.transform.position, playerCam.transform.forward, out hit, attackRadius)) {
                 //Debug.Log(hit.transform.name);
 
                 GameObject hitObj = hit.transform.gameObject;
@@ -71,7 +72,7 @@ public class Gun : MonoBehaviour, IAttack {
 
                 // Check if the hit object's layer is in the LayerMask
                 if ((targetLayer.value & (1 << hitObj.layer)) != 0) {
-                    Debug.Log("targetlayer matched");
+                    //Debug.Log("targetlayer matched");
                     ((IAttack)this).DealDamage(hitObj.gameObject);
                     ((IAttack)this).ApplyKnockback(hitObj.gameObject);
                 }
