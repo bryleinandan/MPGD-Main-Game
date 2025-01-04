@@ -25,10 +25,12 @@ public class Gun : MonoBehaviour, IAttack {
     //public InputAction Fire;
     public PlayerInput playerInput;
     public LayerMask targetLayer;
+    private ParticleSystem muzzleFlash;
 
     void Start() {
         CalculateKnockback();
         attackRadius = range;
+        muzzleFlash = GetComponentInChildren<ParticleSystem>();
 
         if (playerCam == null) {
             playerCam = GameObject.Find("PlayerCam").GetComponent<Camera>();
@@ -59,9 +61,13 @@ public class Gun : MonoBehaviour, IAttack {
         }
 
         void Shoot() {
+            muzzleFlash.Play();
+
             RaycastHit hit;
             if (Physics.Raycast(playerCam.transform.position, playerCam.transform.forward, out hit, attackRadius)) {
                 //Debug.Log(hit.transform.name);
+
+                //play bullet hit at hit
 
                 GameObject hitObj = hit.transform.gameObject;
 
