@@ -2105,7 +2105,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 6179eb9fab253394f9a96f5c8e1df981, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 18bb5f2db6ea49a4db98d4d85db537f5, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2527,6 +2527,7 @@ MonoBehaviour:
   targetLayer:
     serializedVersion: 2
     m_Bits: 64
+  impactEffect: {fileID: 8850144776568971236, guid: baf0920d2faaf5b46ba6dc3c52e577e2, type: 3}
 --- !u!1 &1609480309
 GameObject:
   m_ObjectHideFlags: 0
@@ -3535,15 +3536,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4856598809076822625, guid: 398afa3b30f443c4bae77e20205ebe15, type: 3}
       propertyPath: m_LocalScale.x
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4856598809076822625, guid: 398afa3b30f443c4bae77e20205ebe15, type: 3}
       propertyPath: m_LocalScale.y
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4856598809076822625, guid: 398afa3b30f443c4bae77e20205ebe15, type: 3}
       propertyPath: m_LocalScale.z
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 4545616574676069487, guid: 398afa3b30f443c4bae77e20205ebe15, type: 3}

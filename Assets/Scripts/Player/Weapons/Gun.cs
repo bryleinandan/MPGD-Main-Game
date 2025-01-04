@@ -26,6 +26,9 @@ public class Gun : MonoBehaviour, IAttack {
     public PlayerInput playerInput;
     public LayerMask targetLayer;
     private ParticleSystem muzzleFlash;
+    public ParticleSystem impactEffect;
+    public float fireRate = 15f;
+    private float nextTimeToFire = 0f;
 
     void Start() {
         CalculateKnockback();
@@ -55,7 +58,9 @@ public class Gun : MonoBehaviour, IAttack {
 
     void Update()
     {
-        if (playerInput.actions["Fire"].WasPerformedThisFrame()) {
+        if (playerInput.actions["Fire"].WasPerformedThisFrame() && (Time.time >= nextTimeToFire)) {
+            nextTimeToFire = Time.time + 1f/fireRate;
+            // greater fire rate = less time between shots
             //Debug.Log("fire was performed this frame");
             Shoot();
         }
@@ -70,6 +75,10 @@ public class Gun : MonoBehaviour, IAttack {
                 //play bullet hit at hit
 
                 GameObject hitObj = hit.transform.gameObject;
+
+                // spawn impact particle effect using surface normal as rotation
+                ParticleSystem impact = Instantiate(impactEffect, hit.point, Quaternion.LookRotation(hit.normal));
+                Destroy(impact, 3f); // destroy after 3s
 
                 // if on target layer: do iattack
 
