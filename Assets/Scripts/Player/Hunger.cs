@@ -30,6 +30,9 @@ public class Hunger : MonoBehaviour
         {
             yield return new WaitForSeconds(hungerDecayRate);
             UpdateHunger(-5); // Reduce hunger by 5 unit
+            if (remainingHunger >= maxHunger/2) { //if hunger is over 50%, regenerate health slowly
+                health.Heal(1);
+            }
         }
         while (remainingHunger == 0) {
             

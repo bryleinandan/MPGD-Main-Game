@@ -12,7 +12,7 @@ public class InventoryManager : MonoBehaviour, IItemContainer
     public GameObject inventoryItemPrefab;
     //int selectedSlot = -1;
     //select first hotbar slot as soon as game starts
-    int selectedSlot = 0;
+    int selectedSlot = -1;
 
     public GameObject[] slotsByTag; // temp for getting the slots
 
@@ -63,6 +63,7 @@ public class InventoryManager : MonoBehaviour, IItemContainer
     }
 
     private void Update() {
+        // Debug.Log(selectedSlot);
         if (Input.inputString != null) {
             bool isNumber = int.TryParse(Input.inputString, out int number);
             if (isNumber && number > 0 && number < 9) {

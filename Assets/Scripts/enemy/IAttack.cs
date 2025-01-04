@@ -159,10 +159,10 @@ public interface IAttack {
         bool grounded = CheckIfGrounded(height);
         while (!grounded) {
             grounded = CheckIfGrounded(height);
-            Debug.Log("Grounded: " + grounded);
+            //Debug.Log("Grounded: " + grounded);
             yield return null;
         }
-        Debug.Log("Object is now grounded!");
+        //Debug.Log("Object is now grounded!");
         agent.enabled = true;
     }
 

@@ -195,14 +195,19 @@ public class FieldOfView : MonoBehaviour, IAttack {
 
         // only chase when alerted
         if (agent != null) {
+        //if (gameObject.GetComponent<NavMeshAgent>() != null) {
             //Debug.Log(agent.enabled);
             if (agent.enabled == true) {
-                if (alertStage == AlertStage.Alerted) {
-                    agent.isStopped = false;
-                    agent.SetDestination(player.transform.position);
-                } else {
-                    agent.SetDestination(agent.transform.position);
-                    agent.isStopped = true;
+                if (agent.isOnNavMesh == true) { // check if on valid mesh
+                    //Debug.Log($"Agent Status: Enabled={agent.enabled}, OnNavMesh={agent.isOnNavMesh}");
+
+                    if (alertStage == AlertStage.Alerted) { // chase!
+                        agent.isStopped = false;
+                        agent.SetDestination(player.transform.position);
+                    } else { // do not chase
+                        agent.SetDestination(agent.transform.position);
+                        agent.isStopped = true;
+                    }
                 }
             } else { // agent must be disabled due to an attack - re-enable it
                 float ownHeight = GetComponent<Renderer>().bounds.size.y;
@@ -237,6 +242,10 @@ public class FieldOfView : MonoBehaviour, IAttack {
         transform.rotation = Quaternion.LookRotation(lookDirection);
     }
     
+    bool IsAgentOnNavMesh(NavMeshAgent agent) { // get sample position, return true if on valid mesh
+    return NavMesh.SamplePosition(agent.transform.position, out NavMeshHit hit, 1.0f, NavMesh.AllAreas);
+}
+
     // private void idle()
 
 } // end of class
