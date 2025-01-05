@@ -58,6 +58,7 @@ public class Gun : MonoBehaviour, IAttack {
 
     void Update()
     {
+        //transform.rotation = playerCam.transform.rotation;
         if (playerInput.actions["Fire"].WasPerformedThisFrame() && (Time.time >= nextTimeToFire)) {
             nextTimeToFire = Time.time + 1f/fireRate;
             // greater fire rate = less time between shots

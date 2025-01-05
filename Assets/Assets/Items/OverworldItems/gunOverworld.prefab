@@ -11,6 +11,8 @@ GameObject:
   - component: {fileID: 7874953880907145846}
   - component: {fileID: 5581110427337685953}
   - component: {fileID: 1932711343118977650}
+  - component: {fileID: 1594840211278248624}
+  - component: {fileID: 1055931996575286283}
   m_Layer: 7
   m_Name: model
   m_TagString: Untagged
@@ -83,6 +85,54 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!54 &1594840211278248624
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5197113975564387101}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 2
+  m_AngularDrag: 0.5
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 126
+  m_CollisionDetection: 0
+--- !u!65 &1055931996575286283
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5197113975564387101}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.19080201, y: 1.4738615, z: 0.68718785}
+  m_Center: {x: 0.026316775, y: 0.28040305, z: 0.01689884}
 --- !u!1001 &963467347639680354
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -91,6 +141,30 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 293654950411726807, guid: 8de28c83e3e70b94896c7fe0cc09fdb5, type: 3}
+      propertyPath: m_Height
+      value: 0.7858733
+      objectReference: {fileID: 0}
+    - target: {fileID: 293654950411726807, guid: 8de28c83e3e70b94896c7fe0cc09fdb5, type: 3}
+      propertyPath: m_Radius
+      value: 0.35487366
+      objectReference: {fileID: 0}
+    - target: {fileID: 293654950411726807, guid: 8de28c83e3e70b94896c7fe0cc09fdb5, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 293654950411726807, guid: 8de28c83e3e70b94896c7fe0cc09fdb5, type: 3}
+      propertyPath: m_Center.x
+      value: -0.16853333
+      objectReference: {fileID: 0}
+    - target: {fileID: 293654950411726807, guid: 8de28c83e3e70b94896c7fe0cc09fdb5, type: 3}
+      propertyPath: m_Center.y
+      value: -0.13047034
+      objectReference: {fileID: 0}
+    - target: {fileID: 293654950411726807, guid: 8de28c83e3e70b94896c7fe0cc09fdb5, type: 3}
+      propertyPath: m_Center.z
+      value: -0.023407042
+      objectReference: {fileID: 0}
     - target: {fileID: 2203720961091241853, guid: 8de28c83e3e70b94896c7fe0cc09fdb5, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -193,16 +267,49 @@ PrefabInstance:
       propertyPath: m_Name
       value: gunOverworld
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 293654950411726807, guid: 8de28c83e3e70b94896c7fe0cc09fdb5, type: 3}
+    - {fileID: 1083153724419436608, guid: 8de28c83e3e70b94896c7fe0cc09fdb5, type: 3}
+    - {fileID: 3397492890653781438, guid: 8de28c83e3e70b94896c7fe0cc09fdb5, type: 3}
+    - {fileID: 3441912960929250105, guid: 8de28c83e3e70b94896c7fe0cc09fdb5, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 2203720961091241853, guid: 8de28c83e3e70b94896c7fe0cc09fdb5, type: 3}
-      insertIndex: 0
+      insertIndex: -1
       addedObject: {fileID: 7874953880907145846}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8634385800931006343, guid: 8de28c83e3e70b94896c7fe0cc09fdb5, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5165584532131220265}
   m_SourcePrefab: {fileID: 100100000, guid: 8de28c83e3e70b94896c7fe0cc09fdb5, type: 3}
 --- !u!4 &1426476679687911967 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2203720961091241853, guid: 8de28c83e3e70b94896c7fe0cc09fdb5, type: 3}
   m_PrefabInstance: {fileID: 963467347639680354}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &8830833540144524005 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8634385800931006343, guid: 8de28c83e3e70b94896c7fe0cc09fdb5, type: 3}
+  m_PrefabInstance: {fileID: 963467347639680354}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &5165584532131220265
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8830833540144524005}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f622098584244894587d602296baef3d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inventoryItem: {fileID: 0}
+  prompt: Pick up!
+  visibilitySmoothingSpeed: 2.5
+  smooth: 0
+  autoSetLabelPosition: 1
+  playerCam: {fileID: 0}
+  setToDestroy: 0
+  inventoryManagerObj: {fileID: 0}
+  inventoryManager: {fileID: 0}
