@@ -24,7 +24,7 @@ public class EatAction : MonoBehaviour
     { 
         // Debug.Log(mainInventoryGroup.transform.localScale);
         // !!make it so this only happens if MAIN MENU is closed too (when it is eventually added)
-        if (Input.GetMouseButtonDown(0) && mainInventoryGroup.transform.localScale == Vector3.zero) {
+        if (Input.GetKeyDown(KeyCode.F) && mainInventoryGroup.transform.localScale == Vector3.zero) {
             // when LMB is clicked and inventory closed, remove item in selected slot
             Item removedItem = inventoryManager.GetSelectedItem(true);
             
