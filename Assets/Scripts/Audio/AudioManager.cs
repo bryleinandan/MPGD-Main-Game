@@ -10,7 +10,7 @@ public class AudioManager : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
-                foreach (Sound s in sounds) {
+        foreach (Sound s in sounds) {
             s.source = gameObject.AddComponent<AudioSource>();
             s.source.clip = s.clip;
 
@@ -19,12 +19,11 @@ public class AudioManager : MonoBehaviour
             s.source.loop = s.loop;
             s.source.Play();
         }
-        Debug.Log("i should play!");
-        Play("Theme"); //bgm
     }
 
     void Start () {
-
+        Debug.Log("i should play!");
+        // Play("Theme"); //bgm
     }
 
     public void Play (string name) {
