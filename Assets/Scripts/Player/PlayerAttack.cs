@@ -46,27 +46,25 @@ public class PlayerAttack : MonoBehaviour, IAttack
     }
 
     void Update() {
-        AttackButton();
+        //AttackButton();
     }
 
-    void AttackButton() {
-        if (Input.GetKeyDown(KeyCode.Q)) {
-            // get colliders in range of attack
-            Collider[] rangeChecks = Physics.OverlapSphere(transform.position, attackRadius, attackableMask);
-            foreach (Collider c in rangeChecks) // check list of colliders for player tag
-            {
-                //Debug.Log("damage dealt!");
-                //Debug.Log(knockbackForce);
+    // void AttackButton() {
+    //     if (Input.GetKeyDown(KeyCode.Q)) {
+    //         // get colliders in range of attack
+    //         Collider[] rangeChecks = Physics.OverlapSphere(transform.position, attackRadius, attackableMask);
+    //         foreach (Collider c in rangeChecks) // check list of colliders for player tag
+    //         {
+    //             //Debug.Log("damage dealt!");
+    //             //Debug.Log(knockbackForce);
 
-                // Collider is the component - get game object parent
-                // deal damage + knockback to that collider
-                ((IAttack)this).DealDamage(c.gameObject);
-                ((IAttack)this).ApplyKnockback(c.gameObject);
-            }
-
-        
-        }
-    }
+    //             // Collider is the component - get game object parent
+    //             // deal damage + knockback to that collider
+    //             ((IAttack)this).DealDamage(c.gameObject);
+    //             ((IAttack)this).ApplyKnockback(c.gameObject);
+    //         }
+    //     }
+    // }
 
     // this was supposed to be an extra check to make sure target is hit after movement
     // private bool CheckTargetHit() {
