@@ -6,5 +6,5 @@
 - Q : melee
 - I : open/close inventory
 - Scrollwheel to go through hotbar
-- Left click: eat selected item
-- ~~F : use currently selected item~~
+- F : eat currently selected item
+- Left click: shoot!
