@@ -3,8 +3,6 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-// [System.Serializable]
-// [SerializeField]
 [Serializable]
 public struct ItemAmount
 {
@@ -46,6 +44,9 @@ public class CraftingRecipe : ScriptableObject
                     itemContainer.AddItem(itemAmount.Item);
                 }
             }
+            Debug.Log("Successful craft");
+        } else {
+            Debug.Log("Missing items to craft");
         }
     }
 }

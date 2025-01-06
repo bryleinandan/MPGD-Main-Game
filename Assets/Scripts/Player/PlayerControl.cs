@@ -11,9 +11,9 @@ public class PlayerControl : MonoBehaviour
     private Rigidbody _player;
 
     // grounded player check variables
-    public float _playerHeight;
+    public float playerHeight;
     public LayerMask ground;
-    public bool _grounded;
+    public bool grounded;
 
     // movement drag variables - makes movement feel smoother
     public float groundDrag;
@@ -32,6 +32,9 @@ public class PlayerControl : MonoBehaviour
     public Camera playerCam;
     private Transform cameraTransform;
 
+    // inventoryinput script - has public variable that can be used to check inventory state
+    public InventoryInput inventoryInput;
+
     private void Start() {
 
         _player = GetComponent<Rigidbody>();
@@ -49,13 +52,14 @@ public class PlayerControl : MonoBehaviour
     private void Update() {
 
         // player on ground check
-        _grounded = Physics.Raycast(transform.position, Vector3.down, _playerHeight * 0.5f + 0.3f, ground);
+        grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.6f + 0.3f, ground);
+        Debug.Log("grounded = " + grounded);
 
         // speed limiter function
         _SpeedControl();
 
         // drag handling
-        if(_grounded) {
+        if(grounded) {
             _player.drag = groundDrag;
         } else {
             _player.drag = 0;
@@ -64,8 +68,14 @@ public class PlayerControl : MonoBehaviour
 
     // updates at regular intervals - better for physics
     private void FixedUpdate() {
-        //_MovePlayer();
-        MovePlayerUseCamera();
+
+        // check if inventory is open (open = vector3.one)
+        // if open, stop all movement
+        if(inventoryInput.inventoryOpen == false){
+            //_MovePlayer();
+            MovePlayerUseCamera();
+        }
+        
     }
 
     public void OnMove(InputValue value) {
@@ -75,7 +85,7 @@ public class PlayerControl : MonoBehaviour
     public void OnJump() {
         
         // check conditions for jump
-        if(_readyToJump && _grounded) {
+        if(_readyToJump && grounded) {
 
             // jump started - no longer ready to jump
             _readyToJump = false;
@@ -107,7 +117,7 @@ public class PlayerControl : MonoBehaviour
 
         // add force
         // adjust move speed based on grounded state
-        if(_grounded) {
+        if(grounded) {
             _player.AddForce(movement * moveSpeed * Time.fixedDeltaTime * 10f, ForceMode.Force);
         } else {
             _player.AddForce(movement * moveSpeed * Time.fixedDeltaTime * 10f * airMultiplier, ForceMode.Force);

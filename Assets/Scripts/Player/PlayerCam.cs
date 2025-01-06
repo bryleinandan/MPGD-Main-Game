@@ -20,6 +20,9 @@ public class PlayerCam : MonoBehaviour
     float xRotation;
     float yRotation;
 
+    // inventoryInput script - checks if axis needs to locked when inventory opened
+    public InventoryInput inventoryInput;
+
     private void Start() {
 
         // lock cursor in middle of screen and hide it  
@@ -30,23 +33,28 @@ public class PlayerCam : MonoBehaviour
 
     private void Update() {
 
-        // collect mouse input
-        float mouseX = Input.GetAxisRaw("Mouse X") * Time.deltaTime * sensX;
-        float mouseY = Input.GetAxisRaw("Mouse Y") * Time.deltaTime * sensY;
+        // locks axis if inventory is open
+        if(inventoryInput.inventoryOpen == false){
+            // collect mouse input
+            float mouseX = Input.GetAxisRaw("Mouse X") * Time.deltaTime * sensX;
+            float mouseY = Input.GetAxisRaw("Mouse Y") * Time.deltaTime * sensY;
 
-        // camera rotation
-        yRotation += mouseX;
-        xRotation -= mouseY;
+            // camera rotation
+            yRotation += mouseX;
+            xRotation -= mouseY;
 
-        // stop player from looking around further than 90 degrees
-        xRotation = Mathf.Clamp(xRotation, -90f, 90f);
+            // stop player from looking around further than 90 degrees
+            xRotation = Mathf.Clamp(xRotation, -90f, 90f);
 
-        // rotate camera and player
-        transform.rotation = Quaternion.Euler(xRotation, yRotation, 0);
-        orientation.rotation = Quaternion.Euler(0, yRotation, 0);
+            // rotate camera and player
+            transform.rotation = Quaternion.Euler(xRotation, yRotation, 0);
+            orientation.rotation = Quaternion.Euler(0, yRotation, 0);
 
-        // correct self position
-        transform.position = orientation.position;
+            // correct self position
+            transform.position = orientation.position;
+        }
+
+        
     }
 
 }
