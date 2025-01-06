@@ -16,7 +16,7 @@ public class PlayerControl : MonoBehaviour
     public bool grounded;
 
     // movement drag variables - makes movement feel smoother
-    public float groundDrag;
+    public float groundDrag = 15;
 
 
     // jump variables
@@ -24,6 +24,8 @@ public class PlayerControl : MonoBehaviour
     public float jumpCooldown;
     public float jumpHeight;
     public float airMultiplier;
+    [Range(1,200)]public float forceMultiplier = 50;
+    [Range(1,100)]public float jumpForceMultiplier = 1;
 
     // movement variables
     public float moveSpeed;
@@ -45,6 +47,7 @@ public class PlayerControl : MonoBehaviour
         if (playerCam != null) {
             cameraTransform = playerCam.transform;
         }
+
     }
 
     // updates dependent on machine frame rate as supposed to project
@@ -118,9 +121,9 @@ public class PlayerControl : MonoBehaviour
         // add force
         // adjust move speed based on grounded state
         if(grounded) {
-            _player.AddForce(movement * moveSpeed * Time.fixedDeltaTime * 10f, ForceMode.Force);
+            _player.AddForce(movement * moveSpeed * Time.fixedDeltaTime * 10f * forceMultiplier, ForceMode.Force);
         } else {
-            _player.AddForce(movement * moveSpeed * Time.fixedDeltaTime * 10f * airMultiplier, ForceMode.Force);
+            _player.AddForce(movement * moveSpeed * Time.fixedDeltaTime * 10f * forceMultiplier * airMultiplier, ForceMode.Force);
         }
     }
 
@@ -147,7 +150,7 @@ public class PlayerControl : MonoBehaviour
 
         // make player jump
         // impulse - only add force once
-        _player.AddForce(transform.up * jumpHeight, ForceMode.Impulse);
+        _player.AddForce(transform.up * jumpHeight * jumpForceMultiplier, ForceMode.Impulse);
     }
 
     // reset jump function

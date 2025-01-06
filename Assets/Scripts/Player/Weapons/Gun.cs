@@ -50,6 +50,7 @@ public class Gun : MonoBehaviour, IAttack {
         // if (targetLayer == null) {
         //     int LayerIgnoreRaycast = LayerMask.NameToLayer("Attackable");
         // }
+        inventoryInput = FindAnyObjectByType<InventoryInput>();
     }
 
     public void CalculateKnockback() { // basically override

@@ -26,7 +26,7 @@ public class OverworldItem : MonoBehaviour, IInteractable
 
     [Header("code does this for you / debugging")]
     
-    public GameObject playerCam;
+    public Camera playerCam;
     public bool setToDestroy = false;
     public GameObject inventoryManagerObj;
         // for assigning in inspector because it says InventoryManager is just a GameObject
@@ -79,7 +79,8 @@ public class OverworldItem : MonoBehaviour, IInteractable
         // }
 
         // unity editor is not updating a reference somewhere, so I'm overwriting it
-        playerCam = GameObject.Find("Orientation");
+        //playerCam = GameObject.Find("PlayerCam");
+        playerCam = Camera.main;
         playerTransform = playerCam.transform;
     }
 
@@ -102,7 +103,7 @@ public class OverworldItem : MonoBehaviour, IInteractable
         }
     }
 
-    void LateUpdate() {
+    protected virtual void LateUpdate() {
         if (this == null) return; // don't call if self is null
 
         ((IInteractable)this).LateUpdateLabelRotation();
