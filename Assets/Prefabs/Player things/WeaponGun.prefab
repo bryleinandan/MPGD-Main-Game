@@ -5031,9 +5031,13 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -0.533
       objectReference: {fileID: 0}
+    - target: {fileID: -5754084199372789682, guid: b59d824f0e289af4192d8d307e53269a, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 4300000, guid: f9bb8348447003b4f948c8a1b509580d, type: 2}
     - target: {fileID: 919132149155446097, guid: b59d824f0e289af4192d8d307e53269a, type: 3}
       propertyPath: m_Name
-      value: Gun1
+      value: WeaponGun
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -5068,9 +5072,10 @@ MonoBehaviour:
   playerInput: {fileID: 0}
   targetLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
   impactEffect: {fileID: 0}
   fireRate: 15
+  inventoryInput: {fileID: 0}
 --- !u!4 &8787698729289933295 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: b59d824f0e289af4192d8d307e53269a, type: 3}

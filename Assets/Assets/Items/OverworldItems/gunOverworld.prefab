@@ -42,7 +42,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5197113975564387101}
-  m_Mesh: {fileID: 8989324824668654689, guid: b59d824f0e289af4192d8d307e53269a, type: 3}
+  m_Mesh: {fileID: 4300000, guid: f9bb8348447003b4f948c8a1b509580d, type: 2}
 --- !u!23 &1932711343118977650
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -270,8 +270,6 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 293654950411726807, guid: 8de28c83e3e70b94896c7fe0cc09fdb5, type: 3}
     - {fileID: 1083153724419436608, guid: 8de28c83e3e70b94896c7fe0cc09fdb5, type: 3}
-    - {fileID: 3397492890653781438, guid: 8de28c83e3e70b94896c7fe0cc09fdb5, type: 3}
-    - {fileID: 3441912960929250105, guid: 8de28c83e3e70b94896c7fe0cc09fdb5, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 2203720961091241853, guid: 8de28c83e3e70b94896c7fe0cc09fdb5, type: 3}
@@ -313,3 +311,5 @@ MonoBehaviour:
   setToDestroy: 0
   inventoryManagerObj: {fileID: 0}
   inventoryManager: {fileID: 0}
+  selfMeshFilter: {fileID: 0}
+  meshSize: {x: 0, y: 0, z: 0}
