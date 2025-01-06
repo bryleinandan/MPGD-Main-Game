@@ -10,7 +10,7 @@ public class OutOfBoundsChecker : MonoBehaviour {
     // if current position -Y exceeds a certain value:
         // respawn around the recorded position
 
-    // playercontrol has a variable, _grounded, that we can take
+    // playercontrol has a variable, grounded, that we can take
     [SerializeField] private bool isGrounded = true;
     private PlayerControl playerControl;
     public Vector3 lastGroundedPosition;
@@ -25,7 +25,7 @@ public class OutOfBoundsChecker : MonoBehaviour {
     }
 
     void LateUpdate() {
-        isGrounded = playerControl._grounded;
+        isGrounded = playerControl.grounded;
 
         // don't softlock self by remembering a position that will always get you respawned
         if ((isGrounded) && (transform.position.y > Yboundary)) {
