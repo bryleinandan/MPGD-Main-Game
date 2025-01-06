@@ -15,7 +15,7 @@ public class OverworldItem : MonoBehaviour, IInteractable
     [Header("# Make sure inventory item is set!")]
     public Item inventoryItem; // the Item class equivalent (will be added to inventory)
 
-    //public TextMeshProUGUI promptText => this.transform.GetChild(0).gameObject.GetComponent<TextMeshProUGUI>();
+    [Header("this always overrides what's in canvas")]
     [SerializeField] private string prompt = "Pick up!";
     public float visibilitySmoothingSpeed = 2.5f;
     public float smoothSpeed => visibilitySmoothingSpeed;
@@ -40,15 +40,14 @@ public class OverworldItem : MonoBehaviour, IInteractable
     // more interface things
     //[Range(3,10)] public int interactionRange = 5; // range 
     public Transform playerTransform { get; set; }
-
     public string interactionPromptStr { get; set; }
     public TextMeshPro promptTextMesh { get; set; }
 
     public bool promptIsVisible { get; set; }
     public Vector3 textOriginalScale { get; set; }
+    public MeshFilter selfMeshFilter;
 
-    void Start()
-    {
+    protected virtual void Start() {
         // get own first child and get the text mesh
         promptTextMesh = this.transform.GetChild(0).gameObject.GetComponentInChildren<TextMeshPro>();
         interactionPromptStr = prompt;
@@ -84,13 +83,14 @@ public class OverworldItem : MonoBehaviour, IInteractable
         playerTransform = playerCam.transform;
     }
 
-    void Update() {
+    protected virtual void Update() {
         if (this == null) return;
         
         playerTransform = playerCam.transform;
         //Debug.Log(playerCam);
 
         ((IInteractable)this).UpdateVisibility();
+        
         if(autoSetLabelPosition) {
             AutoSetLabelPosition();
         }
@@ -113,7 +113,7 @@ public class OverworldItem : MonoBehaviour, IInteractable
     }
 
     // Handle interaction with its corresponding overworld object
-    public bool Interact(Interactor interactor) {
+    public virtual bool Interact(Interactor interactor) {
         //Debug.Log("I have been interacted with.");
 
         // Add to inventory
@@ -144,9 +144,9 @@ public class OverworldItem : MonoBehaviour, IInteractable
         Destroy(gameObject);
     }
 
-    void AutoSetLabelPosition() {
+    public virtual void AutoSetLabelPosition() {
         // Get Mesh filter
-        MeshFilter selfMeshFilter = GetComponent<MeshFilter>();
+        selfMeshFilter = GetComponent<MeshFilter>();
         var model = selfMeshFilter.sharedMesh; //.mesh; / .sharedMesh
         // mesh.bounds.size * transform.localScale = actual size of mesh, but they are both vector3 so it's *scalex, *scaley... etc
         Vector3 meshSize = new Vector3((model.bounds.size.x * transform.localScale.x),
