@@ -51,9 +51,9 @@ public class PlayerControl : MonoBehaviour
     // not as regular as fixedupdate
     private void Update() {
 
-        // player on ground check
+        // player on ground check // playerHeight * 0.6f + 0.3f
         grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.6f + 0.3f, ground);
-        Debug.Log("grounded = " + grounded);
+        //Debug.Log("grounded = " + grounded);
 
         // speed limiter function
         _SpeedControl();

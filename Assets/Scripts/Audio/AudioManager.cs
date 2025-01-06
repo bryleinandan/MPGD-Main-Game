@@ -22,7 +22,7 @@ public class AudioManager : MonoBehaviour
     }
 
     void Start () {
-        Debug.Log("i should play!");
+        //Debug.Log("i should play!");
         // Play("Theme"); //bgm
     }
 
