@@ -9,8 +9,8 @@ public class CraftingRecipeUI : MonoBehaviour
 
     // function to run when craft button pressed
     public void OnCraftButtonClick() {
+        Debug.Log("Craft Button Click");
         if(craftingRecipe.CanCraft(itemContainer)){
-            Debug.Log("Craft Button Click");
             craftingRecipe.Craft(itemContainer);
         }
     }
