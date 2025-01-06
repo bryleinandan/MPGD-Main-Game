@@ -9,7 +9,7 @@ using UnityEngine.Rendering;
 
 public class Enemy : MonoBehaviour {
     private FieldOfView fov;
-    private Health healthComponent;
+    public Health healthComponent;
 
     [Header("Item / ScriptableObject ")]
     public Item dropsItem1;
