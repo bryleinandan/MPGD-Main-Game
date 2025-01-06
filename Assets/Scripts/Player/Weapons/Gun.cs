@@ -30,6 +30,9 @@ public class Gun : MonoBehaviour, IAttack {
     public float fireRate = 15f;
     private float nextTimeToFire = 0f;
 
+    // inventoryinput script - public variable to check inventory state
+    public InventoryInput inventoryInput;
+
     void Start() {
         CalculateKnockback();
         attackRadius = range;
@@ -58,40 +61,42 @@ public class Gun : MonoBehaviour, IAttack {
 
     void Update()
     {
-        //transform.rotation = playerCam.transform.rotation;
-        if (playerInput.actions["Fire"].WasPerformedThisFrame() && (Time.time >= nextTimeToFire)) {
-            nextTimeToFire = Time.time + 1f/fireRate;
-            // greater fire rate = less time between shots
-            //Debug.Log("fire was performed this frame");
-            Shoot();
-        }
+        if(inventoryInput.inventoryOpen == false){
 
-        void Shoot() {
-            muzzleFlash.Play();
+            if (playerInput.actions["Fire"].WasPerformedThisFrame() && (Time.time >= nextTimeToFire)) {
+                nextTimeToFire = Time.time + 1f/fireRate;
+                // greater fire rate = less time between shots
+                //Debug.Log("fire was performed this frame");
+                Shoot();
+            }
 
-            RaycastHit hit;
-            if (Physics.Raycast(playerCam.transform.position, playerCam.transform.forward, out hit, attackRadius)) {
-                //Debug.Log(hit.transform.name);
+        }   
+    }
 
-                //play bullet hit at hit
+    void Shoot() {
+        muzzleFlash.Play();
 
-                GameObject hitObj = hit.transform.gameObject;
+        RaycastHit hit;
+        if (Physics.Raycast(playerCam.transform.position, playerCam.transform.forward, out hit, attackRadius)) {
+            //Debug.Log(hit.transform.name);
 
+            //play bullet hit at hit
+
+            GameObject hitObj = hit.transform.gameObject;
                 // spawn impact particle effect using surface normal as rotation
                 Instantiate(impactEffect, hit.point, Quaternion.LookRotation(hit.normal));
                 //Destroy(impact, 1f); // destroy after 1s // this does not, in fact, destroy it
 
-                // if on target layer: do iattack
+            // if on target layer: do iattack
 
-                //if (target.layer == LayerMask.NameToLayer(targetLayer.name)) {
-                // had some issues comparing target.layer -> number with targetLayer -> LayerMask
+            //if (target.layer == LayerMask.NameToLayer(targetLayer.name)) {
+            // had some issues comparing target.layer -> number with targetLayer -> LayerMask
 
-                // Check if the hit object's layer is in the LayerMask
-                if ((targetLayer.value & (1 << hitObj.layer)) != 0) {
-                    //Debug.Log("targetlayer matched");
-                    ((IAttack)this).DealDamage(hitObj.gameObject);
-                    ((IAttack)this).ApplyKnockback(hitObj.gameObject);
-                }
+            // Check if the hit object's layer is in the LayerMask
+            if ((targetLayer.value & (1 << hitObj.layer)) != 0) {
+                //Debug.Log("targetlayer matched");
+                ((IAttack)this).DealDamage(hitObj.gameObject);
+                ((IAttack)this).ApplyKnockback(hitObj.gameObject);
             }
         }
     }
