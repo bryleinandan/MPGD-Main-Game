@@ -37,7 +37,7 @@ public class InventoryInput : MonoBehaviour
             } else {
                 for(int i = 0; i < inventory.Length; i++) {
                     // inventory[i].SetActive(!inventory[i].activeSelf);
-                    inventory[i].transform.localScale = Vector3.one;
+                    inventory[i].transform.localScale = new Vector3(0.6f, 0.6f, 0.6f);
                 }   
             }
             
