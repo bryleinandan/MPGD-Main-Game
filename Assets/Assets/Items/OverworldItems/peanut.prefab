@@ -10,27 +10,39 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 28945417257316507, guid: 8de28c83e3e70b94896c7fe0cc09fdb5, type: 3}
       propertyPath: prompt
-      value: yeah no this is literally just a lump of slime
+      value: a peanut with a perfectly crispy shell.
       objectReference: {fileID: 0}
+    - target: {fileID: 28945417257316507, guid: 8de28c83e3e70b94896c7fe0cc09fdb5, type: 3}
+      propertyPath: inventoryItem
+      value: 
+      objectReference: {fileID: 11400000, guid: 35ebf988cef1ad440b4074110423360a, type: 2}
     - target: {fileID: 293654950411726807, guid: 8de28c83e3e70b94896c7fe0cc09fdb5, type: 3}
       propertyPath: m_Height
-      value: 0.8763138
+      value: 2.3670363
       objectReference: {fileID: 0}
     - target: {fileID: 293654950411726807, guid: 8de28c83e3e70b94896c7fe0cc09fdb5, type: 3}
       propertyPath: m_Radius
-      value: 0.39846998
+      value: 0.4543428
       objectReference: {fileID: 0}
     - target: {fileID: 293654950411726807, guid: 8de28c83e3e70b94896c7fe0cc09fdb5, type: 3}
       propertyPath: m_Center.x
-      value: 0.055198193
+      value: 0.25217512
       objectReference: {fileID: 0}
     - target: {fileID: 293654950411726807, guid: 8de28c83e3e70b94896c7fe0cc09fdb5, type: 3}
       propertyPath: m_Center.y
-      value: -0.061843216
+      value: 0.16687538
       objectReference: {fileID: 0}
     - target: {fileID: 293654950411726807, guid: 8de28c83e3e70b94896c7fe0cc09fdb5, type: 3}
       propertyPath: m_Center.z
-      value: -0.04633218
+      value: 0.54691076
+      objectReference: {fileID: 0}
+    - target: {fileID: 293654950411726807, guid: 8de28c83e3e70b94896c7fe0cc09fdb5, type: 3}
+      propertyPath: m_Direction
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1083153724419436608, guid: 8de28c83e3e70b94896c7fe0cc09fdb5, type: 3}
+      propertyPath: m_Constraints
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2203720961091241853, guid: 8de28c83e3e70b94896c7fe0cc09fdb5, type: 3}
       propertyPath: m_Pivot.x
@@ -119,18 +131,10 @@ PrefabInstance:
     - target: {fileID: 3441912960929250105, guid: 8de28c83e3e70b94896c7fe0cc09fdb5, type: 3}
       propertyPath: m_Mesh
       value: 
-      objectReference: {fileID: 3811635454685056931, guid: cb7f8ca0eaee0494c8502d77fe889aa5, type: 3}
-    - target: {fileID: 4153166989699360016, guid: 8de28c83e3e70b94896c7fe0cc09fdb5, type: 3}
-      propertyPath: m_fontSize
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 4153166989699360016, guid: 8de28c83e3e70b94896c7fe0cc09fdb5, type: 3}
-      propertyPath: m_fontSizeBase
-      value: 4
-      objectReference: {fileID: 0}
+      objectReference: {fileID: -4774559170119481182, guid: 2f6f3b41a6779ab43b02c14b59178c36, type: 3}
     - target: {fileID: 8634385800931006343, guid: 8de28c83e3e70b94896c7fe0cc09fdb5, type: 3}
       propertyPath: m_Name
-      value: slime
+      value: peanut
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

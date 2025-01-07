@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _prompt: Pick up!
   yOffset: 0.5
-  overworldObject: {fileID: 0}
+  overworldObject: {fileID: 8830833540144524005, guid: 3faaa6e40eb744c4389683f75cb114c4, type: 3}
   type: 0
   actionType: 0
   range: {x: 5, y: 4}

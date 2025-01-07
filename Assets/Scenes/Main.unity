@@ -3510,7 +3510,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3617239983203521179, guid: 7633bb5fc3cb84b91aece4acd171942c, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 703368.7
+      value: 744688.44
       objectReference: {fileID: 0}
     - target: {fileID: 3760477746245132766, guid: 7633bb5fc3cb84b91aece4acd171942c, type: 3}
       propertyPath: m_TagString
@@ -4411,15 +4411,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1426476679687911967, guid: 08140662198d72146aa48f8ddffd8575, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 258.66547
+      value: 257.54
       objectReference: {fileID: 0}
     - target: {fileID: 1426476679687911967, guid: 08140662198d72146aa48f8ddffd8575, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -180.87552
+      value: -177.2
       objectReference: {fileID: 0}
     - target: {fileID: 1426476679687911967, guid: 08140662198d72146aa48f8ddffd8575, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 98.0767
+      value: 98.67
       objectReference: {fileID: 0}
     - target: {fileID: 1426476679687911967, guid: 08140662198d72146aa48f8ddffd8575, type: 3}
       propertyPath: m_LocalRotation.w
@@ -4947,7 +4947,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 28945417257316507, guid: 8de28c83e3e70b94896c7fe0cc09fdb5, type: 3}
       propertyPath: prompt
-      value: left click to use items
+      value: '[F] to use items'
       objectReference: {fileID: 0}
     - target: {fileID: 2203720961091241853, guid: 8de28c83e3e70b94896c7fe0cc09fdb5, type: 3}
       propertyPath: m_Pivot.x
@@ -5413,7 +5413,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 28945417257316507, guid: 8de28c83e3e70b94896c7fe0cc09fdb5, type: 3}
       propertyPath: prompt
-      value: this isn't a rocket ship. ew
+      value: '[I] to open/close inventory and cooking'
       objectReference: {fileID: 0}
     - target: {fileID: 2203720961091241853, guid: 8de28c83e3e70b94896c7fe0cc09fdb5, type: 3}
       propertyPath: m_Pivot.x
@@ -6270,11 +6270,11 @@ PrefabInstance:
     - target: {fileID: 5845598083577852097, guid: eee4cb2c3c85dce46b2d009da45a866d, type: 3}
       propertyPath: enemy1
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 4750161559307258112, guid: ea1de8fabb6f957468ca13d24cb3508e, type: 3}
     - target: {fileID: 5845598083577852097, guid: eee4cb2c3c85dce46b2d009da45a866d, type: 3}
       propertyPath: enemy2
       value: 
-      objectReference: {fileID: 2290982206751352936, guid: 74cb3064d0d6f1b44a72d9d53bb175d0, type: 3}
+      objectReference: {fileID: 7872292752298186270, guid: 03693747be7fe834bb59d6706ad149e6, type: 3}
     - target: {fileID: 5845598083577852097, guid: eee4cb2c3c85dce46b2d009da45a866d, type: 3}
       propertyPath: parent
       value: 
