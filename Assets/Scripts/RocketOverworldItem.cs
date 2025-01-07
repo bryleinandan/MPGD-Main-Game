@@ -17,8 +17,6 @@ public class RocketOverworldItem : OverworldItem {
 
     protected override void Start() {
         selfMeshFilter = this.transform.GetChild(1).GetComponentInChildren<MeshFilter>();
-        //meshCollider = GetComponent<MeshCollider>();
-        //meshCollider.sharedMesh = parentMesh.sharedMesh;
         var model = selfMeshFilter.sharedMesh;
         meshSize = new Vector3((model.bounds.size.x * transform.localScale.x),
         (model.bounds.size.y * transform.localScale.y), (model.bounds.size.z * transform.localScale.z));
