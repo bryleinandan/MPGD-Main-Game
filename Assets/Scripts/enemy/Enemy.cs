@@ -9,7 +9,7 @@ using UnityEngine.Rendering;
 
 public class Enemy : MonoBehaviour {
     private FieldOfView fov;
-    private Health healthComponent;
+    public Health healthComponent;
 
     [Header("Item / ScriptableObject ")]
     public Item dropsItem1;
@@ -29,13 +29,13 @@ public class Enemy : MonoBehaviour {
         //fieldOfView.Initialize();
     }
 
-    void Start() {
+    protected virtual void Start() {
         fov = GetComponent<FieldOfView>();
         healthComponent = GetComponentInChildren<Health>();
         itemSpawnParent = GameObject.Find("Items");
     }
     
-    void Update() {
+    protected virtual void Update() {
         // Use fieldOfView for enemy movement logic
 
         if(healthComponent.currentHealth == 0) {
@@ -54,7 +54,7 @@ public class Enemy : MonoBehaviour {
 
     public float smoothSpeed = 2.5f;
     public bool setToDestroy = false;
-    void LateUpdate() {
+    protected virtual void LateUpdate() {
         // get small
         if (setToDestroy) {
             var smooth = 1.0f - Mathf.Pow(0.5f, Time.deltaTime * smoothSpeed);
@@ -65,13 +65,13 @@ public class Enemy : MonoBehaviour {
         }
     }
 
-    void FixedUpdate() {
+    // void FixedUpdate() {
 
-    // limit rotation speed (and 'glitchiness')
-    Rigidbody rb = GetComponent<Rigidbody>();
-    //rb.angularDrag = 5f; // Adjust as needed for smoother damping
-    rb.angularVelocity = Vector3.Lerp(rb.angularVelocity, Vector3.zero, Time.fixedDeltaTime * 5f); // gradually reduce damping speed
-}
+    // // limit rotation speed (and 'glitchiness')
+    //     Rigidbody rb = GetComponent<Rigidbody>();
+    // //rb.angularDrag = 5f; // Adjust as needed for smoother damping
+    //     rb.angularVelocity = Vector3.Lerp(rb.angularVelocity, Vector3.zero, Time.fixedDeltaTime * 5f); // gradually reduce damping speed
+    // }
 
     public virtual void SelfDestruct() {
         // this can overwritten in any child class by public override void selfDestruct() ...

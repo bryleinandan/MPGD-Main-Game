@@ -8,6 +8,30 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 28945417257316507, guid: 8de28c83e3e70b94896c7fe0cc09fdb5, type: 3}
+      propertyPath: prompt
+      value: yeah no this is literally just a lump of slime
+      objectReference: {fileID: 0}
+    - target: {fileID: 293654950411726807, guid: 8de28c83e3e70b94896c7fe0cc09fdb5, type: 3}
+      propertyPath: m_Height
+      value: 0.8763138
+      objectReference: {fileID: 0}
+    - target: {fileID: 293654950411726807, guid: 8de28c83e3e70b94896c7fe0cc09fdb5, type: 3}
+      propertyPath: m_Radius
+      value: 0.39846998
+      objectReference: {fileID: 0}
+    - target: {fileID: 293654950411726807, guid: 8de28c83e3e70b94896c7fe0cc09fdb5, type: 3}
+      propertyPath: m_Center.x
+      value: 0.055198193
+      objectReference: {fileID: 0}
+    - target: {fileID: 293654950411726807, guid: 8de28c83e3e70b94896c7fe0cc09fdb5, type: 3}
+      propertyPath: m_Center.y
+      value: -0.061843216
+      objectReference: {fileID: 0}
+    - target: {fileID: 293654950411726807, guid: 8de28c83e3e70b94896c7fe0cc09fdb5, type: 3}
+      propertyPath: m_Center.z
+      value: -0.04633218
+      objectReference: {fileID: 0}
     - target: {fileID: 2203720961091241853, guid: 8de28c83e3e70b94896c7fe0cc09fdb5, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -88,9 +112,25 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3397492890653781438, guid: 8de28c83e3e70b94896c7fe0cc09fdb5, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+    - target: {fileID: 3441912960929250105, guid: 8de28c83e3e70b94896c7fe0cc09fdb5, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 3811635454685056931, guid: cb7f8ca0eaee0494c8502d77fe889aa5, type: 3}
+    - target: {fileID: 4153166989699360016, guid: 8de28c83e3e70b94896c7fe0cc09fdb5, type: 3}
+      propertyPath: m_fontSize
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4153166989699360016, guid: 8de28c83e3e70b94896c7fe0cc09fdb5, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 8634385800931006343, guid: 8de28c83e3e70b94896c7fe0cc09fdb5, type: 3}
       propertyPath: m_Name
-      value: OverworldItem
+      value: slime
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

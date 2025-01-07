@@ -64,7 +64,13 @@ public interface IAttack {
         if (target.CompareTag("Player")) {
             target.GetComponent<PlayerHealthController>().TakeDamage(damage);
         } else {
-            target.GetComponent<HealthController>().TakeDamage(damage);
+            // get health controller - or get from parent - and apply damage
+            if (target.TryGetComponent(out HealthController health)) {
+                health.TakeDamage(damage);
+            } else if (target.transform.parent.TryGetComponent(out HealthController health2)) {
+                health2.TakeDamage(damage);
+            }
+            //target.GetComponent<HealthController>().TakeDamage(damage);
         }
     }
 
