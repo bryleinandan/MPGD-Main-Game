@@ -13,8 +13,8 @@ public class CollectibleCount : MonoBehaviour
 
     void Start() => UpdateCount();
 
-    void OnEnable() => Collectible.OnCollected += OnCollectibleCollected;
-    void OnDisable() => Collectible.OnCollected -= OnCollectibleCollected;
+    void OnEnable() => RocketOverworldItem.OnCollected += OnCollectibleCollected;
+    void OnDisable() => RocketOverworldItem.OnCollected -= OnCollectibleCollected;
     
     void OnCollectibleCollected() {
         count++;
@@ -22,6 +22,6 @@ public class CollectibleCount : MonoBehaviour
     }
 
     void UpdateCount() {
-        text.text = $"{count} / {Collectible.total}";
+        text.text = $"{count} / {RocketOverworldItem.total}";
     }
 }

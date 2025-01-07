@@ -53,10 +53,9 @@ public class RocketOverworldItem : OverworldItem {
     }
 
     public override bool Interact(Interactor interactor) {
-        
-        Debug.Log("interacted with rocket");
-        OnCollected?.Invoke();
-
+        if (!setToDestroy) {
+            OnCollected?.Invoke();
+        }
         setToDestroy = true;
         return true;
     }
