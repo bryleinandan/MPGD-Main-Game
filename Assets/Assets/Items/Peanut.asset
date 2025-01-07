@@ -10,12 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ab0687e676ca967489a234c37e4a259f, type: 3}
-  m_Name: Peanuts
+  m_Name: Peanut
   m_EditorClassIdentifier: 
-  inventoryManager: {fileID: 0}
-  overworldObject: {fileID: 0}
+  _prompt: 
+  yOffset: 0.5
+  overworldObject: {fileID: 8830833540144524005, guid: dde65244f03f23743b13b3811dd245da, type: 3}
   type: 0
   actionType: 0
   range: {x: 5, y: 4}
   stackable: 1
-  image: {fileID: 0}
+  image: {fileID: 21300000, guid: e332698117ade7c45bdc634ea46645fc, type: 3}
