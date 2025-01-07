@@ -22,6 +22,11 @@ public class CollectibleCount : MonoBehaviour
     }
 
     void UpdateCount() {
-        text.text = $"{count} / {RocketOverworldItem.total}";
+        if (count < 8) {
+            text.text = $"{count} / {RocketOverworldItem.total}";
+        } else {
+            text.text = "Congratulations! You've collected all the rockets!";
+        }
+        
     }
 }
