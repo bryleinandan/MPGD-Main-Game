@@ -10,27 +10,39 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 28945417257316507, guid: 8de28c83e3e70b94896c7fe0cc09fdb5, type: 3}
       propertyPath: prompt
-      value: yeah no this is literally just a lump of slime
+      value: the poor fluffy rabbit that tried to kill me. (looks edible)
       objectReference: {fileID: 0}
+    - target: {fileID: 28945417257316507, guid: 8de28c83e3e70b94896c7fe0cc09fdb5, type: 3}
+      propertyPath: setToDestroy
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 28945417257316507, guid: 8de28c83e3e70b94896c7fe0cc09fdb5, type: 3}
+      propertyPath: inventoryItem
+      value: 
+      objectReference: {fileID: 11400000, guid: 0c04d3a19eed947af9ad13ebd90d8e16, type: 2}
     - target: {fileID: 293654950411726807, guid: 8de28c83e3e70b94896c7fe0cc09fdb5, type: 3}
       propertyPath: m_Height
-      value: 0.8763138
+      value: 1.2685463
       objectReference: {fileID: 0}
     - target: {fileID: 293654950411726807, guid: 8de28c83e3e70b94896c7fe0cc09fdb5, type: 3}
       propertyPath: m_Radius
-      value: 0.39846998
+      value: 0.50038445
       objectReference: {fileID: 0}
     - target: {fileID: 293654950411726807, guid: 8de28c83e3e70b94896c7fe0cc09fdb5, type: 3}
       propertyPath: m_Center.x
-      value: 0.055198193
+      value: 0.018812165
       objectReference: {fileID: 0}
     - target: {fileID: 293654950411726807, guid: 8de28c83e3e70b94896c7fe0cc09fdb5, type: 3}
       propertyPath: m_Center.y
-      value: -0.061843216
+      value: -0.07750285
       objectReference: {fileID: 0}
     - target: {fileID: 293654950411726807, guid: 8de28c83e3e70b94896c7fe0cc09fdb5, type: 3}
       propertyPath: m_Center.z
-      value: -0.04633218
+      value: 0.019196287
+      objectReference: {fileID: 0}
+    - target: {fileID: 1083153724419436608, guid: 8de28c83e3e70b94896c7fe0cc09fdb5, type: 3}
+      propertyPath: m_Constraints
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2203720961091241853, guid: 8de28c83e3e70b94896c7fe0cc09fdb5, type: 3}
       propertyPath: m_Pivot.x
@@ -119,7 +131,7 @@ PrefabInstance:
     - target: {fileID: 3441912960929250105, guid: 8de28c83e3e70b94896c7fe0cc09fdb5, type: 3}
       propertyPath: m_Mesh
       value: 
-      objectReference: {fileID: 3811635454685056931, guid: cb7f8ca0eaee0494c8502d77fe889aa5, type: 3}
+      objectReference: {fileID: 7872899913877935716, guid: 19a4d458d9444ef49864f39cee41912e, type: 3}
     - target: {fileID: 4153166989699360016, guid: 8de28c83e3e70b94896c7fe0cc09fdb5, type: 3}
       propertyPath: m_fontSize
       value: 4
@@ -130,10 +142,40 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8634385800931006343, guid: 8de28c83e3e70b94896c7fe0cc09fdb5, type: 3}
       propertyPath: m_Name
-      value: slime
+      value: rabbitBody
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 293654950411726807, guid: 8de28c83e3e70b94896c7fe0cc09fdb5, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8634385800931006343, guid: 8de28c83e3e70b94896c7fe0cc09fdb5, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1235452635886127676}
   m_SourcePrefab: {fileID: 100100000, guid: 8de28c83e3e70b94896c7fe0cc09fdb5, type: 3}
+--- !u!1 &8830833540144524005 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8634385800931006343, guid: 8de28c83e3e70b94896c7fe0cc09fdb5, type: 3}
+  m_PrefabInstance: {fileID: 963467347639680354}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &1235452635886127676
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8830833540144524005}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.8950537, y: 0.917429, z: 0.2850062}
+  m_Center: {x: -0.085776776, y: -0.0180514, z: -0.01958267}
