@@ -108,6 +108,7 @@ MonoBehaviour:
   sensX: 400
   sensY: 400
   orientation: {fileID: 0}
+  inventoryInput: {fileID: 0}
 --- !u!1 &8408844984917963375
 GameObject:
   m_ObjectHideFlags: 0

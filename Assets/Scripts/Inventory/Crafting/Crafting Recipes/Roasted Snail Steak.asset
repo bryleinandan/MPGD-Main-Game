@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d9094a000371e42479acf2087c0975e0, type: 3}
+  m_Name: Roasted Snail Steak
+  m_EditorClassIdentifier: 
+  Materials:
+  - Item: {fileID: 11400000, guid: 2b944e682aa364c6cbc9e5a8f0c69318, type: 2}
+    Amount: 0
+  - Item: {fileID: 11400000, guid: e74608f797a594831b9c1b44a158a7ed, type: 2}
+    Amount: 0
+  Results:
+  - Item: {fileID: 11400000, guid: a5d407e36ac514b2a9799f2993627390, type: 2}
+    Amount: 0

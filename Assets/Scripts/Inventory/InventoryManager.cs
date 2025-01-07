@@ -4,7 +4,7 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class InventoryManager : MonoBehaviour
+public class InventoryManager : MonoBehaviour, IItemContainer
 {
     public GameObject mainInventoryGroup;
     public int maxStackedItems = 61;
@@ -107,6 +107,7 @@ public class InventoryManager : MonoBehaviour
         selectedSlot = newValue;
     }
     
+    // add item method - crafting
     public bool AddItem(Item item) {
         //Check if any slot has same item with count lower than max
         for (int i = 0; i<inventorySlots.Length; i++) {
@@ -130,7 +131,6 @@ public class InventoryManager : MonoBehaviour
                 return true;
             }
         }
-
         return false;
     }
     
@@ -139,7 +139,9 @@ public class InventoryManager : MonoBehaviour
         InventoryItem inventoryItem = newItemGo.GetComponent<InventoryItem>();
         inventoryItem.InitialiseItem(item);
     }
+
     //remove item from inventory - aka eat food
+    // could be removed when demo script not needed
     public Item GetSelectedItem(bool remove) {
         if (selectedSlot != -1) {
             InventorySlot slot = inventorySlots[selectedSlot];
@@ -161,13 +163,82 @@ public class InventoryManager : MonoBehaviour
         return null;
     }
 
+    // remove item method - crafting
+    public bool RemoveItem(Item item) {
+
+        for (int i = 0; i < inventorySlots.Length; i++) {
+
+            InventorySlot slot = inventorySlots[selectedSlot];
+            InventoryItem itemInSlot = slot.GetComponentInChildren<InventoryItem>();
+
+            // check if item in inventory slot
+            // check if there is more than one item in the slot
+            // if more than one, subtract one from count, otherwise remove item
+            if (itemInSlot == item) {
+                if (itemInSlot.count > 1) {
+                    itemInSlot.count--;
+                    itemInSlot.RefreshCount();
+                    return true;
+                } else {
+                    itemInSlot = null;
+                    return true;
+                }
+            }
+        }
+        // return false if item not found
+        return false;
+    }
+
     public void showMainInventory(bool tf) {
         if (tf) {
-            mainInventoryGroup.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
+            mainInventoryGroup.transform.localScale = new Vector3(0.5f, 0.5f, 1f);
         }
         else {
             mainInventoryGroup.transform.localScale = Vector3.zero;
         }
+    }
+
+    // checks if inventory has required items for crafting
+    public bool ContainsRequiredItem(Item item) {
+        for (int i = 0; i < inventorySlots.Length; i++) {
+
+            InventorySlot slot = inventorySlots[i];
+            InventoryItem itemInSlot = slot.GetComponentInChildren<InventoryItem>();
+
+            if (itemInSlot == item) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    // checks if inventory is full - space for crafted item to go
+    public bool IsFull() {
+        for (int i = 0; i < inventorySlots.Length; i++) {
+
+            InventorySlot slot = inventorySlots[i];
+            InventoryItem itemInSlot = slot.GetComponentInChildren<InventoryItem>();
+
+            if (itemInSlot == null) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    // checks for number of items in case of unstackable items
+    public int ItemCount(Item item) {
+
+        int number = 0;
+
+        for (int i = 0; i < inventorySlots.Length; i++) {
+            InventorySlot slot = inventorySlots[i];
+            InventoryItem itemInSlot = slot.GetComponentInChildren<InventoryItem>();
+            if (itemInSlot == item) {
+                number++;
+            }
+        }
+        return number;
     }
 
 }

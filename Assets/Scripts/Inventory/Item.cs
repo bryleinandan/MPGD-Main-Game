@@ -55,7 +55,7 @@ public class Item : ScriptableObject
         OverworldItem item = instance.GetComponent<OverworldItem>();
         if (item != null) {
             //item.Initialize(this);
-            Debug.Log("I spawned an item at " + pos);
+            //Debug.Log("I spawned an item at " + pos);
         }
 
         //return instance;

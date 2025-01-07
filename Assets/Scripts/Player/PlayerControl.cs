@@ -11,12 +11,12 @@ public class PlayerControl : MonoBehaviour
     private Rigidbody _player;
 
     // grounded player check variables
-    public float _playerHeight;
+    public float playerHeight;
     public LayerMask ground;
-    public bool _grounded;
+    public bool grounded;
 
     // movement drag variables - makes movement feel smoother
-    public float groundDrag;
+    public float groundDrag = 15;
 
 
     // jump variables
@@ -24,6 +24,8 @@ public class PlayerControl : MonoBehaviour
     public float jumpCooldown;
     public float jumpHeight;
     public float airMultiplier;
+    [Range(1,200)]public float forceMultiplier = 50;
+    [Range(1,100)]public float jumpForceMultiplier = 1;
 
     // movement variables
     public float moveSpeed;
@@ -31,6 +33,9 @@ public class PlayerControl : MonoBehaviour
 
     public Camera playerCam;
     private Transform cameraTransform;
+
+    // inventoryinput script - has public variable that can be used to check inventory state
+    public InventoryInput inventoryInput;
 
     private void Start() {
 
@@ -42,20 +47,22 @@ public class PlayerControl : MonoBehaviour
         if (playerCam != null) {
             cameraTransform = playerCam.transform;
         }
+
     }
 
     // updates dependent on machine frame rate as supposed to project
     // not as regular as fixedupdate
     private void Update() {
 
-        // player on ground check
-        _grounded = Physics.Raycast(transform.position, Vector3.down, _playerHeight * 0.5f + 0.3f, ground);
+        // player on ground check // playerHeight * 0.6f + 0.3f
+        grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.6f + 0.3f, ground);
+        //Debug.Log("grounded = " + grounded);
 
         // speed limiter function
         _SpeedControl();
 
         // drag handling
-        if(_grounded) {
+        if(grounded) {
             _player.drag = groundDrag;
         } else {
             _player.drag = 0;
@@ -64,8 +71,14 @@ public class PlayerControl : MonoBehaviour
 
     // updates at regular intervals - better for physics
     private void FixedUpdate() {
-        //_MovePlayer();
-        MovePlayerUseCamera();
+
+        // check if inventory is open (open = vector3.one)
+        // if open, stop all movement
+        if(inventoryInput.inventoryOpen == false){
+            //_MovePlayer();
+            MovePlayerUseCamera();
+        }
+        
     }
 
     public void OnMove(InputValue value) {
@@ -75,7 +88,7 @@ public class PlayerControl : MonoBehaviour
     public void OnJump() {
         
         // check conditions for jump
-        if(_readyToJump && _grounded) {
+        if(_readyToJump && grounded) {
 
             // jump started - no longer ready to jump
             _readyToJump = false;
@@ -107,10 +120,10 @@ public class PlayerControl : MonoBehaviour
 
         // add force
         // adjust move speed based on grounded state
-        if(_grounded) {
-            _player.AddForce(movement * moveSpeed * Time.fixedDeltaTime * 10f, ForceMode.Force);
+        if(grounded) {
+            _player.AddForce(movement * moveSpeed * Time.fixedDeltaTime * 10f * forceMultiplier, ForceMode.Force);
         } else {
-            _player.AddForce(movement * moveSpeed * Time.fixedDeltaTime * 10f * airMultiplier, ForceMode.Force);
+            _player.AddForce(movement * moveSpeed * Time.fixedDeltaTime * 10f * forceMultiplier * airMultiplier, ForceMode.Force);
         }
     }
 
@@ -137,7 +150,7 @@ public class PlayerControl : MonoBehaviour
 
         // make player jump
         // impulse - only add force once
-        _player.AddForce(transform.up * jumpHeight, ForceMode.Impulse);
+        _player.AddForce(transform.up * jumpHeight * jumpForceMultiplier, ForceMode.Impulse);
     }
 
     // reset jump function

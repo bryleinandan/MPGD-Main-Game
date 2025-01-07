@@ -249,18 +249,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dbad892c40106438987489696f670fbf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _playerHeight: 2
+  playerHeight: 2
   ground:
     serializedVersion: 2
     m_Bits: 1024
-  _grounded: 0
-  groundDrag: 5
+  grounded: 0
+  groundDrag: 15
   jumpCooldown: 0.25
   jumpHeight: 12
   airMultiplier: 0.4
+  forceMultiplier: 120
+  jumpForceMultiplier: 5
   moveSpeed: 150
   moveValue: {x: 0, y: 0}
   playerCam: {fileID: 0}
+  inventoryInput: {fileID: 0}
 --- !u!114 &7332446570959644245
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -339,6 +342,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc50bfb08a19ed8459ad9223beabe01d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  stunEnemies: 0
+  stunTimeS: 5
   attackableMask:
     serializedVersion: 2
     m_Bits: 64
