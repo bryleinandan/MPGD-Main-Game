@@ -23,22 +23,15 @@ public class ItemAutoSpawner : MonoBehaviour
     // this might be better off as an array but you didn't hear that from me
     [Header("Assign items to spawn - scriptable objects")]
     public Item item1;
+    //private  GameObject item1;
     public int item1_max = 10;
-    public Item item2;
-    public int item2_max = 10;
-    public Item item3;
-    public int item3_max = 10;
-    public Item item4;
-    public int item4_max = 10;
+    // copy n paste in a few places
 
     [Header("place parent / folder")]
     public GameObject parent;
 
     [Header("checkers (no need to touch these)")]
     public int item1_count;
-    public int item2_count;
-    public int item3_count;
-    public int item4_count;
 
     void Start() {
         //Debug.Log("I live");
@@ -78,15 +71,6 @@ public class ItemAutoSpawner : MonoBehaviour
                     if (oItem.inventoryItem == item1) { // if the collider is the same type as item1
                         item1_count++;
                     }
-                    if (oItem.inventoryItem == item2) { // if the collider is the same type as item1
-                        item1_count++;
-                    }
-                    if (oItem.inventoryItem == item3) { // if the collider is the same type as item1
-                        item1_count++;
-                    }
-                    if (oItem.inventoryItem == item4) { // if the collider is the same type as item1
-                        item1_count++;
-                    }
                 }
             }
         // rangecheck done, call the numbers checker
@@ -96,15 +80,7 @@ public class ItemAutoSpawner : MonoBehaviour
     private void NumbersChecker() {
         if (item1_count < item1_max) {
             item1.Spawn(GeneratePosition(transform.position, radius), (default), parent.transform);
-        }
-        if (item2_count < item2_max) {
-            item2.Spawn(GeneratePosition(transform.position, radius), (default), parent.transform);
-        }
-        if (item3_count < item3_max) {
-            item3.Spawn(GeneratePosition(transform.position, radius), (default), parent.transform);
-        }
-        if (item4_count < item4_max) {
-            item4.Spawn(GeneratePosition(transform.position, radius), (default), parent.transform);
+            //SpawnItem(no1);
         }
 
         // I should probably despawn things if they're over the max so let's do that laterr

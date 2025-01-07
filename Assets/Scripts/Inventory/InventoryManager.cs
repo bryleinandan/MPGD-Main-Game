@@ -48,7 +48,6 @@ public class InventoryManager : MonoBehaviour, IItemContainer
 		// }
 
         int index = 0;
-        Debug.Log(slotsByTag.Length);
         foreach (GameObject thing in slotsByTag) {
             if (index <= 7) {
                 inventorySlots[7-index] = slotsByTag[index].GetComponent<InventorySlot>();

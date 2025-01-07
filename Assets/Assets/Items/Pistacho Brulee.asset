@@ -18,6 +18,5 @@ MonoBehaviour:
   type: 0
   actionType: 0
   range: {x: 5, y: 4}
-  healValue: 69
   stackable: 1
-  image: {fileID: 21300000, guid: 66ee44cd15299df4f8427135de38bb84, type: 3}
+  image: {fileID: 0}

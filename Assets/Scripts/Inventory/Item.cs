@@ -27,7 +27,6 @@ public class Item : ScriptableObject
 
     public ActionType actionType;
     public Vector2Int range = new Vector2Int(5, 4); // Range of which this tool can be used
-    public float healValue = 10;
 
     [Header("Only UI")]
     public bool stackable = true;

@@ -28,14 +28,12 @@ public class FieldOfView : MonoBehaviour, IAttack {
     }
 
     public float movementSpeed = 5;
-    public float dealsDamage = 5;
-    public float attackCooldownSetter = 2;
 
     [Header("Interface stuff")]
-    [Range(0.01f, 1)] public float _angeredMoveSpeed = 0.2f; // backing field time
+    [Range(0.01f, 1)] public float _attackSpeedSetter = 0.2f; // backing field time
     public float attackSpeed { // these lines took years off my life. please never make me write them again
-        get=>_angeredMoveSpeed; 
-        set {_angeredMoveSpeed = value;}
+        get=>_attackSpeedSetter; 
+        set {_attackSpeedSetter = value;}
     }
     [SerializeField] public float attackCooldown { get; set; } = 2;
     [SerializeField] public float damage { get; set; } = 10;
@@ -92,8 +90,6 @@ public class FieldOfView : MonoBehaviour, IAttack {
 
         ((IAttack)this).CalculateKnockback();
         ownHeight = GetComponent<Renderer>().bounds.size.y;
-        damage = dealsDamage;
-        attackCooldown = attackCooldownSetter;
     }
 
     private IEnumerator FOVRoutine() // core routine to reduce number of calls per frame (for performance)

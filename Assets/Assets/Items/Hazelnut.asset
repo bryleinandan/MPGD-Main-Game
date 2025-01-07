@@ -12,12 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab0687e676ca967489a234c37e4a259f, type: 3}
   m_Name: Hazelnut
   m_EditorClassIdentifier: 
-  _prompt: 
+  _prompt: Pick up!
   yOffset: 0.5
-  overworldObject: {fileID: 8830833540144524005, guid: 2b5de21ab2fb4bf4c96440f9c1be802c, type: 3}
+  overworldObject: {fileID: 0}
   type: 0
   actionType: 0
   range: {x: 5, y: 4}
-  healValue: 20
   stackable: 1
-  image: {fileID: 21300000, guid: 0dd372311472b54438e7925b16135a40, type: 3}
+  image: {fileID: 0}

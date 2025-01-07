@@ -38,7 +38,7 @@ public class Hunger : MonoBehaviour
             
             yield return new WaitForSeconds(healthDecayRate);
             health.TakeDamage(5); // Reduce hunger by 5 unit
-            //Debug.Log($"Health down bc hunger down: {health.currentHealth}");
+            Debug.Log($"Health down bc hunger down: {health.currentHealth}");
             
         }
     }

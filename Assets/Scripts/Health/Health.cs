@@ -6,7 +6,7 @@ public class Health : MonoBehaviour {
     public int maxHealth = 100;
     public int currentHealth;
 
-    void Awake()
+    void Start()
     {
         currentHealth = maxHealth; // initialize health
     }
