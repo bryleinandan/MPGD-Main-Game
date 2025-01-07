@@ -28,15 +28,23 @@ public class EnemyAutoSpawner : MonoBehaviour
     public GameObject enemy1;
     public int no1_max = 10;
 
+    public GameObject enemy2;
+    public int no2_max = 10;
+
         [Header("checkers (no need to touch these)")]
     public Enemy no1;
     public int no1_count;
+    public Enemy no2;
+    public int no2_count;
 
     void Start() {
         //Debug.Log("I live");
         // get component
         if(enemy1 != null) {
             no1 = enemy1.GetComponentInChildren<Enemy>();
+        }
+        if(enemy2 != null) {
+            no2 = enemy2.GetComponentInChildren<Enemy>();
         }
 
         // No enemies selected, don't do anything
@@ -67,6 +75,9 @@ public class EnemyAutoSpawner : MonoBehaviour
                 if (c.gameObject == no1) {
                     no1_count++;
                 }
+                if (c.gameObject == no2) {
+                    no2_count++;
+                }
             }
         // rangecheck done, call the numbers checker
         NumbersChecker();
@@ -76,7 +87,9 @@ public class EnemyAutoSpawner : MonoBehaviour
         if (no1_count < no1_max) {
             SpawnEnemy(no1);
         }
-
+        if (no2_count < no2_max) {
+            SpawnEnemy(no2);
+        }
         // I should probably despawn things if they're over the max so let's do that
     }
 
